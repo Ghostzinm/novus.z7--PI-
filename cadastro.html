@@ -1,34 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/cadastro.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login e Cadastro | Novus.z7</title>
+    <link rel="stylesheet" href="./css/cadastro.css" />
 </head>
 
 <body>
+
+    <header class="cabecalho">
+        <h1>NOVUS.Z7</h1>
+        <nav class="navegacao">
+            <ul class="menu-principal">
+                <l1> <a href="./index.html">LOJA</a></l1>
+                <l1> <a href="./sobre.html">SOBRE</a></l1>
+            </ul>
+        </nav>
+    </header>
+
     <section class="grd_card">
-            <main class="card">
-                <div class="cadastro">
-                    <h1>cadastro</h1>
-                    <input class="email" type="email" placeholder="Digite seu email" id="email">
-                    <input class="password" placeholder="Digite sua senha" id="senha">
+
+
+        <!-- CADASTRO -->
+        <main class="card">
+            <div class="cadastro">
+                <h1>Cadastro</h1>
+                <input class="email" type="email" placeholder="Digite seu email" id="email-cadastro" />
+                <input class="password" type="password" placeholder="Digite sua senha" id="senha-cadastro" />
+                <input class="btn" type="submit" value="Cadastrar" />
+            </div>
+        </main>
+
+        <!-- LOGIN -->
+        <main class="container-login">
+            <div class="login">
+                <h1>Login</h1>
+                <input class="email" type="email" placeholder="Digite seu email" id="email-login" />
+                <input class="password" type="password" placeholder="Digite sua senha" id="senha-login" />
+                <div class="check-container">
+                    <input class="lembrar" type="checkbox" id="lembrar" />
+                    <label for="lembrar" class="check">Lembrar</label>
                 </div>
-            </main>
-
-
-
-
-            <!-- ====================================login===================================== -->
-            <main class="container-login">
-                <div class="login">
-                    <h1>Login</h1>
-                    <input class="email" type="email" placeholder="Digite seu email" id="email">
-                    <input class="password" placeholder="Digite sua senha" id="senha">
-                </div>
-            </main>
+                <input class="btn" type="submit" value="Entrar" />
+            </div>
+        </main>
 
     </section>
 </body>

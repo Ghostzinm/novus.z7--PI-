@@ -58,15 +58,6 @@ body {
   border-radius: 5px;
 }
 
-.menu-principal a:hover {
-  text-decoration: underline;
-
-  transition: 0.3s;
-  background-color: #a7a7a7;
-  color: rgb(0, 0, 0);
-  border-radius: 5px;
-}
-
 /*================================================================ */
 
 nav {
