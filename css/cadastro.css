@@ -96,8 +96,15 @@ nav a:hover {
     flex-direction: column;
 }
 
+.btn-login{
+
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
 .email,
-.password {
+.password, .nome {
     margin-bottom: 15px;
     padding: 14px;
     border-radius: 8px;
