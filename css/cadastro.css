@@ -112,6 +112,13 @@ body {
     height: 100%;
 }
 
+.container form a:hover{
+  color: #00ff88;
+  scale: 1.05;
+  transition: 0.5s;
+}
+
+
 /* ===================checkbox===================== */
 .checkbox-wrapper {
   --checkbox-size: 20px;
