@@ -90,7 +90,7 @@ nav a.ativo {
 }
 
 .product {
-  width: 85%;
+  width: 270px;
   background: #1c1c1c;
   border-radius: 15px;
   padding: 20px;
@@ -106,7 +106,7 @@ nav a.ativo {
 .product img {
   object-fit: cover;
   object-position: center;
-  height: 350px;
+  height: 200px;
   width: 100%;
   border-radius: 10px;
 }
