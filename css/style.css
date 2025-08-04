@@ -5,8 +5,19 @@
 
 body {
   margin: 0;
-  background-color: #5F94D9;
+  background-color: var(--primary-color);
  
+}
+/* Color Theme Swatches in Hex */
+
+
+
+:root{
+  --primary-color: #D8FFDB;
+  --cor-secundaria: #015958;
+  --cor-terciaria: #C7FFED;
+  --cor-quartearia: #023535;
+  --cor-comple:#008F8C;
 }
 
 /*============================= header ============================ */
@@ -22,11 +33,11 @@ header img {
   position: absolute;
   top: 20px;
   right: 50px;
-  background-color: #3B3B3B;
+  background-color: var(--cor-secundaria);
   padding: 10px;
   border-radius: 5px;
   text-decoration: none;
-  color: #ffffff;
+  color:#C7FFED;
   font-size: large;
  
 }
@@ -36,7 +47,7 @@ header img {
   align-items: center;
   flex-direction: column;
   padding: 15px;
-   color: #fff;
+   color: var(--cor-secundaria);
 }
 
 .cabecalho h1 {
@@ -48,7 +59,7 @@ header img {
 
 .navegacao>ul a {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--cor-secundaria);
   text-decoration: none;
   font-size: large;
 
@@ -73,8 +84,6 @@ header img {
 
 nav a:hover,
 nav a.ativo {
-  color: #ffffff;
-
 
   transition: 0.3s;
   border-radius: 5px;
@@ -92,7 +101,7 @@ nav a.ativo {
 
 .product {
   width: 270px;
-  background: #1c1c1c;
+  background: var(--cor-secundaria);
   border-radius: 15px;
   padding: 20px;
   transition: 0.3s;
@@ -115,11 +124,11 @@ nav a.ativo {
 .product h3 {
   margin: 10px 0 5px;
   font-size: 20px;
-  color: #ffffff;
+  color: #C7FFED;
 }
 
 .product p {
-  color: #aaa;
+  color: #C7FFED;
   font-size: 14px;
 }
 
@@ -148,13 +157,13 @@ nav a.ativo {
 footer {
   text-align: center;
   padding: 30px;
-  background: #000;
+  background-color: var(--cor-quartearia);
   color: #555;
   font-size: 14px;
 }
 
 footer a {
-  color: #0ff;
+  color: var(--cor-terciaria);
   text-decoration: none;
 }
 
