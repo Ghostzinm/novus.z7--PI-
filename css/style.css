@@ -91,13 +91,8 @@ nav a.ativo {
 }
 
 .product {
-<<<<<<< HEAD
-  width: 85%;
-  background: #595959;
-=======
   width: 270px;
   background: #1c1c1c;
->>>>>>> 226d98a23f9c70faf38f232a3d4342f7c9422b1c
   border-radius: 15px;
   padding: 20px;
   transition: 0.3s;
