@@ -5,17 +5,22 @@
 
 :root {
   --primary-color: #D8FFDB;
-    --cor-secundaria: #015958;
-    --cor-terciaria: #C7FFED;
-    --cor-quartearia: #023535;
-    --cor-comple: #008F8C;       /* Rosa claro – hover/destaques */
+  --cor-secundaria: #015958;
+  --cor-terciaria: #C7FFED;
+  --cor-quartearia: #023535;
+  --cor-comple: #008F8C;
+  /* Rosa claro – hover/destaques */
+}
+
+* {
+  font-family: Arial, sans-serif;
+  color: var(--cor-terciaria);
 }
 
 body {
+  width: 100%;
   margin: 0;
   background-color: var(--primary-color);
-  font-family: Arial, sans-serif;
-  color: var(--cor-terciaria);
 }
 
 
@@ -53,12 +58,12 @@ body {
   text-decoration: none;
   color: #fff;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: 0.3s;
 }
 
 .login a:hover {
   background-color: var(--cor-quartearia);
-  color: #000;
+  color: var(--primary-color);
 }
 
 /* =================== NAV =================== */
@@ -75,7 +80,7 @@ nav a {
   font-size: 16px;
   padding: 8px 12px;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  transition: 0.3s;
 }
 
 nav a:hover,
