@@ -140,7 +140,6 @@ label {
 }
 
 .sign-in {
-    left: 0;
     width: 50%;
     z-index: 2;
 }
@@ -151,7 +150,6 @@ label {
 }
 
 .sign-up {
-    left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
