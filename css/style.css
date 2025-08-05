@@ -4,13 +4,12 @@
 }
 
 :root {
-  --primary-color: #1F1F1F;
-  --cor-secundaria: #262626;
-  --cor-terciaria: #E0E0E0;
-  --cor-quartearia: #FF3C38;
-  --cor-comple: #F3DE8A;
+  --primary-color: #D8FFDB;
+    --cor-secundaria: #015958;
+    --cor-terciaria: #C7FFED;
+    --cor-quartearia: #023535;
+    --cor-comple: #008F8C;       /* Rosa claro – hover/destaques */
 }
-
 
 body {
   margin: 0;
@@ -18,6 +17,8 @@ body {
   font-family: Arial, sans-serif;
   color: var(--cor-terciaria);
 }
+
+
 
 
 
@@ -48,7 +49,7 @@ body {
   right: 50px;
   background-color: var(--cor-comple);
   padding: 10px 15px;
-  border-radius: 8px;
+  border-radius: 20px;
   text-decoration: none;
   color: #fff;
   font-weight: bold;
