@@ -95,19 +95,7 @@
       overflow: hidden;
     }
 
-    .sobre-container::before {
-      content: "";
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: url('../img/logo-removebg-preview.png') no-repeat center center;
-      background-size: contain;
-      opacity: 0.1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
+ 
     .sobre-container h2 {
       color: var(--cor-comple);
       margin-bottom: 20px;
