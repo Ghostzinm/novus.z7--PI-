@@ -4,18 +4,18 @@
 }
 
 :root {
-  --primary-color: #dcd8ff;
-  --cor-secundaria: #015958;
-  --cor-terciaria: #C7FFED; 
-  --cor-quartearia: #023535;
-  --cor-comple: #008F8C;
+  --primary-color: #F5F7FA;     /* Fundo claro suave */
+  --cor-secundaria: #E3E8EF;    /* Fundo de cards, menus, header – cinza clarinho */
+  --cor-terciaria: #333333;     /* Textos – cinza escuro para legibilidade */
+  --cor-quartearia: #4FD1C5;    /* Verde claro e suave – botões e links */
+  --cor-comple: #10a37796;        /* Rosa claro – hover/destaques */
 }
 
 body {
   margin: 0;
   background-color: var(--primary-color);
   font-family: Arial, sans-serif;
-  color: var(--cor-quartearia);
+  color: var(--cor-terciaria);
 }
 
 /* =================== HEADER =================== */
@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 1px;
   background-color: var(--cor-secundaria);
   color: var(--cor-terciaria);
 }
@@ -37,7 +37,7 @@ body {
   color: var(--cor-terciaria);
 }
 
-/* LOGIN */
+/* =================== LOGIN =================== */
 
 .login a {
   position: absolute;
@@ -53,10 +53,11 @@ body {
 }
 
 .login a:hover {
-  background-color: #00b5b2;
+  background-color: var(--cor-quartearia);
+  color: #000;
 }
 
-/* NAV */
+/* =================== NAV =================== */
 
 nav ul {
   display: flex;
@@ -94,13 +95,14 @@ nav a.ativo {
   background-color: var(--cor-secundaria);
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(79, 209, 197, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
+  color: var(--cor-terciaria);
 }
 
 .product:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 111, 175, 0.5);
 }
 
 .product img {
@@ -123,7 +125,7 @@ nav a.ativo {
 
 .preco {
   font-size: 18px;
-  color: #ffffff;
+  color: var(--cor-quartearia);
   font-weight: bold;
   margin: 10px 0;
 }
@@ -131,13 +133,13 @@ nav a.ativo {
 .size {
   font-size: 13px;
   margin: 10px 0;
-  color: #eeeeee;
+  color: #999999;
 }
 
 .buy-btn {
   display: inline-block;
-  background-color: #ffffff;
-  color: var(--cor-secundaria);
+  background-color: var(--cor-quartearia);
+  color: #000;
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 8px;
@@ -146,8 +148,8 @@ nav a.ativo {
 }
 
 .buy-btn:hover {
-  background-color: var(--cor-terciaria);
-  color: #000;
+  background-color: var(--cor-comple);
+  color: #fff;
 }
 
 /* =================== FOOTER =================== */
@@ -155,7 +157,7 @@ nav a.ativo {
 footer {
   text-align: center;
   padding: 30px;
-  background-color: var(--cor-quartearia);
+  background-color: var(--cor-secundaria);
   color: var(--cor-terciaria);
   font-size: 14px;
 }
