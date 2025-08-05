@@ -4,10 +4,10 @@
 }
 
 :root {
-  --primary-color: #F5F7FA;     /* Fundo claro suave */
-  --cor-secundaria: #E3E8EF;    /* Fundo de cards, menus, header – cinza clarinho */
-  --cor-terciaria: #333333;     /* Textos – cinza escuro para legibilidade */
-  --cor-quartearia: #4FD1C5;    /* Verde claro e suave – botões e links */
+  --primary-color: hsl(330, 100%, 50%);     /* Fundo claro suave */
+  --cor-secundaria: #265aad;    /* Fundo de cards, menus, header – cinza clarinho */
+  --cor-terciaria: #000000;     /* Textos – cinza escuro para legibilidade */
+  --cor-quartearia: #dad160;    /* Verde claro e suave – botões e links */
   --cor-comple: #10a37796;        /* Rosa claro – hover/destaques */
 }
 
