@@ -4,12 +4,13 @@
 }
 
 :root {
-  --primary-color: hsl(330, 100%, 50%);     /* Fundo claro suave */
-  --cor-secundaria: #265aad;    /* Fundo de cards, menus, header – cinza clarinho */
-  --cor-terciaria: #000000;     /* Textos – cinza escuro para legibilidade */
-  --cor-quartearia: #dad160;    /* Verde claro e suave – botões e links */
-  --cor-comple: #10a37796;        /* Rosa claro – hover/destaques */
+  --primary-color: #1F1F1F;
+  --cor-secundaria: #262626;
+  --cor-terciaria: #E0E0E0;
+  --cor-quartearia: #FF3C38;
+  --cor-comple: #F3DE8A;
 }
+
 
 body {
   margin: 0;
@@ -17,6 +18,8 @@ body {
   font-family: Arial, sans-serif;
   color: var(--cor-terciaria);
 }
+
+
 
 /* =================== HEADER =================== */
 
@@ -155,6 +158,10 @@ nav a.ativo {
 /* =================== FOOTER =================== */
 
 footer {
+  margin-top: auto;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   text-align: center;
   padding: 30px;
   background-color: var(--cor-secundaria);
