@@ -1,100 +1,52 @@
-/* --- FOOTER STYLE --- */
-.footer {
-  background: #000;
-  color: #ccc;
-  border-top: 2px solid #111;
-  padding: 60px 20px 20px;
-  font-family: 'Poppins', sans-serif;
-}
+<footer class="footer">
+    <div class="footer-container">
 
-.footer-container {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
-}
+        <!-- Logo + descrição -->
+        <div class="footer-col">
+            <h2 class="logo">novus.z7</h2>
+            <p class="desc">
+                Streetwear independente ☯🎭💭<br>
+                Estilo urbano, identidade única, atitude nas ruas.
+            </p>
+        </div>
 
-.footer-col h2.logo {
-  font-size: 26px;
-  font-weight: bold;
-  color: #fff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+        <!-- Navegação -->
+        <div class="footer-col">
+            <h3>Navegação</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
 
-.footer-col h3 {
-  font-size: 15px;
-  margin-bottom: 15px;
-  color: #fff;
-  border-left: 3px solid #666;
-  padding-left: 8px;
-}
+        <!-- Ajuda -->
+        <div class="footer-col">
+            <h3>Ajuda</h3>
+            <ul>
+                <li><a href="#">Suporte</a></li>
+                <li><a href="#">Trocas & Devoluções</a></li>
+                <li><a href="#">Frete & Entregas</a></li>
+                <li><a href="#">Privacidade</a></li>
+            </ul>
+        </div>
 
-.footer-col p.desc {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #aaa;
-  margin-top: 10px;
-}
+        <!-- Redes -->
+        <div class="footer-col">
+            <h3>Conecta 🌐</h3>
+            <div class="socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
 
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    <div class="copyright">
+        © 2025 novus.z7 — Todos os direitos reservados 🕷
+    </div>
+</footer>
+</body>
 
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-  color: #aaa;
-  font-size: 14px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.footer-col ul li a:hover {
-  color: #fff;
-  text-shadow: 0 0 8px #0ff, 0 0 12px #0ff;
-}
-
-/* --- Redes sociais --- */
-.socials {
-  display: flex;
-  gap: 12px;
-}
-
-.socials a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: #111;
-  border-radius: 50%;
-  color: #aaa;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.socials a:hover {
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0 12px #0ff, 0 0 20px #0ff;
-}
-
-/* --- Copyright --- */
-.footer .copyright {
-  margin-top: 40px;
-  text-align: center;
-  font-size: 12px;
-  color: #666;
-  border-top: 1px solid #111;
-  padding-top: 20px;
-}
-.footer .copyright a {
-  color: #0ff;
-  text-decoration: none;
-}
+</html>
