@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<?php include('./templates/header.php'); ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novus.z7</title>
-  <link rel="icon" href="./img/logo.png" type="image/png">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-</head>
 
-<body>
-  <div class="site-wrapper">
-    <header class="cabecalho">
-      <div class="login"><a href="./cadastro.html"><i class="bi bi-person-fill"></i> Login</a></div>
-      <h1 class="logo">NOVUS.Z7</h1>
-      <p class="sub-logo">Streetwear • Premium • Autenticidade</p>
-      <nav class="navegacao">
-        <ul class="menu-principal">
-          <li><a class="ativo" href="">LOJA</a></li>
-          <li><a href="./sobre.html">SOBRE</a></li>
-        </ul>
-      </nav>
-    </header>
     <main class="conteudo">
       <section class="container">
         <figure class="product">
@@ -71,10 +49,7 @@
       </section>
     </main>
 
-    <footer>
-      © 2025 Novus.z7 — Estilo não se compra. Se impõe.
-    </footer>
-  </div>
+    <?php include('./templates/footer.php'); ?>
 
   <script type="module">
     import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js'
