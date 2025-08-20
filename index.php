@@ -1,6 +1,5 @@
 <?php include('./templates/header.php'); ?>
 
-
     <main class="conteudo">
       <section class="container">
         <figure class="product">

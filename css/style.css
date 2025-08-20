@@ -62,24 +62,6 @@ body {
   color: #fff;
 }
 
-/* LOGIN */
-.login a {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  background-color: var(--cor-comple);
-  padding: 8px 14px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #fff;
-  transition: 0.3s;
-}
-
-.login a:hover {
-  background-color: var(--cor-hover);
-}
-
 
 /* PRODUTOS */
 .container {
@@ -141,14 +123,4 @@ body {
 
 .buy-btn:hover {
   background-color: var(--cor-hover);
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: var(--cor-secundaria);
-  color: var(--cor-terciaria);
-  font-size: 14px;
-  margin-top: 40px;
 }

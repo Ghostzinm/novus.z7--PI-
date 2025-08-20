@@ -21,31 +21,17 @@
     <!-- Menu desktop -->
     <nav class="nav">
       <ul>
-        <li><a href="#">Home</a></li>
+        <li><a href="./header.php">Home</a></li>
         <li><a href="#">Catálogo</a></li>
-        <li><a href="#">Sobre</a></li>
+        <li><a href="./sobre.html">Sobre</a></li>
         <li><a href="#">Contato</a></li>
       </ul>
     </nav>
 
     <!-- Login -->
-    <div class="login-btn">
-      <a href="login.html">Login</a>
+    <div class="login">
+      <a href="./cadastro.html"><i class="bi bi-person-fill"></i> Login</a>
     </div>
 
-    <!-- Botão hamburguer -->
-    <div class="menu-btn" id="menu-btn">
-      ☰
-    </div>
-  </div>
-
-  <!-- Menu mobile -->
-  <div class="mobile-nav" id="mobile-nav">
-    <a href="#">Home</a>
-    <a href="#">Catálogo</a>
-    <a href="#">Sobre</a>
-    <a href="#">Contato</a>
-    <a href="login.html" class="login-mobile">Login</a>
-  </div>
 </header>
 
