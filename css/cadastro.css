@@ -32,10 +32,6 @@
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
     background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #0f0f0f);
     background-size: 400% 400%;
     animation: gradientBG 12s ease infinite;
@@ -75,6 +71,13 @@ h6 {
 .cabecalho .logo:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.534);
+}
+
+.container2 {
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .container {

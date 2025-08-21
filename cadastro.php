@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/cadastro.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  
+  <link rel="stylesheet" href="./css/footer.css">
   <title>Login | novus.z7</title>
 </head>
 
@@ -15,66 +15,67 @@
     <a href="./index.html"><img class="logo" src="./img/logo.png" alt="Logo Novus.z7"></a>
   </header>
 
-  <section class="container" id="container">
+  <section class="container2">
+    <div class="container" id="container">
+      <!-- Cadastro -->
+      <main class="form-container sign-up">
+        <form>
+          <h1>Crie sua conta</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"><i class="bi bi-google"></i></a>
+            <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
+            <a href="#" class="icon"><i class="bi bi-apple"></i></a>
+          </div>
+          <span>ou use seu email para se cadastrar</span>
+          <input type="text" id="nome-cadastro" placeholder="Nome">
+          <input type="email" id="email-cadastro" placeholder="Email">
+          <input type="password" id="senha-cadastro" placeholder="Senha">
+          <input type="password" id="confirmar-senha" placeholder="Confirme sua senha">
+          <button type="submit">Cadastrar</button>
+        </form>
+      </main>
 
-    <!-- Cadastro -->
-    <main class="form-container sign-up">
-      <form>
-        <h1>Crie sua conta</h1>
-        <div class="social-icons">
-          <a href="#" class="icon"><i class="bi bi-google"></i></a>
-          <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
-          <a href="#" class="icon"><i class="bi bi-apple"></i></a>
-        </div>
-        <span>ou use seu email para se cadastrar</span>
-        <input type="text" id="nome-cadastro" placeholder="Nome">
-        <input type="email" id="email-cadastro" placeholder="Email">
-        <input type="password" id="senha-cadastro" placeholder="Senha">
-        <input type="password" id="confirmar-senha" placeholder="Confirme sua senha">
-        <button type="submit">Cadastrar</button>
-      </form>
-    </main>
+      <!-- Login -->
+      <main class="form-container sign-in">
+        <form>
+          <h1>Entrar</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"><i class="bi bi-google"></i></a>
+            <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
+            <a href="#" class="icon"><i class="bi bi-apple"></i></a>
+          </div>
+          <span>ou use seu email</span>
+          <input type="email" id="email-login" placeholder="Email">
+          <input type="password" id="senha-login" placeholder="Senha">
+          <div class="remember-me">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" id="lembrar" />
+              <div class="checkmark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M20 6L9 17L4 12" stroke-width="3"></path>
+                </svg>
+              </div>
+              <span class="label">Lembrar de mim</span>
+            </label>
+          </div>
+          <a href="#">Esqueceu sua senha?</a>
+          <button type="submit">Entrar</button>
+        </form>
+      </main>
 
-    <!-- Login -->
-    <main class="form-container sign-in">
-      <form>
-        <h1>Entrar</h1>
-        <div class="social-icons">
-          <a href="#" class="icon"><i class="bi bi-google"></i></a>
-          <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
-          <a href="#" class="icon"><i class="bi bi-apple"></i></a>
-        </div>
-        <span>ou use seu email</span>
-        <input type="email" id="email-login" placeholder="Email">
-        <input type="password" id="senha-login" placeholder="Senha">
-        <div class="remember-me">
-          <label class="checkbox-wrapper">
-            <input type="checkbox" id="lembrar" />
-            <div class="checkmark">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M20 6L9 17L4 12" stroke-width="3"></path>
-              </svg>
-            </div>
-            <span class="label">Lembrar de mim</span>
-          </label>
-        </div>
-        <a href="#">Esqueceu sua senha?</a>
-        <button type="submit">Entrar</button>
-      </form>
-    </main>
-
-    <!-- Painel de alternância -->
-    <div class="toggle-container">
-      <div class="toggle">
-        <div class="toggle-panel toggle-left">
-          <h1>Bem-vindo de volta!</h1>
-          <p>Entre com seus dados para continuar</p>
-          <button class="hidden" id="login">Entrar</button>
-        </div>
-        <div class="toggle-panel toggle-right">
-          <h1>Olá, visitante!</h1>
-          <p>Cadastre-se para acessar todos os recursos</p>
-          <button class="hidden" id="register">Cadastrar</button>
+      <!-- Painel de alternância -->
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Bem-vindo de volta!</h1>
+            <p>Entre com seus dados para continuar</p>
+            <button class="hidden" id="login">Entrar</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>Olá, visitante!</h1>
+            <p>Cadastre-se para acessar todos os recursos</p>
+            <button class="hidden" id="register">Cadastrar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -82,6 +83,5 @@
   </section>
 
   <script src="./js/cadastro.js"></script>
-</body>
 
-</html>
+  <?php include('./templates/footer.php'); ?>
