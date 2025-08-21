@@ -1,4 +1,5 @@
 /* Importando fonte */
+/* Importando fonte */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -64,6 +65,7 @@ h6 {
     width: auto;
     height: 80%;
     margin-left: 20px;
+    margin-left: 20px;
     border-radius: 20px;
     margin-top: auto;
     margin-bottom: auto;
@@ -89,11 +91,16 @@ h6 {
 .container p,
 .container span,
 label {
+.container p,
+.container span,
+label {
     font-size: 12px;
+    color: var(--text-light);
     color: var(--text-light);
 }
 
 .container a {
+    color: var(--text-light);
     color: var(--text-light);
     font-size: 13px;
     margin: 15px 0 10px;
@@ -180,7 +187,6 @@ input:focus {
 }
 
 .sign-in {
-    left: 0;
     width: 50%;
     z-index: 2;
 }
@@ -191,7 +197,6 @@ input:focus {
 }
 
 .sign-up {
-    left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
@@ -205,13 +210,13 @@ input:focus {
 }
 
 @keyframes move {
-
     0%,
     49.99% {
         opacity: 0;
         z-index: 1;
     }
 
+    50%,
     50%,
     100% {
         opacity: 1;
@@ -251,6 +256,7 @@ input:focus {
 
 .toggle {
     background-color: #a0a0a03f;
+    color: var(--text-light);
     color: var(--text-light);
     position: relative;
     left: -100%;
