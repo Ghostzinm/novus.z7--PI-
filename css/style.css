@@ -18,49 +18,12 @@ body {
   color: var(--cor-terciaria);
 }
 
-/* HEADER */
-.cabecalho {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--cor-secundaria);
-  box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+/* carrosel */
+.c-img {
+  height: 500px;
+  object-fit: cover;
 }
 
-.logo {
-  font-family: 'streetwear', serif;
-  font-size: 2.2rem;
-  letter-spacing: 10px;
-  margin: 5px 0;
-}
-
-.sub-logo {
-  font-size: 0.9rem;
-  color: #aaa;
-  margin-bottom: 10px;
-}
-
-.menu-principal {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  padding: 0;
-}
-
-.menu-principal a {
-  text-decoration: none;
-  color: var(--cor-terciaria);
-  padding: 8px 14px;
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-.menu-principal a:hover,
-.menu-principal a.ativo {
-  background-color: var(--cor-comple);
-  color: #fff;
-}
 
 
 /* PRODUTOS */
@@ -93,7 +56,8 @@ body {
   border-radius: 10px;
 }
 
-.product h3 {
+.product h3, p {
+  color: var(--cor-terciaria);
   margin: 12px 0 5px;
   font-size: 18px;
 }

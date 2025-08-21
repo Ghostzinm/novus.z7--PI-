@@ -36,9 +36,9 @@
         <div class="footer-col">
             <h3>Conecta 🌐</h3>
             <div class="socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://instagram.com/novus.z7"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-tiktok"></i></a>
+                <a href="#"><i class="bi bi-whatsapp"></i></a>
             </div>
         </div>
     </div>
