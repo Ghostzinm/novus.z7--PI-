@@ -91,9 +91,6 @@ h6 {
 .container p,
 .container span,
 label {
-.container p,
-.container span,
-label {
     font-size: 12px;
     color: var(--text-light);
     color: var(--text-light);
