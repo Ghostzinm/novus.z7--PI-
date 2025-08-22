@@ -110,6 +110,17 @@ body {
   cursor: pointer;
   transition: 0.3s ease;
 }
+.checkout-btn2 {
+  padding: 12px 24px;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-right: -450px;
+}
 
 .checkout-btn:hover {
   background-color: #f0f0f0;
