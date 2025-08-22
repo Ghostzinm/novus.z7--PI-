@@ -9,7 +9,7 @@
             <p>Camisa Premium</p>
             <div class="preco">R$ 70,00</div>
             <p class="size">Tamanhos: G</p>
-            <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+             <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
           </figcaption>
         </figure>
 
@@ -20,7 +20,7 @@
             <p>Camisa Premium</p>
             <div class="preco">R$ 70,00</div>
             <p class="size">Tamanhos: M</p>
-            <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+            <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
           </figcaption>
         </figure>
 
@@ -31,7 +31,7 @@
             <p>Camisa Premium</p>
             <div class="preco">R$ 70,00</div>
             <p class="size">Tamanhos: M</p>
-            <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+            <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
           </figcaption>
         </figure>
 
@@ -42,7 +42,7 @@
             <p>Camisa Comum.</p>
             <div class="preco">R$ 50,00</div>
             <p class="size">Tamanhos: M</p>
-            <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+             <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
           </figcaption>
         </figure>
       </section>
