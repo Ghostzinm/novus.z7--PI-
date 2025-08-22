@@ -1,7 +1,15 @@
 /* --- HEADER --- */
+
+:root {
+
+  --preto: #0f0f0f;
+  --cor-comple: #00B3B0;
+  --cor-hover: #FF4F6D;
+}
+
 .header {
   width: 100%;
-  background: #000;
+  background: var(--preto);
   color: #fff;
   border-bottom: 2px solid #111;
   position: sticky;
