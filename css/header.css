@@ -1,0 +1,116 @@
+/* --- HEADER --- */
+
+:root {
+
+  --preto: #0f0f0f;
+  --cor-comple: #00B3B0;
+  --cor-hover: #FF4F6D;
+}
+
+.header {
+  width: 100%;
+  background: var(--preto);
+  color: #fff;
+  border-bottom: 2px solid #111;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .logo {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 8px #0ff, 0 0 14px #0ff;
+}
+
+/* --- MENU DESKTOP --- */
+.nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.nav ul li a:hover {
+  color: #fff;
+  text-shadow: 0 0 6px #0ff, 0 0 10px #0ff;
+}
+
+/* --- BOTÃO MOBILE --- */
+.menu-btn {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+/* --- MENU MOBILE --- */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  background: #111;
+  border-top: 1px solid #222;
+}
+
+.mobile-nav a {
+  padding: 15px;
+  color: #ccc;
+  text-decoration: none;
+  border-bottom: 1px solid #222;
+  transition: 0.3s;
+}
+
+.mobile-nav a:hover {
+  background: #0ff;
+  color: #000;
+  text-shadow: 0 0 6px #000;
+}
+
+/* LOGIN */
+.login a {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background-color: var(--cor-comple);
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.login a:hover {
+  background-color: var(--cor-hover);
+}
+
+
+/* --- media screen --- */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+  .menu-btn {
+    display: block;
+  }
+}
