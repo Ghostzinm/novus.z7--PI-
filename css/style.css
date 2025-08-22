@@ -5,7 +5,7 @@
 
 :root {
   --primary-color: #D8FFDB;
-  --cor-secundaria: #023535;
+  --cor-secundaria:  #023535;
   --cor-terciaria: #C7FFED;
   --cor-comple: #00B3B0;
   --cor-hover: #FF4F6D;
@@ -24,6 +24,9 @@ body {
   object-fit: cover;
 }
 
+.container-produtos {
+  background-color: var(--cor-terciaria);
+}
 
 
 /* PRODUTOS */

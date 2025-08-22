@@ -22,54 +22,53 @@
   </button>
 </div>
 
-<main class="conteudo">
-  <section class="container">
-    <figure class="product">
-      <img src="./img/roupas/lv.webp" alt="Camisa Premium Luis Vuitton">
-      <figcaption>
-        <h3>Luis Vuitton</h3>
-        <p>Camisa Premium</p>
-        <div class="preco">R$ 70,00</div>
-        <p class="size">Tamanhos: G</p>
-        <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
-      </figcaption>
-    </figure>
+<section class="container-produtos">
+  <main class="conteudo container">
+      <figure class="product">
+        <img src="./img/roupas/lv.webp" alt="Camisa Premium Luis Vuitton">
+        <figcaption>
+          <h3>Luis Vuitton</h3>
+          <p>Camisa Premium</p>
+          <div class="preco">R$ 70,00</div>
+          <p class="size">Tamanhos: G</p>
+          <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+        </figcaption>
+      </figure>
 
-    <figure class="product">
-      <img src="./img/roupas/Anjo_trip.png" alt="Camisa Premium Anjo">
-      <figcaption>
-        <h3>Anjo Trip $ide</h3>
-        <p>Camisa Premium</p>
-        <div class="preco">R$ 70,00</div>
-        <p class="size">Tamanhos: M</p>
-        <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
-      </figcaption>
-    </figure>
+      <figure class="product">
+        <img src="./img/roupas/Anjo_trip.png" alt="Camisa Premium Anjo">
+        <figcaption>
+          <h3>Anjo Trip $ide</h3>
+          <p>Camisa Premium</p>
+          <div class="preco">R$ 70,00</div>
+          <p class="size">Tamanhos: M</p>
+          <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+        </figcaption>
+      </figure>
 
-    <figure class="product">
-      <img src="./img/roupas/compton.png" alt="Camisa Premium Compton">
-      <figcaption>
-        <h3>Compton</h3>
-        <p>Camisa Premium</p>
-        <div class="preco">R$ 70,00</div>
-        <p class="size">Tamanhos: M</p>
-        <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
-      </figcaption>
-    </figure>
+      <figure class="product">
+        <img src="./img/roupas/compton.png" alt="Camisa Premium Compton">
+        <figcaption>
+          <h3>Compton</h3>
+          <p>Camisa Premium</p>
+          <div class="preco">R$ 70,00</div>
+          <p class="size">Tamanhos: M</p>
+          <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+        </figcaption>
+      </figure>
 
-    <figure class="product">
-      <img src="./img/roupas/high.jpg" alt="Camisa Premium High Dragão">
-      <figcaption>
-        <h3>HIGH Dragão</h3>
-        <p>Camisa Comum.</p>
-        <div class="preco">R$ 50,00</div>
-        <p class="size">Tamanhos: M</p>
-        <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
-      </figcaption>
-    </figure>
-  </section>
-</main>
-
+      <figure class="product">
+        <img src="./img/roupas/high.jpg" alt="Camisa Premium High Dragão">
+        <figcaption>
+          <h3>HIGH Dragão</h3>
+          <p>Camisa Comum.</p>
+          <div class="preco">R$ 50,00</div>
+          <p class="size">Tamanhos: M</p>
+          <a class="buy-btn" href="https://instagram.com/novus.z7" target="_blank">Comprar no Insta</a>
+        </figcaption>
+      </figure>
+  </main>
+</section>
 <?php include('./templates/footer.php'); ?>
 
 <script type="module">
