@@ -1,31 +1,44 @@
 <?php
-// Só processa se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+echo "<h1>cadastro de camisas php </h1>";
 
-    // Pega os dados do form
-    $formNome = $_POST["nome"] ?? '';
-    $formPreco = $_POST["preco"] ?? '';
-    $formTamanho = $_POST["tamanho"] ?? '';
-    $formDesc = $_POST["desc"] ?? '';
 
-    // Conexão PDO
-    $dsn = 'mysql:dbname=db_novus;host=127.0.0.1';
-    $usuario = 'root';
-    $senha = '';
-    $conn = new PDO($dsn, $usuario, $senha);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$formNome = $_POST["nome"];
+$formPreco = $_POST["preco"];
+$formTamanho = $_POST["tamanho"];
+$formDesc = $_POST["desc"];
 
-    // Inserção no banco
-    $stmt = $conn->prepare("INSERT INTO tb_produtos(nome, preco, tamanho, descricao) 
-                            VALUES (:nome, :preco, :tamanho, :descricao)");
-    $stmt->execute([
+$dsn = 'mysql:dbname=db_novus;host=127.0.0.1';
+$usuario = 'root';
+$senha = '';
+
+
+
+$conn = new PDO($dsn, $usuario, $senha);
+
+$scriptCadastro = "INSERT INTO
+    tb_produtos(
+        nome,
+        preco,
+        tamanho,
+        descricao
+    )
+    VALUES (
+        :nome,
+        :preco,
+        :tamanho,
+        :descricao
+    )";
+
+
+    $scriptPreparado = $conn->prepare($scriptCadastro);
+    $scriptPreparado->execute([
         ":nome" => $formNome,
         ":preco"=> $formPreco,
         ":tamanho" => $formTamanho,
         ":descricao" => $formDesc
     ]);
 
-    // Pega todos os produtos para atualizar o JSON
+        // Pega todos os produtos para atualizar o JSON
     $stmt = $conn->prepare("SELECT * FROM tb_produtos");
     $stmt->execute();
     $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -39,4 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Redireciona para a página de administração
     header('Location: adm.html');
     exit;
-}
+
