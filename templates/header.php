@@ -23,7 +23,7 @@
 
       <nav class="nav">
         <ul>
-          <li><a href="./header.php">Home</a></li>
+          <li><a href="./index.php">Home</a></li>
           <li><a href="#">Catálogo</a></li>
           <li><a href="./sobre.html">Sobre</a></li>
           <li><a href="#">Contato</a></li>
