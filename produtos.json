@@ -26,19 +26,5 @@
         "preco": "004",
         "tamanho": "premium",
         "descricao": "e"
-    },
-    {
-        "id": 10,
-        "nome": "vaii",
-        "preco": "004",
-        "tamanho": "premium",
-        "descricao": "e"
-    },
-    {
-        "id": 11,
-        "nome": "a",
-        "preco": "33",
-        "tamanho": "premium",
-        "descricao": "fefe"
     }
 ]
