@@ -1,3 +1,34 @@
+
+<?php 
+
+$nome = '';
+$email = '';
+$senha = '';
+$cSenha = '';
+
+if (isset($_GET['id']) && !empty('id')) {
+
+    $id = $_GET['id'];
+    $dsn = 'mysql:dbname=db_forms;host=127.0.0.1';
+    $usuario = 'root';
+    $senha = '';
+
+    $conn = new PDO($dsn, $usuario, $senha);
+
+    $scriptSelect = "SELECT * FROM tb_cadastro WHERE id = $id";
+
+    $dadosSelect = $conn->query($scriptSelect)->fetch();
+
+    $nome = $dadosSelect["nome"];
+    $telefone = $dadosSelect["telefone"];
+    $usuario = $dadosSelect["usuario"];
+    $senha = $dadosSelect["senha"];
+
+};
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,7 +50,7 @@
     <div class="container" id="container">
       <!-- Cadastro -->
       <main class="form-container sign-up">
-        <form>
+        <form action="./form-cadastrar.php" method="POST">
           <h1>Crie sua conta</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="bi bi-google"></i></a>
@@ -27,10 +58,10 @@
             <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email para se cadastrar</span>
-          <input type="text" id="nome-cadastro" placeholder="Nome">
-          <input type="email" id="email-cadastro" placeholder="Email">
-          <input type="password" id="senha-cadastro" placeholder="Senha">
-          <input type="password" id="confirmar-senha" placeholder="Confirme sua senha">
+          <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
+          <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
+          <input <?= $senha ?> name="senha" type="password" id="senha-cadastro" placeholder="Senha" required >
+          <input <?= $cSenha ?> name="cSenha" type="password" id="confirmar-senha" placeholder="Confirme sua senha" required >
           <button type="submit">Cadastrar</button>
         </form>
       </main>
@@ -45,8 +76,8 @@
             <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email</span>
-          <input type="email" id="email-login" placeholder="Email">
-          <input type="password" id="senha-login" placeholder="Senha">
+          <input type="email" id="email-login" placeholder="Email" required>
+          <input type="password" id="senha-login" placeholder="Senha" required>
           <div class="remember-me">
             <label class="checkbox-wrapper">
               <input type="checkbox" id="lembrar" />
