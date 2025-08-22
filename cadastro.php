@@ -12,7 +12,7 @@
 
 <body>
   <header class="cabecalho">
-    <a href="./index.html"><img class="logo" src="./img/logo.png" alt="Logo Novus.z7"></a>
+    <a href="./index.php"><i class="bi bi-box-arrow-in-left"></i></a>
   </header>
 
   <section class="container2">
