@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produto | Novus.z7</title>
-  <link rel="stylesheet" href="./css/produtos.css">
-</head>
-<body>
+<?php
+include('./templates/header.php');
+?>
 
-  <header class="topo">
-    <h1 class="logo">novus.z7</h1>
-  </header>
+<link rel="stylesheet" href="./css/produtos.css">
+
+
+  
 
   <main class="container-produto">
   <div class="galeria">
     <div class="miniaturas">
-      <img src="img/roupas/Anjo_trip.png" alt="Foto 1" onclick="trocarImagem(this)">
+      <img src="img/roupas/high.jpg" alt="Foto 1" onclick="trocarImagem(this)">
       <img src="img/roupas/Anjo_trip.png" alt="Foto 2" onclick="trocarImagem(this)">
-      <img src="img/roupas/Anjo_trip.png" alt="Foto 3" onclick="trocarImagem(this)">
+      <img src="img/roupas/lv.webp" alt="Foto 3" onclick="trocarImagem(this)">
       <img src="img/roupas/Anjo_trip.png" alt="Foto 4" onclick="trocarImagem(this)">
     </div>
     <div class="imagem-principal">
@@ -31,7 +26,7 @@
     <p class="descricao">
       Camiseta 100% algodão, modelagem oversized, estampa exclusiva Novus.z7, perfeita para quem curte o lifestyle urbano.
     </p>
-    <a href="https://wa.me/55SEUNUMERO" class="btn-comprar">Comprar Agora</a>
+    <a href="./carrinho.html" class="btn-comprar">Comprar Agora</a>
   </div>
 </main>
 
@@ -41,5 +36,8 @@
     }
   </script>
 
-</body>
-</html>
+
+
+<?php
+include('./templates/footer.php');
+?>

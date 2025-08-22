@@ -31,7 +31,7 @@
           <p>Camisa Premium</p>
           <div class="preco">R$ 70,00</div>
           <p class="size">Tamanhos: G</p>
-          <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
+          <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
         </figcaption>
       </figure>
 
@@ -42,7 +42,7 @@
           <p>Camisa Premium</p>
           <div class="preco">R$ 70,00</div>
           <p class="size">Tamanhos: M</p>
-          <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
+           <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
         </figcaption>
       </figure>
 
@@ -53,18 +53,18 @@
           <p>Camisa Premium</p>
           <div class="preco">R$ 70,00</div>
           <p class="size">Tamanhos: M</p>
-          <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
+           <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
         </figcaption>
       </figure>
 
       <figure class="product">
         <img src="./img/roupas/high.jpg" alt="Camisa Premium High Dragão">
-        <figcaption>
+       <figcaption>
           <h3>HIGH Dragão</h3>
           <p>Camisa Comum.</p>
           <div class="preco">R$ 50,00</div>
           <p class="size">Tamanhos: M</p>
-          <a class="buy-btn" href="./carrinho.html" target="_blank">Comprar</a>
+            <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
         </figcaption>
       </figure>
   </main>
