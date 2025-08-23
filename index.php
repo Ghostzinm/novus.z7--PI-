@@ -22,8 +22,8 @@
   </button>
 </div>
 
-<section class="container-produtos">
-  <main class="conteudo container">
+<section class="container-produtos" >
+  <main class="conteudo container" id="container-produtos">
       <figure class="product">
         <img src="./img/roupas/lv.webp" alt="Camisa Premium Luis Vuitton">
         <figcaption>
@@ -86,6 +86,8 @@
     },
   });
 </script>
+
+<script src="./js/card.js"></script>
 
 </body>
 

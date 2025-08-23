@@ -1,44 +1,28 @@
-[
-    {
-        "id": 1,
-        "nome": "anjo trip $ide",
-        "preco": "R$ 70,00",
-        "tamanho": "M",
-        "descricao": "camisa streetweare 100% algodão"
-    },
-    {
-        "id": 7,
-        "nome": "a",
-        "preco": "2",
-        "tamanho": "premium",
-        "descricao": "a"
-    },
-    {
-        "id": 8,
-        "nome": "sap",
-        "preco": "004",
-        "tamanho": "premium",
-        "descricao": "e"
-    },
-    {
-        "id": 9,
-        "nome": "sap",
-        "preco": "004",
-        "tamanho": "premium",
-        "descricao": "e"
-    },
-    {
-        "id": 10,
-        "nome": "vaii",
-        "preco": "004",
-        "tamanho": "premium",
-        "descricao": "e"
-    },
-    {
-        "id": 11,
-        "nome": "a",
-        "preco": "33",
-        "tamanho": "premium",
-        "descricao": "fefe"
-    }
-]
+{
+    "produtos": [
+        {
+            "id": "1",
+            "nome": "anjo trip $ide",
+            "preco": 0,
+            "descricao": "camisa streetweare 100% algodão"
+        },
+        {
+            "id": "18",
+            "nome": "hgjfhgfdgdyfdty",
+            "preco": 2341564,
+            "descricao": "fytyufyutyufrutyfyutf"
+        },
+        {
+            "id": "19",
+            "nome": "a",
+            "preco": 2,
+            "descricao": "w"
+        },
+        {
+            "id": "20",
+            "nome": "a",
+            "preco": 2222222,
+            "descricao": "222vdsvsvfd"
+        }
+    ]
+}
