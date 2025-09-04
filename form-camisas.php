@@ -1,14 +1,17 @@
 <?php
 echo "<h1>cadastro de camisas php </h1>";
 
+$_ENV = parse_ini_file('.env');
+
+
 $formNome = $_POST["nome"];
 $formPreco = $_POST["preco"];
 $formTamanho = $_POST["tamanho"];
 $formDesc = $_POST["desc"];
 
-$dsn = 'mysql:dbname=db_novus;host=127.0.0.1';
-$usuario = 'root';
-$senha = '';
+$dsn = "mysql:dbname={$_ENV['BANCO']};host={$_ENV['HOST']}";
+$usuario = ['USUARIO'];
+$senha = ['SENHA'];
 
 $conn = new PDO($dsn, $usuario, $senha);
 
