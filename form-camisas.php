@@ -1,53 +1,55 @@
 <?php
-echo "<h1>cadastro de camisas php </h1>";
+echo "<h1>Cadastro de Camisas PHP</h1>";
 
+// Carrega variáveis de ambiente
 $_ENV = parse_ini_file('.env');
 
+// Conecta ao banco de dados
+$dsn = "mysql:dbname={$_ENV['BANCO']};host={$_ENV['HOST']}";
+$usuario = $_ENV['USUARIO'];
+$senha = $_ENV['SENHA'];
+$conn = new PDO($dsn, $usuario, $senha);
 
+// Pega os dados do formulário
 $formNome = $_POST["nome"];
 $formPreco = $_POST["preco"];
 $formTamanho = $_POST["tamanho"];
 $formDesc = $_POST["desc"];
 
-$dsn = "mysql:dbname={$_ENV['BANCO']};host={$_ENV['HOST']}";
-$usuario = ['USUARIO'];
-$senha = ['SENHA'];
+// === Upload da imagem ===
+$pastaDestino = "imagens/roupas";
+$imagemCaminho = "";
 
-$conn = new PDO($dsn, $usuario, $senha);
+if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+    $arquivoTmp = $_FILES['imagem']['tmp_name'];
+    $nomeOriginal = basename($_FILES['imagem']['name']);
+    $novoNome = uniqid() . "_" . $nomeOriginal;
+    $caminhoFinal = $pastaDestino . $novoNome;
 
-$scriptCadastro = "INSERT INTO tb_produtos(nome, preco, tamanho, descricao)
-                   VALUES (:nome, :preco, :tamanho, :descricao)";
+    if (move_uploaded_file($arquivoTmp, $caminhoFinal)) {
+        $imagemCaminho = $caminhoFinal; // Caminho da imagem a ser salvo no banco
+    } else {
+        echo "Erro ao salvar a imagem.";
+        exit;
+    }
+} else {
+    echo "Erro no upload da imagem.";
+    exit;
+}
+
+// === Inserção no banco de dados ===
+$scriptCadastro = "INSERT INTO tb_produtos(nome, preco, tamanho, descricao, img)
+                   VALUES (:nome, :preco, :tamanho, :descricao, :img)";
 
 $scriptPreparado = $conn->prepare($scriptCadastro);
 $scriptPreparado->execute([
     ":nome" => $formNome,
     ":preco" => $formPreco,
     ":tamanho" => $formTamanho,
-    ":descricao" => $formDesc
+    ":descricao" => $formDesc,
+    ":img" => $imagemCaminho
 ]);
 
-// Pega todos os produtos para atualizar o JSON
-$stmt = $conn->prepare("SELECT * FROM tb_produtos");
-$stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // <-- CORREÇÃO AQUI
-
-// Monta o array no formato desejado
-$produtosJson = ['produtos' => []];
-
-foreach ($rows as $row) {
-    $produtosJson['produtos'][] = [
-        'id' => (string)$row['id'],
-        'nome' => $row['nome'],
-        'preco' => (float)$row['preco'],
-        'descricao' => $row['descricao'],
-    ];
-}
-
-// Caminho do arquivo JSON
-$arquivoJson = __DIR__ . '/json/roupas.json';
-
-// Salva o JSON
-file_put_contents($arquivoJson, json_encode($produtosJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-
-echo "JSON atualizado com sucesso!";
-header('location:index.php');
+// Redireciona para a página inicial após o cadastro
+header('Location: index.php');
+exit;

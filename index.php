@@ -1,4 +1,7 @@
-<?php include('./templates/header.php'); ?>
+<?php include('./templates/header.php');
+include('consulta-prod.php');
+
+?>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -24,52 +27,24 @@
 
 <section class="container-produtos" >
   <main class="conteudo container" id="container-produtos">
+  <?php foreach ($resultado as $linha): ?>
       <figure class="product">
-        <img src="./img/roupas/lv.webp" alt="Camisa Premium Luis Vuitton">
+        <!-- Coloque a imagem do produto, se tiver no banco use $linha['imagem'] -->
+        <!-- Aqui, só um placeholder fixo. Ajuste conforme seu banco -->
+        <img src="<?php echo './img/roupas/' . ($linha['img'] ?? 'default.webp'); ?>" alt="<?php echo htmlspecialchars($linha['nome']); ?>">
         <figcaption>
-          <h3>Luis Vuitton</h3>
-          <p>Camisa Premium</p>
-          <div class="preco">R$ 70,00</div>
+          <h3><?php echo htmlspecialchars($linha['nome']); ?></h3>
+          <p><?php echo htmlspecialchars($linha['descricao']); ?></p>
+          <div class="preco">R$ <?php echo $linha['preco']; ?></div>
+          <!-- Se tiver tamanhos, pode puxar do banco, senão deixe fixo -->
           <p class="size">Tamanhos: G</p>
-          <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
+          <a class="buy-btn" href="./produtos.php?id=<?php echo $linha['id']; ?>" target="_blank">Comprar</a>
         </figcaption>
       </figure>
+    <?php endforeach; ?>
 
-      <figure class="product">
-        <img src="./img/roupas/Anjo_trip.png" alt="Camisa Premium Anjo">
-        <figcaption>
-          <h3>Anjo Trip $ide</h3>
-          <p>Camisa Premium</p>
-          <div class="preco">R$ 70,00</div>
-          <p class="size">Tamanhos: M</p>
-           <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
-        </figcaption>
-      </figure>
-
-      <figure class="product">
-        <img src="./img/roupas/compton.png" alt="Camisa Premium Compton">
-        <figcaption>
-          <h3>Compton</h3>
-          <p>Camisa Premium</p>
-          <div class="preco">R$ 70,00</div>
-          <p class="size">Tamanhos: M</p>
-           <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
-        </figcaption>
-      </figure>
-
-      <figure class="product">
-        <img src="./img/roupas/high.jpg" alt="Camisa Premium High Dragão">
-       <figcaption>
-          <h3>HIGH Dragão</h3>
-          <p>Camisa Comum.</p>
-          <div class="preco">R$ 50,00</div>
-          <p class="size">Tamanhos: M</p>
-            <a class="buy-btn" href="./produtos.php" target="_blank">Comprar</a>
-        </figcaption>
-      </figure>
   </main>
 </section>
-<?php include('./templates/footer.php'); ?>
 
 <script type="module">
   import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js'
@@ -87,7 +62,7 @@
   });
 </script>
 
-<script src="./js/card.js"></script>
+<?php include('./templates/footer.php'); ?>
 
 </body>
 
