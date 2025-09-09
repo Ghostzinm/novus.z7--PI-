@@ -24,7 +24,7 @@
 
       <nav class="nav">
         <ul>
-          <li><a href="./header.php">Home</a></li>
+          <li><a href="./index.php">Home</a></li>
           <li><a href="#">Catálogo</a></li>
           <li><a href="./sobre.html">Sobre</a></li>
           <li><a href="#">Contato</a></li>
@@ -33,7 +33,7 @@
 
       <!-- Login -->
       <div class="login">
-        <a href="./cadastro.html"><i class="bi bi-person-fill"></i> Login</a>
+        <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
       </div>
 
   </header>
