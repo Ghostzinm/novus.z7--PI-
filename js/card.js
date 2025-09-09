@@ -10,8 +10,8 @@ async function carregarProdutos() {
         let idProduto = produto.id;
         let descricao = produto.descricao;
         let preco = produto.preco;
-  
-        let linkCompra = produto.linkCompra;
+        let img = produto.img;
+        let telaProduto = produto.telaProduto;
 
         console.log(nome, idProduto, descricao, preco);
 
@@ -20,13 +20,17 @@ async function carregarProdutos() {
 
         coluna.innerHTML = `
             <figure class="product">
+                <a href="${telaProduto}" target="_blank">
+                    <img src="${img}" alt="${nome}">
                 <figcaption>
                     <h3>${nome}</h3>
                     <p>${descricao}</p>
                     <div class="preco">R$ ${preco}</div>
                 </figcaption>
+                </a>
             </figure>
         `;
+
 
         container.appendChild(coluna);
     });

@@ -2,24 +2,29 @@
     "produtos": [
         {
             "id": "1",
+            "img": "img/roupas/high.jpg",
+            "telaProduto": "index.php",
             "nome": "anjo trip $ide",
             "preco": 0,
             "descricao": "camisa streetweare 100% algodão"
         },
         {
             "id": "2",
+            "img": "img/roupas/high.jpg",
             "nome": "anjo trip $ide",
             "preco": 0,
             "descricao": "camisa streetweare 100% algodão"
         },
         {
             "id": "3",
+            "img": "img/roupas/high.jpg",
             "nome": "anjo trip $ide",
             "preco": 0,
             "descricao": "camisa streetweare 100% algodão"
         },
         {
             "id": "4",
+            "img": "img/roupas/high.jpg",
             "nome": "minha pica",
             "preco": 156156156,
             "descricao": "fwqfe212121"
