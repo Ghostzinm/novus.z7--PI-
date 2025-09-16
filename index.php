@@ -29,16 +29,13 @@ include('consulta-prod.php');
   <main class="conteudo container" id="container-produtos">
   <?php foreach ($resultado as $linha): ?>
       <figure class="product">
-        <!-- Coloque a imagem do produto, se tiver no banco use $linha['imagem'] -->
-        <!-- Aqui, só um placeholder fixo. Ajuste conforme seu banco -->
-        <img src="<?php echo './img/roupas/' . ($linha['img'] ?? 'default.webp'); ?>" alt="<?php echo htmlspecialchars($linha['nome']); ?>">
+        <img src="<?php echo './img/roupas/' . ($linha['img']); ?>" alt="<?php echo $linha['nome']; ?>">
         <figcaption>
-          <h3><?php echo htmlspecialchars($linha['nome']); ?></h3>
-          <p><?php echo htmlspecialchars($linha['descricao']); ?></p>
+          <h3><?php echo$linha['nome']; ?></h3>
+          <p><?php echo$linha['descricao']; ?></p>
           <div class="preco">R$ <?php echo $linha['preco']; ?></div>
-          <!-- Se tiver tamanhos, pode puxar do banco, senão deixe fixo -->
           <p class="size">Tamanhos: <?php echo $linha['tamanho']; ?></p>
-          <a class="buy-btn" href="./produtos.php?id=<?php echo $linha['id']; ?>" target="_blank">Comprar</a>
+          <a class="buy-btn" href="./produtos.php?id=<?php echo $linha['id']; ?>">Comprar</a>
         </figcaption>
       </figure>
     <?php endforeach; ?>

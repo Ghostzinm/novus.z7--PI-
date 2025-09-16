@@ -1,3 +1,19 @@
+<?php
+
+require('config.php');
+
+$id = (int) $_GET['idProduto'];
+$scriptBusca = "SELECT * FROM tb_cadastro WHERE id = $id";
+
+$scriptConsulta = 'SELECT * FROM tb_produtos';
+
+$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
+
+$produto = $resultadoConsulta[$id];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,18 +29,18 @@
       <h3>quantidade</h3>
 
     <div class="cart-item">
-      <img src="img/roupas/compton.png" alt="Tênis Nike">
+      <img src="img/roupas/<?= $produto['img'] ?>" alt="Tênis Nike">
       <div class="item-details">
-        <h2>camisa street</h2>
-        <p>Tamanho: 42</p>
-        <p>R$ 699,90</p>
+        <h2><?= $produto['nome'] ?> </h2>
+        <p>Tamanho:<?= $produto['tamanho'] ?></p>
+        <p><?= $produto['preco'] ?> </p>
           
       </div>
      
     </div>
  <button class="remove-btn">Remover</button>
     <div class="cart-total">
-      <p>Total: <strong>R$ 699,90</strong></p>
+      <p>Total: <strong><?= $produto['preco'] ?> </strong></p>
             <a class="checkout-btn" href="./index.php" target="_blank">Finalizar Compra</a>
 
     </div>
