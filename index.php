@@ -37,7 +37,7 @@ include('consulta-prod.php');
           <p><?php echo htmlspecialchars($linha['descricao']); ?></p>
           <div class="preco">R$ <?php echo $linha['preco']; ?></div>
           <!-- Se tiver tamanhos, pode puxar do banco, senão deixe fixo -->
-          <p class="size">Tamanhos: G</p>
+          <p class="size">Tamanhos: <?php echo $linha['tamanho']; ?></p>
           <a class="buy-btn" href="./produtos.php?id=<?php echo $linha['id']; ?>" target="_blank">Comprar</a>
         </figcaption>
       </figure>
