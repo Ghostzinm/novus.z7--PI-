@@ -1,0 +1,4 @@
+CREATE DATABASE db_novus
+    DEFAULT CHARACTER SET = 'utf8mb4';
+
+    
