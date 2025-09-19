@@ -1,16 +1,18 @@
-/* --- HEADER --- */
-
 :root {
-
   --preto: #0f0f0f;
   --cor-comple: #00B3B0;
   --cor-hover: #FF4F6D;
+  --cor-perfil-start: #6a11cb;
+  --cor-perfil-end: #2575fc;
+  --cor-fundo: #111;
+  --cor-texto-claro: #fff;
 }
 
+/* Header desktop */
 .header {
   width: 100%;
   background: var(--preto);
-  color: #fff;
+  color: var(--cor-texto-claro);
   border-bottom: 2px solid #111;
   position: sticky;
   top: 0;
@@ -31,11 +33,10 @@
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--cor-texto-claro);
   text-shadow: 0 0 8px #0ff, 0 0 14px #0ff;
 }
 
-/* --- MENU DESKTOP --- */
 .nav ul {
   display: flex;
   gap: 25px;
@@ -52,64 +53,158 @@
 }
 
 .nav ul li a:hover {
-  color: #fff;
+  color: var(--cor-texto-claro);
   text-shadow: 0 0 6px #0ff, 0 0 10px #0ff;
 }
 
-/* --- BOTÃO MOBILE --- */
-.menu-btn {
-  display: none;
-  font-size: 22px;
-  cursor: pointer;
-  color: #aaa;
+/* Header right (botões) */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
 }
 
-/* --- MENU MOBILE --- */
+/* Botões padrão */
+.btn-action,
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  border: none;
+  color: var(--cor-texto-claro);
+  background: var(--cor-comple);
+  box-shadow: 0 0 8px rgba(0, 179, 176, 0.5);
+}
+
+.btn-action:hover,
+.btn-icon:hover {
+  background: var(--cor-hover);
+  box-shadow: 0 0 12px var(--cor-hover);
+  transform: translateY(-2px);
+}
+
+/* Botão perfil - degrade roxo/azul */
+.btn-action.perfil {
+  background: linear-gradient(135deg, var(--cor-perfil-start), var(--cor-perfil-end));
+  box-shadow: 0 0 10px rgba(106, 17, 203, 0.7);
+}
+
+.btn-action.perfil:hover {
+  box-shadow: 0 0 15px rgba(38, 117, 252, 0.9);
+  transform: translateY(-2px);
+}
+
+/* Botão logout - vermelho suave */
+.btn-action.logout {
+  background: #ff4f6d;
+  box-shadow: 0 0 10px #ff4f6dcc;
+}
+
+.btn-action.logout:hover {
+  background: #e04260;
+  box-shadow: 0 0 15px #e04260cc;
+  transform: translateY(-2px);
+}
+
+/* Botão login */
+.btn-action.login {
+  background: var(--cor-comple);
+  box-shadow: 0 0 8px rgba(0, 179, 176, 0.5);
+}
+
+.btn-action.login:hover {
+  background: var(--cor-hover);
+  box-shadow: 0 0 12px var(--cor-hover);
+  transform: translateY(-2px);
+}
+
+/* Ícone carrinho */
+.btn-icon {
+  position: relative;
+  font-size: 18px;
+  background: var(--cor-comple);
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #ff4f6d;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+/* Mensagem de boas-vindas */
+.welcome-msg {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cor-texto-claro);
+}
+
+/* Botão mobile */
+.menu-btn {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #aaa;
+  user-select: none;
+}
+
+/* === MENU MOBILE === */
 .mobile-nav {
   display: none;
   flex-direction: column;
-  background: #111;
+  background: var(--cor-fundo);
   border-top: 1px solid #222;
+  width: 100%;
+  padding: 10px 0;
+  gap: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.mobile-nav.show {
+  display: flex !important;
+  max-height: 500px;
 }
 
 .mobile-nav a {
-  padding: 15px;
+  padding: 14px 24px;
   color: #ccc;
   text-decoration: none;
   border-bottom: 1px solid #222;
+  font-weight: 600;
+  font-size: 16px;
   transition: 0.3s;
 }
 
 .mobile-nav a:hover {
-  background: #0ff;
+  background: var(--cor-comple);
   color: #000;
-  text-shadow: 0 0 6px #000;
+  text-shadow: none;
+  border-bottom: none;
 }
 
-/* LOGIN */
-.login a {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  background-color: var(--cor-comple);
-  padding: 8px 14px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #fff;
-  transition: 0.3s;
-}
-
-.login a:hover {
-  background-color: var(--cor-hover);
-}
-
-
-/* --- media screen --- */
+/* RESPONSIVO */
 @media (max-width: 768px) {
-  .nav {
-    display: none;
+  .nav,
+  .header-right {
+    display: none !important;
   }
+
   .menu-btn {
     display: block;
   }
