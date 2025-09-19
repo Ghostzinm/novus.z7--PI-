@@ -76,8 +76,8 @@ if (isset($_GET['id']) && !empty('id')) {
             <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email</span>
-          <input type="email" id="email-login" placeholder="Email" required>
-          <input type="password" id="senha-login" placeholder="Senha" required>
+          <input type="email" name="email" id="email-login" placeholder="Email" required>
+          <input type="password" name="senha" id="senha-login" placeholder="Senha" required>
           <div class="remember-me">
             <label class="checkbox-wrapper">
               <input type="checkbox" id="lembrar" />
