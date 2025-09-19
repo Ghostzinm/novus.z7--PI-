@@ -1,69 +1,59 @@
 <?php
-echo "<h1>Cadastro de Camisas PHP</h1>";
+$servidor = "localhost";
+$usuario = "root";
+$senha = "";
+$banco = "db_novus";
 
-// Carrega variáveis de ambiente
-$_ENV = parse_ini_file('.env');
+$conexao = new mysqli($servidor, $usuario, $senha, $banco);
 
-// Conecta ao banco de dados
-$dsn = "mysql:dbname={$_ENV['BANCO']};host={$_ENV['HOST']}";
-$usuario = $_ENV['USUARIO'];
-$senha = $_ENV['SENHA'];
-$conn = new PDO($dsn, $usuario, $senha);
-
-// Pega os dados do formulário
-$formNomes = $_POST["nome"];
-$formPrecos = $_POST["preco"];
-$formTamanhos = $_POST["tamanho"];
-$formDescs = $_POST["desc"];
-
-// === Upload das imagens ===
-$pastaDestino = "imagens/roupas/";
-
-// Garantir que a pasta existe
-if (!is_dir($pastaDestino)) {
-    mkdir($pastaDestino, 0777, true);
+if ($conexao->connect_error) {
+    die("Falha na conexão do banco: " . $conexao->connect_error);
 }
 
-// Percorre todos os cadastros enviados
-foreach ($formNomes as $index => $nome) {
-    $preco = $formPrecos[$index];
-    $tamanho = $formTamanhos[$index];
-    $descricao = $formDescs[$index];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Tratar imagem correspondente
-    $imagemCaminho = "";
-    if (isset($_FILES['imagem']['tmp_name'][$index]) && $_FILES['imagem']['error'][$index] === UPLOAD_ERR_OK) {
-        $arquivoTmp = $_FILES['imagem']['tmp_name'][$index];
-        $nomeOriginal = basename($_FILES['imagem']['name'][$index]);
-        $novoNome = uniqid() . "_" . $nomeOriginal;
-        $caminhoFinal = $pastaDestino . $novoNome;
+    $nome = $conexao->real_escape_string($_POST['nome']);
+    $tipo = $conexao->real_escape_string($_POST['tipo']);
+    $preco = $conexao->real_escape_string($_POST['preco']);
+    $tamanho = $conexao->real_escape_string($_POST['tamanho']);
+    $descricao = $conexao->real_escape_string($_POST['descricao']);
 
-        if (move_uploaded_file($arquivoTmp, $caminhoFinal)) {
-            $imagemCaminho = $caminhoFinal;
-        } else {
-            echo "Erro ao salvar a imagem da camisa: $nome<br>";
-            continue;
+    // Função para fazer upload de cada imagem
+    function uploadImagem($campo, $pasta = "./uploads/") {
+        if (isset($_FILES[$campo]) && $_FILES[$campo]["error"] == 0) {
+            $arquivo_tmp = $_FILES[$campo]["tmp_name"];
+            $nome_original = $_FILES[$campo]["name"];
+            $extensao = pathinfo($nome_original, PATHINFO_EXTENSION);
+            $novo_nome = uniqid() . "." . $extensao;
+            $caminho_upload = $pasta . $novo_nome;
+
+            if (move_uploaded_file($arquivo_tmp, $caminho_upload)) {
+                return $caminho_upload;
+            }
         }
-    } else {
-        echo "Erro no upload da imagem da camisa: $nome<br>";
-        continue;
+        return null; // retorna null se não enviar arquivo
     }
 
-    // === Inserção no banco de dados ===
-    $scriptCadastro = "INSERT INTO tb_produtos(nome, preco, tamanho, descricao, img)
-                       VALUES (:nome, :preco, :tamanho, :descricao, :img)";
-    $scriptPreparado = $conn->prepare($scriptCadastro);
-    $scriptPreparado->execute([
-        ":nome" => $nome,
-        ":preco" => $preco,
-        ":tamanho" => $tamanho,
-        ":descricao" => $descricao,
-        ":img" => $imagemCaminho
-    ]);
+    // Faz upload das 5 imagens
+    $img1 = uploadImagem("img");
+    $img2 = uploadImagem("img2");
+    $img3 = uploadImagem("img3");
+    $img4 = uploadImagem("img4");
+    $img5 = uploadImagem("img5");
 
-    echo "Camisa '$nome' cadastrada com sucesso!<br>";
+    // Prepara o insert
+    $stmt = $conexao->prepare("INSERT INTO tb_produtos (nome, tipo, preco, tamanho, img, img2, img3, img4, img5, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssdsssssss", $nome, $tipo, $preco, $tamanho, $img1, $img2, $img3, $img4, $img5, $descricao);
+
+    if ($stmt->execute()) {
+        echo "<h1>Produto cadastrado com sucesso!</h1>";
+        echo "<a href='./index.php'>Cadastrar outro produto</a>";
+    } else {
+        echo "Erro ao cadastrar produto: " . $stmt->error;
+    }
+
+    $stmt->close();
 }
 
-// Redireciona após tudo
-header('Location: index.php');
-exit;
+$conexao->close();
+?>
