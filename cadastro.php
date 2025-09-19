@@ -68,7 +68,7 @@ if (isset($_GET['id']) && !empty('id')) {
 
       <!-- Login -->
       <main class="form-container sign-in">
-        <form>
+        <form action="./form-login.php" method="POST">
           <h1>Entrar</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="bi bi-google"></i></a>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+$logado = isset($_SESSION['usuario']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -31,9 +37,14 @@
         </ul>
       </nav>
 
-      <!-- Login -->
-      <div class="login">
-        <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
-      </div>
+      <?php if ($logado): ?>
+          <p>Bem-vindo, <?php echo $_SESSION['usuario']['nome']; ?>!</p>
+          <a href="logout.php">Sair</a>
+      <?php else: ?>
+          <!-- Login -->
+          <div class="login">
+            <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
+          </div>
+       <?php endif; ?>
 
   </header>

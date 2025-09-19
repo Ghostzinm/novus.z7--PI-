@@ -12,10 +12,7 @@ require('config.php');
 
 $scriptConsulta = "SELECT * FROM tb_cadastro WHERE email = '$formEmail' ";;
 
-$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
-
-$email = $resultadoConsulta;
-
+$email = $conn->query($scriptConsulta)->fetchAll();
 
 if ($formSenha != $formConfSenha) {
     echo '<h1> ta errado </h1>';

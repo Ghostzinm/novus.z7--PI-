@@ -1,4 +1,7 @@
-<?php include('./templates/header.php');
+<?php
+$logado = isset($_SESSION['usuario']);
+
+include('./templates/header.php');
 include('consulta-prod.php');
 
 ?>
