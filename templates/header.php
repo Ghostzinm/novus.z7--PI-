@@ -39,7 +39,7 @@ $logado = isset($_SESSION['usuario']);
 
       <?php if ($logado): ?>
           <p>Bem-vindo, <?php echo $_SESSION['usuario']['nome']; ?>!</p>
-          <a href="logout.php">Sair</a>
+          <a href="form-logout.php">Sair</a>
       <?php else: ?>
           <!-- Login -->
           <div class="login">
