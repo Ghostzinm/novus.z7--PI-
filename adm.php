@@ -13,11 +13,17 @@
     <h1>Upload de Camisas - novus.z7 🕸️</h1>
 
     <form action="./form-camisas.php" method="post" id="uploadForm">
-      <input type="file" id="imgInput" accept="image/*" name="imagem" required>
+      <input type="file" id="imgInput" accept="image/*" name="imagem[]" multiple required>
+
       <input name="nome" type="text" id="nomeCamisa" placeholder="Nome da camisa" required>
       <select name="tamanho" id="tamanhoCamisa" required>
         <option value="premium">Premium</option>
         <option value="comum">Comum</option>
+      </select>
+         <select name="tamanho" id="tamanhoCamisa" required>
+        <option value="tamanho">M</option>
+        <option value="tamanho">G</option>
+         <option value="tamanho">GG</option>
       </select>
       <input name="preco" type="number" id="preço" placeholder="Preço da camisa" required>
 

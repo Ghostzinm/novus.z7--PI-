@@ -11,45 +11,59 @@ $senha = $_ENV['SENHA'];
 $conn = new PDO($dsn, $usuario, $senha);
 
 // Pega os dados do formulário
-$formNome = $_POST["nome"];
-$formPreco = $_POST["preco"];
-$formTamanho = $_POST["tamanho"];
-$formDesc = $_POST["desc"];
+$formNomes = $_POST["nome"];
+$formPrecos = $_POST["preco"];
+$formTamanhos = $_POST["tamanho"];
+$formDescs = $_POST["desc"];
 
-// === Upload da imagem ===
-$pastaDestino = "imagens/roupas";
-$imagemCaminho = "";
+// === Upload das imagens ===
+$pastaDestino = "imagens/roupas/";
 
-if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-    $arquivoTmp = $_FILES['imagem']['tmp_name'];
-    $nomeOriginal = basename($_FILES['imagem']['name']);
-    $novoNome = uniqid() . "_" . $nomeOriginal;
-    $caminhoFinal = $pastaDestino . $novoNome;
-
-    if (move_uploaded_file($arquivoTmp, $caminhoFinal)) {
-        $imagemCaminho = $caminhoFinal; // Caminho da imagem a ser salvo no banco
-    } else {
-        echo "Erro ao salvar a imagem.";
-        exit;
-    }
-} else {
-    echo "Erro no upload da imagem.";
-    exit;
+// Garantir que a pasta existe
+if (!is_dir($pastaDestino)) {
+    mkdir($pastaDestino, 0777, true);
 }
 
-// === Inserção no banco de dados ===
-$scriptCadastro = "INSERT INTO tb_produtos(nome, preco, tamanho, descricao, img)
-                   VALUES (:nome, :preco, :tamanho, :descricao, :img)";
+// Percorre todos os cadastros enviados
+foreach ($formNomes as $index => $nome) {
+    $preco = $formPrecos[$index];
+    $tamanho = $formTamanhos[$index];
+    $descricao = $formDescs[$index];
 
-$scriptPreparado = $conn->prepare($scriptCadastro);
-$scriptPreparado->execute([
-    ":nome" => $formNome,
-    ":preco" => $formPreco,
-    ":tamanho" => $formTamanho,
-    ":descricao" => $formDesc,
-    ":img" => $imagemCaminho
-]);
+    // Tratar imagem correspondente
+    $imagemCaminho = "";
+    if (isset($_FILES['imagem']['tmp_name'][$index]) && $_FILES['imagem']['error'][$index] === UPLOAD_ERR_OK) {
+        $arquivoTmp = $_FILES['imagem']['tmp_name'][$index];
+        $nomeOriginal = basename($_FILES['imagem']['name'][$index]);
+        $novoNome = uniqid() . "_" . $nomeOriginal;
+        $caminhoFinal = $pastaDestino . $novoNome;
 
-// Redireciona para a página inicial após o cadastro
+        if (move_uploaded_file($arquivoTmp, $caminhoFinal)) {
+            $imagemCaminho = $caminhoFinal;
+        } else {
+            echo "Erro ao salvar a imagem da camisa: $nome<br>";
+            continue;
+        }
+    } else {
+        echo "Erro no upload da imagem da camisa: $nome<br>";
+        continue;
+    }
+
+    // === Inserção no banco de dados ===
+    $scriptCadastro = "INSERT INTO tb_produtos(nome, preco, tamanho, descricao, img)
+                       VALUES (:nome, :preco, :tamanho, :descricao, :img)";
+    $scriptPreparado = $conn->prepare($scriptCadastro);
+    $scriptPreparado->execute([
+        ":nome" => $nome,
+        ":preco" => $preco,
+        ":tamanho" => $tamanho,
+        ":descricao" => $descricao,
+        ":img" => $imagemCaminho
+    ]);
+
+    echo "Camisa '$nome' cadastrada com sucesso!<br>";
+}
+
+// Redireciona após tudo
 header('Location: index.php');
 exit;
