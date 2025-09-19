@@ -16,9 +16,6 @@ $resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
 
 $email = $resultadoConsulta;
 
-var_dump($resultadoConsulta);
-var_dump($email);
-var_dump (!empty($email));
 
 if ($formSenha != $formConfSenha) {
     echo '<h1> ta errado </h1>';
@@ -26,7 +23,7 @@ if ($formSenha != $formConfSenha) {
 } else {
     if (!empty($email)) {
         echo "<h1>Email ja cadastrado</h1>";
-        header('location:form-cadastrar.php');
+        header('location:cadastro.php');
     } else {
 
 
@@ -44,13 +41,13 @@ if ($formSenha != $formConfSenha) {
     )";
 
 
-        // $scriptPreparado = $conn->prepare($scriptCadastro);
-        // $scriptPreparado->execute([
-        //     ":nome" => $formNome,
-        //     ":email" => $formEmail,
-        //     ":senha" => $formSenha
-        // ]);
+        $scriptPreparado = $conn->prepare($scriptCadastro);
+        $scriptPreparado->execute([
+            ":nome" => $formNome,
+            ":email" => $formEmail,
+            ":senha" => $formSenha
+        ]);
         echo"<h1>cadastrado com sucesso</h1>";
-        // header('location:index.php');
+        header('location:index.php');
     };
 };
