@@ -10,9 +10,10 @@ $scripEmail = $conn->prepare("SELECT * FROM tb_cadastro WHERE email = :email");
 $scripEmail->bindParam(':email', $formEmail);
 $scripEmail->execute();
 
+
 $usuario = $scripEmail->fetch(PDO::FETCH_ASSOC);
 
-if ($usuario) {  
+if ($usuario && $formSenha === $usuario['senha']) {  
     // Se o usuário foi encontrado e a senha estiver correta
     $_SESSION['usuario'] = [
         'id' => $usuario['id'],
