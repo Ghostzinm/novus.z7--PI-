@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<?php include('./templates/header.php'); ?>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sobre - Novus.z7</title>
-  <link rel="stylesheet" href="../css/sobre.css" />
-</head>
-
-<body>
-  <header class="cabecalho">
-    <h1>NOVUS.Z7</h1>
-    <nav class="navegacao">
-      <ul class="menu-principal">
-        <l1> <a href="./index.html">LOJA</a></l1>
-        <l1> <a class="ativo" href="#">SOBRE</a></l1>
-      </ul>
-    </nav>
-  </header>
+<link rel="stylesheet" href="./css/sobre.css">
 
   <main>
     <section class="sobre-container">
@@ -39,9 +22,4 @@
     </section>
   </main>
 
-  <footer>
-    © 2025 Novus.z7 — Estilo não se compra. Se impõe.
-  </footer>
-</body>
-
-</html>
+  <?php include('./templates/footer.php'); ?>
