@@ -16,14 +16,14 @@
       <input type="file" id="imgInput" accept="image/*" name="imagem[]" multiple required>
 
       <input name="nome" type="text" id="nomeCamisa" placeholder="Nome da camisa" required>
-      <select name="tamanho" id="tamanhoCamisa" required>
+      <select name="tipo" id="tipoCamisa" required>
         <option value="premium">Premium</option>
         <option value="comum">Comum</option>
       </select>
          <select name="tamanho" id="tamanhoCamisa" required>
-        <option value="tamanho">M</option>
-        <option value="tamanho">G</option>
-         <option value="tamanho">GG</option>
+        <option value="M">M</option>
+        <option value="G">G</option>
+         <option value="GG">GG</option>
       </select>
       <input name="preco" type="number" id="preço" placeholder="Preço da camisa" required>
 

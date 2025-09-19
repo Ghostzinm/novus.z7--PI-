@@ -13,43 +13,60 @@ if ($conexao->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nome = $conexao->real_escape_string($_POST['nome']);
-    $tipo = $conexao->real_escape_string($_POST['tipo']);
+    $tamanho_tipo = $conexao->real_escape_string($_POST['tipo']); // tipo da camisa
+    $tamanho_camisa = $conexao->real_escape_string($_POST['tamanho']); // tamanho da camisa
     $preco = $conexao->real_escape_string($_POST['preco']);
-    $tamanho = $conexao->real_escape_string($_POST['tamanho']);
-    $descricao = $conexao->real_escape_string($_POST['descricao']);
+    $descricao = $conexao->real_escape_string($_POST['desc']);
 
-    // Função para fazer upload de cada imagem
-    function uploadImagem($campo, $pasta = "./uploads/") {
-        if (isset($_FILES[$campo]) && $_FILES[$campo]["error"] == 0) {
-            $arquivo_tmp = $_FILES[$campo]["tmp_name"];
-            $nome_original = $_FILES[$campo]["name"];
-            $extensao = pathinfo($nome_original, PATHINFO_EXTENSION);
-            $novo_nome = uniqid() . "." . $extensao;
-            $caminho_upload = $pasta . $novo_nome;
+    // Pasta de upload
+    $pasta_upload = "./uploads/";
 
-            if (move_uploaded_file($arquivo_tmp, $caminho_upload)) {
-                return $caminho_upload;
+    // Array para armazenar os caminhos das imagens
+    $imagens = [];
+
+    if (isset($_FILES['imagem'])) {     
+        $arquivos = $_FILES['imagem'];
+        $total = count($arquivos['name']);
+
+        for ($i = 0; $i < $total; $i++) {
+            if ($arquivos['error'][$i] == 0) {
+                $extensao = pathinfo($arquivos['name'][$i], PATHINFO_EXTENSION);
+                $novo_nome = uniqid() . "." . $extensao;
+                $caminho_upload = $pasta_upload . $novo_nome;
+
+                if (move_uploaded_file($arquivos['tmp_name'][$i], $caminho_upload)) {
+                    $imagens[] = $caminho_upload;
+                }
             }
         }
-        return null; // retorna null se não enviar arquivo
     }
 
-    // Faz upload das 5 imagens
-    $img1 = uploadImagem("img");
-    $img2 = uploadImagem("img2");
-    $img3 = uploadImagem("img3");
-    $img4 = uploadImagem("img4");
-    $img5 = uploadImagem("img5");
+    // Preencher até 5 imagens, se tiver menos, preencher com NULL
+    for ($i = count($imagens); $i < 5; $i++) {
+        $imagens[$i] = null;
+    }
 
-    // Prepara o insert
+    // Insert no banco
     $stmt = $conexao->prepare("INSERT INTO tb_produtos (nome, tipo, preco, tamanho, img, img2, img3, img4, img5, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdsssssss", $nome, $tipo, $preco, $tamanho, $img1, $img2, $img3, $img4, $img5, $descricao);
+    $stmt->bind_param(
+        "ssds sssss",
+        $nome,
+        $tamanho_tipo,
+        $preco,
+        $tamanho_camisa,
+        $imagens[0],
+        $imagens[1],
+        $imagens[2],
+        $imagens[3],
+        $imagens[4],
+        $descricao
+    );
 
     if ($stmt->execute()) {
-        echo "<h1>Produto cadastrado com sucesso!</h1>";
-        echo "<a href='./index.php'>Cadastrar outro produto</a>";
+        echo "<h1>Camisa cadastrada com sucesso!</h1>";
+        echo "<a href='./form-camisas.php'>Cadastrar outra camisa</a>";
     } else {
-        echo "Erro ao cadastrar produto: " . $stmt->error;
+        echo "Erro ao cadastrar camisa: " . $stmt->error;
     }
 
     $stmt->close();
@@ -57,3 +74,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conexao->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Upload de Camisas - novus.z7</title>
+  <link rel="stylesheet" href="./css/adm.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Upload de Camisas - novus.z7 🕸️</h1>
+
+    <form action="./form-camisas.php" method="post" id="uploadForm" enctyp
+ 
