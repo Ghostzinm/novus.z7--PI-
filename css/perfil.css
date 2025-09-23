@@ -1,0 +1,222 @@
+    :root {
+      --bg-dark-perfil: #0b0b0b;
+      --bg-card-perfil: #161616;
+      --primary-perfil: #6c63ff;
+      --secondary-perfil: #ff3c6a;
+      --accent-perfil: #00ffa6;
+      --text-perfil: #f5f5f5;
+      --text-light-perfil: #a1a1a1;
+      --radius-perfil: 14px;
+      --transition-perfil: 0.3s ease;
+    }
+
+    body.body-perfil {
+      background: var(--bg-dark-perfil);
+      color: var(--text-perfil);
+      font-family: "Montserrat", sans-serif;
+      min-height: 100vh;
+    }
+
+    /* Container */
+    .container-perfil {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Cabeçalho do perfil */
+    .profile-header-perfil {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #222;
+      padding-bottom: 20px;
+    }
+
+    .profile-header-perfil img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--secondary-perfil);
+      object-fit: cover;
+    }
+
+    .profile-info-perfil h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .profile-info-perfil p {
+      color: var(--text-light-perfil);
+      font-size: 0.9rem;
+    }
+
+    /* Grid */
+    .sections-perfil {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Card */
+    .card-perfil {
+      background: var(--bg-card-perfil);
+      padding: 20px;
+      border-radius: var(--radius-perfil);
+      border: 1px solid #222;
+      transition: transform var(--transition-perfil), box-shadow var(--transition-perfil);
+      position: relative;
+    }
+
+    .card-perfil:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 15px rgba(108, 99, 255, 0.25);
+    }
+
+    .card-perfil h3 {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: var(--accent-perfil);
+      border-bottom: 1px solid #333;
+      padding-bottom: 8px;
+    }
+
+    .card-perfil p, 
+    .card-perfil li {
+      color: var(--text-light-perfil);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    /* Produtos dentro dos cards */
+    .product-perfil {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #111;
+      padding: 10px;
+      border-radius: var(--radius-perfil);
+      margin-bottom: 12px;
+      transition: background var(--transition-perfil);
+    }
+
+    .product-perfil:hover {
+      background: #1f1f1f;
+    }
+
+    .product-perfil img {
+      width: 55px;
+      height: 55px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .product-info-perfil {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .product-info-perfil h4 {
+      font-size: 0.95rem;
+      margin-bottom: 5px;
+    }
+
+    .product-info-perfil span {
+      font-size: 0.85rem;
+      color: var(--secondary-perfil);
+    }
+
+    .status-perfil {
+      font-size: 0.8rem;
+      color: var(--accent-perfil);
+      font-weight: 600;
+    }
+
+    /* Botão logout */
+    .logout-perfil {
+      display: block;
+      text-align: center;
+      margin: 40px auto 0;
+      background: var(--secondary-perfil);
+      color: #fff;
+      font-weight: bold;
+      padding: 12px 25px;
+      border-radius: var(--radius-perfil);
+      text-decoration: none;
+      transition: background var(--transition-perfil);
+      max-width: 200px;
+    }
+
+    .logout-perfil:hover {
+      background: #e02f58;
+    }
+
+    .enderecos-perfil {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 30px auto;
+  max-width: 600px; /* metade da tela em tela grande */
+}
+
+.titulo-perfil {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+  text-align: center;
+}
+
+.form-perfil {
+  display: grid;
+  gap: 12px;
+}
+
+.grupo-form-perfil {
+  display: flex;
+  flex-direction: column;
+}
+
+.grupo-form-perfil label {
+  color: #ccc;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+}
+
+.grupo-form-perfil input {
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  transition: border 0.3s ease;
+}
+
+.grupo-form-perfil input:focus {
+  border-color: #0ff;
+  outline: none;
+}
+
+.btn-perfil {
+  background: #0ff;
+  color: #000;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 50%; /* botão menor */
+  margin: 0 auto; /* centraliza o botão */
+}
+
+.btn-perfil:hover {
+  background: #00cccc;
+}
+
+/* Para telas pequenas, o form ocupa 90% da largura */
+@media (max-width: 768px) {
+  .enderecos-perfil {
+    max-width: 90%;
+  }
+}
