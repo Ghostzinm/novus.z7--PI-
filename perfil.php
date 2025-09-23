@@ -16,40 +16,40 @@ if (!$endereco) { ?>
         <section class="enderecos-perfil">
             <h2 class="titulo-perfil">📦 Meus Endereços</h2>
 
-            <form action="salvar_endereco.php" method="POST" class="form-perfil">
+            <form action="form-endereco.php" method="POST" class="form-perfil">
                 <div class="grupo-form-perfil">
                     <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" placeholder="Digite seu CEP" required>
+                    <input type="text" id="cep" name="formCep" placeholder="Digite seu CEP" required>
                 </div>
 
                 <div class="grupo-form-perfil">
                     <label for="rua">Rua</label>
-                    <input type="text" id="rua" name="rua" placeholder="Ex: Av. Paulista" required>
+                    <input type="text" id="rua" name="formRua" placeholder="Ex: Av. Paulista" required>
                 </div>
 
                 <div class="grupo-form-perfil">
                     <label for="numero">Número</label>
-                    <input type="text" id="numero" name="numero" placeholder="Ex: 123" required>
+                    <input type="text" id="numero" name="formNumero" placeholder="Ex: 123" required>
                 </div>
 
                 <div class="grupo-form-perfil">
                     <label for="complemento">Complemento</label>
-                    <input type="text" id="complemento" name="complemento" placeholder="Ex: Apto 45" />
+                    <input type="text" id="complemento" name="formComplemento" placeholder="Ex: Apto 45" />
                 </div>
 
                 <div class="grupo-form-perfil">
                     <label for="bairro">Bairro</label>
-                    <input type="text" id="bairro" name="bairro" placeholder="Ex: Centro" required>
+                    <input type="text" id="bairro" name="formBairro" placeholder="Ex: Centro" required>
                 </div>
 
                 <div class="grupo-form-perfil">
                     <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" name="cidade" placeholder="Ex: São Paulo" required>
+                    <input type="text" id="cidade" name="formCidade" placeholder="Ex: São Paulo" required>
                 </div>
 
                 <div class="grupo-form-perfil">
                     <label for="estado">Estado</label>
-                    <input type="text" id="estado" name="estado" placeholder="Ex: SP" maxlength="2" required>
+                    <input type="text" id="estado" name="formEstado" placeholder="Ex: SP" maxlength="2" required>
                 </div>
 
                 <button type="submit" class="btn-perfil">Salvar Endereço</button>
@@ -69,8 +69,7 @@ if (!$endereco) { ?>
             <div class="profile-header-perfil">
                 <img src="https://i.pravatar.cc/150?img=12" alt="Foto do Cliente">
                 <div class="profile-info-perfil">
-                    <h2>João Silva</h2>
-                    <p>Cliente desde 2024</p>
+                    <h2><?php echo ($_SESSION['usuario']['nome']); ?></h2>
                 </div>
             </div>
 
@@ -119,8 +118,8 @@ if (!$endereco) { ?>
                 <!-- Dados -->
                 <div class="card-perfil">
                     <h3>Meus Dados</h3>
-                    <p><strong>Nome:</strong> João Silva</p>
-                    <p><strong>Email:</strong> joao@email.com</p>
+                    <p><strong>Nome:</strong> <?php echo ($_SESSION['usuario']['nome']); ?></p>
+                    <p><strong>Email:</strong> <?php echo ($_SESSION['usuario']['email']); ?></p>
                     <p><strong>Telefone:</strong> (11) 99999-9999</p>
                 </div>
 

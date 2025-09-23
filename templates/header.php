@@ -1,6 +1,7 @@
 <?php
 session_start();
 $logado = isset($_SESSION['usuario']);
+
 ?>
 
 <!DOCTYPE html>
@@ -63,9 +64,9 @@ $logado = isset($_SESSION['usuario']);
       <a href="#"><i class="bi bi-cart-fill"></i> Carrinho</a>
 
       <?php if ($logado): ?>
-        <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo htmlspecialchars($_SESSION['usuario']['nome']); ?></a>
         <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
       <?php else: ?>
+        <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo ($_SESSION['usuario']['nome']); ?></a>
         <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
       <?php endif; ?>
     </div>
