@@ -1,55 +1,49 @@
 <?php
-echo "<h1>Cadastro de Camisas PHP</h1>";
+// Conexão com o banco de dados
+$servidor = "localhost";
+$usuario = "root";
+$senha = "";
+$banco = "db_novus";
 
-// Carrega variáveis de ambiente
-$_ENV = parse_ini_file('.env');
+$conexao = new mysqli($servidor, $usuario, $senha, $banco);
 
-// Conecta ao banco de dados
-$dsn = "mysql:dbname={$_ENV['BANCO']};host={$_ENV['HOST']}";
-$usuario = $_ENV['USUARIO'];
-$senha = $_ENV['SENHA'];
-$conn = new PDO($dsn, $usuario, $senha);
-
-// Pega os dados do formulário
-$formNome = $_POST["nome"];
-$formPreco = $_POST["preco"];
-$formTamanho = $_POST["tamanho"];
-$formDesc = $_POST["desc"];
-
-// === Upload da imagem ===
-$pastaDestino = "imagens/roupas";
-$imagemCaminho = "";
-
-if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-    $arquivoTmp = $_FILES['imagem']['tmp_name'];
-    $nomeOriginal = basename($_FILES['imagem']['name']);
-    $novoNome = uniqid() . "_" . $nomeOriginal;
-    $caminhoFinal = $pastaDestino . $novoNome;
-
-    if (move_uploaded_file($arquivoTmp, $caminhoFinal)) {
-        $imagemCaminho = $caminhoFinal; // Caminho da imagem a ser salvo no banco
-    } else {
-        echo "Erro ao salvar a imagem.";
-        exit;
-    }
-} else {
-    echo "Erro no upload da imagem.";
-    exit;
+if ($conexao->connect_error) {
+    die("Falha na conexão do banco: " . $conexao->connect_error);
 }
 
-// === Inserção no banco de dados ===
-$scriptCadastro = "INSERT INTO tb_produtos(nome, preco, tamanho, descricao, img)
-                   VALUES (:nome, :preco, :tamanho, :descricao, :img)";
+if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == 0) {
+    echo "<h1>Arquivo recebido com sucesso.</h1>";
+    $nome_camisa = $conexao->real_escape_string($_POST['nomeCamisa']);
+    $tipo = $conexao->real_escape_string($_POST['tipo']);
+    $tamanho = $conexao->real_escape_string($_POST['tamanho']);
+    $preco = $conexao->real_escape_string($_POST['preco']);
+    $desc = $conexao->real_escape_string($_POST['desc']);
+    $arquivo_tmp = $_FILES['imagem']["tmp_name"];
+    $nome_original = $_FILES['imagem']['name'];
 
-$scriptPreparado = $conn->prepare($scriptCadastro);
-$scriptPreparado->execute([
-    ":nome" => $formNome,
-    ":preco" => $formPreco,
-    ":tamanho" => $formTamanho,
-    ":descricao" => $formDesc,
-    ":img" => $imagemCaminho
-]);
+    $extensao = pathinfo($nome_original, PATHINFO_EXTENSION);
+    $novo_nome = uniqid() . "." . $extensao;
 
-// Redireciona para a página inicial após o cadastro
-header('Location: index.php');
-exit;
+    $caminho_upload = "./img/roupas/" . $novo_nome;
+
+    if (move_uploaded_file($arquivo_tmp, $caminho_upload)) {
+        $sql = "INSERT INTO tb_produtos (nome,tipo, preco, tamanho, img, descricao) 
+                VALUES ('$nome_camisa', '$tipo', '$preco', '$tamanho', '$novo_nome', '$desc')";
+
+        if ($conexao->query($sql) === TRUE) {
+            echo "<h1>Foto cadastrada com sucesso</h1>";
+            echo "<p>Nome da camisa: {$nome_camisa}</p>";
+            echo "<p>Nome do arquivo: {$novo_nome}</p>";
+            echo "<a href='./index.php'>Cadastrar outra foto</a>";
+        } else {
+            echo "Erro ao salvar a foto: " . $conexao->error;
+        }
+    } else {
+        echo "Erro ao mover o arquivo para a pasta de uploads.";
+    }
+} else {
+    echo "Nenhum arquivo enviado.";
+}
+
+$conexao->close();
+?>
