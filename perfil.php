@@ -67,9 +67,8 @@ if (!$endereco) { ?>
         <div class="container-perfil">
             <!-- Cabeçalho do perfil -->
             <div class="profile-header-perfil">
-                <img src="https://i.pravatar.cc/150?img=12" alt="Foto do Cliente">
                 <div class="profile-info-perfil">
-                    <h2><?php echo ($_SESSION['usuario']['nome']); ?></h2>
+                    <h2>Olá, <?php echo ($_SESSION['usuario']['nome']); ?></h2>
                 </div>
             </div>
 
