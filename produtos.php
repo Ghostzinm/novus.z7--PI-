@@ -3,13 +3,14 @@
 include('./templates/header.php');
 include('config.php');
 
-$scriptConsulta = 'SELECT * FROM tb_produtos';
-
-$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
-
 $id = $_GET['id'];
 
-$produto = $resultadoConsulta[$id];
+$scriptConsulta = "SELECT * FROM tb_produtos WHERE id = :id";
+$resultadoConsulta = $conn->prepare($scriptConsulta);
+$resultadoConsulta->bindParam(':id', $id, PDO::PARAM_INT);
+$resultadoConsulta->execute();
+
+$produto = $resultadoConsulta->fetch();
 
 ?>
 

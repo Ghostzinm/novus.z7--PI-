@@ -3,13 +3,12 @@
 require('config.php');
 
 $id = (int) $_GET['idProduto'];
-$scriptBusca = "SELECT * FROM tb_cadastro WHERE id = $id";
 
-$scriptConsulta = 'SELECT * FROM tb_produtos';
-
-$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
-
-$produto = $resultadoConsulta[$id];
+$scriptConsulta = "SELECT * FROM tb_produtos WHERE id = :id";
+$stmt = $conn->prepare($scriptConsulta);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
+$produto = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
