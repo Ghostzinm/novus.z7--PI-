@@ -40,7 +40,7 @@ $produto = $stmt->fetch(PDO::FETCH_ASSOC);
  <button class="remove-btn">Remover</button>
     <div class="cart-total">
       <p>Total: <strong><?= $produto['preco'] ?> </strong></p>
-            <a class="checkout-btn" href="./index.php" target="_blank">Finalizar Compra</a>
+            <a class="checkout-btn" href="./form-carrinho.php" target="_blank">Finalizar Compra</a>
 
     </div>
 
