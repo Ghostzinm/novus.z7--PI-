@@ -31,14 +31,25 @@ include('consulta-prod.php');
 <section class="container-produtos" >
   <main class="conteudo container" id="container-produtos">
   <?php foreach ($resultado as $linha): ?>
-      <figure class="product">
-        <img src="<?php echo './img/roupas/' . ($linha['img']); ?>" alt="<?php echo $linha['nome']; ?>">
-        <figcaption>
-          <h3><?php echo$linha['nome']; ?></h3>
-          <p><?php echo$linha['descricao']; ?></p>
-          <div class="preco">R$ <?php echo $linha['preco']; ?></div>
-          <p class="size">Tamanhos: <?php echo $linha['tamanho']; ?></p>
-          <a class="buy-btn" href="./produtos.php?id=<?php echo $linha['id']; ?>">Comprar</a>
+      <figure class="product card bg-dark text-light p-2">
+        <img src="<?php echo './img/roupas/' . ($linha['img']); ?>" class="card-img-top" alt="<?php echo $linha['nome']; ?>">
+        <figcaption class="card-body">
+          <h3 class="card-title"><?php echo $linha['nome']; ?></h3>
+          <p class="card-text"><?php echo $linha['descricao']; ?></p>
+          <div class="preco mb-2">R$ <?php echo $linha['preco']; ?></div>
+          <p class="size mb-3">Tamanhos: <?php echo $linha['tamanho']; ?></p>
+
+          <div class="d-flex justify-content-between">
+            <a href="./produtos.php?id=<?php echo $linha['id']; ?>" class="btn buy-btn flex-grow-1 me-1">
+              <p>Comprar <i class="bi bi-cart-plus"></i></p> 
+            </a>
+            <button class="btn fav-btn me-1" title="Favorito">
+              <p><i class="bi bi-heart"></i></p>
+            </button>
+            <button class="btn cart-btn" title="Carrinho">
+             <p><i class="bi bi-bag-plus"></i></p> 
+            </button>
+          </div>
         </figcaption>
       </figure>
     <?php endforeach; ?>
