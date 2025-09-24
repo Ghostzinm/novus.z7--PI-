@@ -24,7 +24,7 @@ $logado = isset($_SESSION['usuario']);
 <body>
   <header class="header">
     <div class="container">
-      <h1 class="logo">novus.z7</h1>
+      <h1 class="logo"><a class="logo" href="./index.php">novus.z7</a></h1>
 
       <nav class="nav">
         <ul>
