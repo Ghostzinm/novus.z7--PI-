@@ -12,10 +12,11 @@
   <div class="container">
     <h1>Upload de Camisas - novus.z7 🕸️</h1>
 
-    <form action="./form-camisas.php" method="post" id="uploadForm">
-      <input type="file" id="imgInput" accept="image/*" name="imagem[]" multiple required>
+    <form action="./form-camisas.php" method="post" id="uploadForm" enctype="multipart/form-data">
+      <label for="imagem">Selecione a imagem da camisa:</label>
+      <input type="file" id="imagem" accept="image/*" name="imagem" multiple required>
 
-      <input name="nome" type="text" id="nomeCamisa" placeholder="Nome da camisa" required>
+      <input name="nomeCamisa" type="text" id="nomeCamisa" placeholder="Nome da camisa" required>
       <select name="tipo" id="tipoCamisa" required>
         <option value="premium">Premium</option>
         <option value="comum">Comum</option>

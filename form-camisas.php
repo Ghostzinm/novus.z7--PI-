@@ -1,4 +1,5 @@
 <?php
+// Conexão com o banco de dados
 $servidor = "localhost";
 $usuario = "root";
 $senha = "";
@@ -10,84 +11,39 @@ if ($conexao->connect_error) {
     die("Falha na conexão do banco: " . $conexao->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $nome = $conexao->real_escape_string($_POST['nome']);
-    $tamanho_tipo = $conexao->real_escape_string($_POST['tipo']); // tipo da camisa
-    $tamanho_camisa = $conexao->real_escape_string($_POST['tamanho']); // tamanho da camisa
+if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == 0) {
+    echo "<h1>Arquivo recebido com sucesso.</h1>";
+    $nome_camisa = $conexao->real_escape_string($_POST['nomeCamisa']);
+    $tipo = $conexao->real_escape_string($_POST['tipo']);
+    $tamanho = $conexao->real_escape_string($_POST['tamanho']);
     $preco = $conexao->real_escape_string($_POST['preco']);
-    $descricao = $conexao->real_escape_string($_POST['desc']);
+    $desc = $conexao->real_escape_string($_POST['desc']);
+    $arquivo_tmp = $_FILES['imagem']["tmp_name"];
+    $nome_original = $_FILES['imagem']['name'];
 
-    // Pasta de upload
-    $pasta_upload = "./uploads/";
+    $extensao = pathinfo($nome_original, PATHINFO_EXTENSION);
+    $novo_nome = uniqid() . "." . $extensao;
 
-    // Array para armazenar os caminhos das imagens
-    $imagens = [];
+    $caminho_upload = "./img/roupas/" . $novo_nome;
 
-    if (isset($_FILES['imagem'])) {     
-        $arquivos = $_FILES['imagem'];
-        $total = count($arquivos['name']);
+    if (move_uploaded_file($arquivo_tmp, $caminho_upload)) {
+        $sql = "INSERT INTO tb_produtos (nome,tipo, preco, tamanho, img, descricao) 
+                VALUES ('$nome_camisa', '$tipo', '$preco', '$tamanho', '$novo_nome', '$desc')";
 
-        for ($i = 0; $i < $total; $i++) {
-            if ($arquivos['error'][$i] == 0) {
-                $extensao = pathinfo($arquivos['name'][$i], PATHINFO_EXTENSION);
-                $novo_nome = uniqid() . "." . $extensao;
-                $caminho_upload = $pasta_upload . $novo_nome;
-
-                if (move_uploaded_file($arquivos['tmp_name'][$i], $caminho_upload)) {
-                    $imagens[] = $caminho_upload;
-                }
-            }
+        if ($conexao->query($sql) === TRUE) {
+            echo "<h1>Foto cadastrada com sucesso</h1>";
+            echo "<p>Nome da camisa: {$nome_camisa}</p>";
+            echo "<p>Nome do arquivo: {$novo_nome}</p>";
+            echo "<a href='./index.php'>Cadastrar outra foto</a>";
+        } else {
+            echo "Erro ao salvar a foto: " . $conexao->error;
         }
-    }
-
-    // Preencher até 5 imagens, se tiver menos, preencher com NULL
-    for ($i = count($imagens); $i < 5; $i++) {
-        $imagens[$i] = null;
-    }
-
-    // Insert no banco
-    $stmt = $conexao->prepare("INSERT INTO tb_produtos (nome, tipo, preco, tamanho, img, img2, img3, img4, img5, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param(
-        "ssds sssss",
-        $nome,
-        $tamanho_tipo,
-        $preco,
-        $tamanho_camisa,
-        $imagens[0],
-        $imagens[1],
-        $imagens[2],
-        $imagens[3],
-        $imagens[4],
-        $descricao
-    );
-
-    if ($stmt->execute()) {
-        echo "<h1>Camisa cadastrada com sucesso!</h1>";
-        echo "<a href='./form-camisas.php'>Cadastrar outra camisa</a>";
     } else {
-        echo "Erro ao cadastrar camisa: " . $stmt->error;
+        echo "Erro ao mover o arquivo para a pasta de uploads.";
     }
-
-    $stmt->close();
+} else {
+    echo "Nenhum arquivo enviado.";
 }
 
 $conexao->close();
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Upload de Camisas - novus.z7</title>
-  <link rel="stylesheet" href="./css/adm.css">
-</head>
-
-<body>
-  <div class="container">
-    <h1>Upload de Camisas - novus.z7 🕸️</h1>
-
-    <form action="./form-camisas.php" method="post" id="uploadForm" enctyp
- 
