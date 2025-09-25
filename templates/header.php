@@ -74,7 +74,6 @@ $logado = isset($_SESSION['usuario']);
         <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
       <?php endif; ?>
     </div>
-      <?php endif; ?>
     </div>
 
   </header>
