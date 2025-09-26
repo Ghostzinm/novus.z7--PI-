@@ -75,7 +75,6 @@ $logado = isset($_SESSION['usuario']);
       <?php endif; ?>
     </div>
     </div>
-
   </header>
 
   <script>
