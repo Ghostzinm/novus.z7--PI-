@@ -26,7 +26,7 @@
         <option value="G">G</option>
          <option value="GG">GG</option>
       </select>
-      <input name="preco" type="number" id="preço" placeholder="Preço da camisa" required>
+      <input name="preco"  type="number" step="any" id="preço" placeholder="Preço da camisa" required>
 
       <textarea name="desc" id="descricaoCamisa" placeholder="Descrição da camisa" required></textarea>
       <button type="submit">Adicionar Camisa</button>
