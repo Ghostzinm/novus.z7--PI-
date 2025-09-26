@@ -1,7 +1,5 @@
 
 CREATE TABLE tb_cadastro (
-
-CREATE TABLE tb_cadastro (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -9,17 +7,11 @@ CREATE TABLE tb_cadastro (
 );
 
 CREATE TABLE tb_produtos (
-CREATE TABLE tb_produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(100) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
     tamanho VARCHAR(50),
-    img VARCHAR(255),
-    img2 VARCHAR(255),
-    img3 VARCHAR(255),
-    img4 VARCHAR(255),
-    img5 VARCHAR(255),
     img VARCHAR(255),
     img2 VARCHAR(255),
     img3 VARCHAR(255),
@@ -41,11 +33,13 @@ CREATE TABLE tb_pedidos (
 CREATE TABLE tb_enderecos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
+    cep VARCHAR(20) NOT NULL,
     rua VARCHAR(100) NOT NULL,
+    numero VARCHAR(20) NOT NULL,
+    complemento VARCHAR(100),
+    bairro VARCHAR(100) NOT NULL,
     cidade VARCHAR(100) NOT NULL,
     estado VARCHAR(100) NOT NULL,
-    cep VARCHAR(20) NOT NULL,
-    pais VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES tb_cadastro(id)
 );
 CREATE TABLE tb_pagamentos (
