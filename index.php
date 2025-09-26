@@ -28,9 +28,9 @@ include('consulta-prod.php');
   </button>
 </div>
 
-<section class="container-produtos" >
+<section class="container-produtos">
   <main class="conteudo container" id="container-produtos">
-  <?php foreach ($resultado as $linha): ?>
+    <?php foreach ($resultado as $linha): ?>
       <figure class="product card bg-dark text-light p-2">
         <img src="<?php echo './img/roupas/' . ($linha['img']); ?>" class="card-img-top" alt="<?php echo $linha['nome']; ?>">
         <figcaption class="card-body">
@@ -41,13 +41,18 @@ include('consulta-prod.php');
 
           <div class="d-flex justify-content-between">
             <a href="./produtos.php?id=<?php echo $linha['id']; ?>" class="btn buy-btn flex-grow-1 me-1">
-              <p>Comprar <i class="bi bi-cart-plus"></i></p> 
+              <p>Comprar <i class="bi bi-cart-plus"></i></p>
             </a>
             <button class="btn fav-btn me-1" title="Favorito">
               <p><i class="bi bi-heart"></i></p>
             </button>
-            <button class="btn cart-btn" title="Carrinho">
-             <p><i class="bi bi-bag-plus"></i></p> 
+            <button class="btn cart-btn"
+              data-id="<?php echo $linha['id']; ?>"
+              data-nome="<?php echo $linha['nome']; ?>"
+              data-img="<?php echo $linha['img']; ?>"
+              data-tamanho="<?php echo $linha['tamanho']; ?>"
+              data-preco="<?php echo $linha['preco']; ?>">
+              <p><i class="bi bi-bag-plus"></i></p>
             </button>
           </div>
         </figcaption>
@@ -56,6 +61,28 @@ include('consulta-prod.php');
 
   </main>
 </section>
+
+<script>
+  document.querySelectorAll('.cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const nome = btn.dataset.nome;
+      const preco = btn.dataset.preco;
+
+      fetch("form-carrinho.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}&nome=${nome}&preco=${preco}`
+        })
+        .then(r => r.text())
+        .then(res => {
+          alert("Produto adicionado ao carrinho!");
+        });
+    });
+  });
+</script>
 
 <script type="module">
   import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js'
