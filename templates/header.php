@@ -62,19 +62,17 @@ $logado = isset($_SESSION['usuario']);
 
     <!-- MENU MOBILE -->
     <div class="mobile-nav" id="mobileMenu">
+      <?php if ($logado): ?>
+        <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo ($_SESSION['usuario']['nome']); ?></a>
+        <?php else: ?>
+          <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
+      <?php endif; ?>
       <a href="./index.php">Home</a>
       <a href="#">Catálogo</a>
       <a href="./sobre.html">Sobre</a>
       <a href="#">Contato</a>
       <a href="./Carrinho.php"><i class="bi bi-cart-fill"></i> Carrinho</a>
-
-      <?php if ($logado): ?>
-        <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
-      <?php else: ?>
-        <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo ($_SESSION['usuario']['nome']); ?></a>
-        <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
-      <?php endif; ?>
-    </div>
     </div>
 
   </header>
