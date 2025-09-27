@@ -41,7 +41,7 @@ $logado = isset($_SESSION['usuario']);
       </nav>
 
       <div class="header-right">
-        <a href="#" class="btn-icon" title="Carrinho">
+        <a href="./carrinho.php" class="btn-icon" title="Carrinho">
           <i class="bi bi-cart-fill"></i>
           <span class="cart-count">2</span>
         </a>
@@ -66,7 +66,7 @@ $logado = isset($_SESSION['usuario']);
       <a href="#">Catálogo</a>
       <a href="./sobre.html">Sobre</a>
       <a href="#">Contato</a>
-      <a href="#"><i class="bi bi-cart-fill"></i> Carrinho</a>
+      <a href="./Carrinho.php"><i class="bi bi-cart-fill"></i> Carrinho</a>
 
       <?php if ($logado): ?>
         <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>

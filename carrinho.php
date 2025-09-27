@@ -1,29 +1,10 @@
 <?php
 session_start();
-require('config.php');
 
-// Se não existir carrinho, cria vazio
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
 }
 
-// Se veio um produto pela URL (ex: add)
-if (isset($_GET['idProduto'])) {
-    $id = (int) $_GET['idProduto'];
-
-    // Consulta produto no banco
-    $stmt = $conn->prepare("SELECT * FROM tb_produtos WHERE id = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $produto = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($produto) {
-        // Adiciona ao carrinho
-        $_SESSION['carrinho'][] = $produto;
-    }
-}
-
-// Agora lista o carrinho inteiro
 $itensCarrinho = $_SESSION['carrinho'];
 $total = 0;
 ?>
@@ -38,21 +19,21 @@ $total = 0;
 <body>
   <div class="cart-container">
     <h1>Carrinho de Compras</h1>
-          <a href="carrinho-delete.php?acao=limpar" class="btn limpar-btn">🗑 Esvaziar carrinho</a>
-
+    <a href="carrinho-delete.php?acao=limpar" class="btn limpar-btn">🗑 Esvaziar carrinho</a>
 
     <?php if (count($itensCarrinho) > 0): ?>
       <?php foreach ($itensCarrinho as $item): ?>
         <div class="cart-item">
-          <img src="img/roupas/<?= $item['img'] ?>" alt="<?= $item['nome'] ?>">
+          <img src="img/roupas/<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['nome']) ?>">
           <div class="item-details">
-            <h2><?= $item['nome'] ?></h2>
-            <p>Tamanho: <?= $item['tamanho'] ?></p>
+            <h2><?= htmlspecialchars($item['nome']) ?></h2>
+            <p>Tamanho: <?= htmlspecialchars($item['tamanho']) ?></p>
             <p>Preço: R$ <?= number_format($item['preco'], 2, ',', '.') ?></p>
+            <p>Qtd: <?= $item['quantidade'] ?></p>
           </div>
-          <button class="remove-btn">Remover</button>
+          <a href="carrinho-delete.php?acao=remover&id=<?= $item['id'] ?>" class="remove-btn">Remover</a>
         </div>
-        <?php $total += $item['preco']; ?>
+        <?php $total += $item['preco'] * $item['quantidade']; ?>
       <?php endforeach; ?>
 
       <div class="cart-total">
