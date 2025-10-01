@@ -3,7 +3,6 @@ $logado = isset($_SESSION['usuario']);
 
 include('./templates/header.php');
 include('consulta-prod.php');
-
 ?>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -28,53 +27,55 @@ include('consulta-prod.php');
   </button>
 </div>
 
-<section class="container-produtos" >
+<section class="container-produtos">
   <main class="conteudo container" id="container-produtos">
-  <?php foreach ($resultado as $linha): ?>
+    <?php foreach ($resultado as $linha): ?>
       <figure class="product card bg-dark text-light p-2">
-        <img src="<?php echo './img/roupas/' . ($linha['img']); ?>" class="card-img-top" alt="<?php echo $linha['nome']; ?>">
+        <img src="./img/roupas/<?= htmlspecialchars($linha['img']) ?>" class="card-img-top" alt="<?= htmlspecialchars($linha['nome']) ?>">
         <figcaption class="card-body">
-          <h3 class="card-title"><?php echo $linha['nome']; ?></h3>
-          <p class="card-text"><?php echo $linha['descricao']; ?></p>
-          <div class="preco mb-2">R$ <?php echo $linha['preco']; ?></div>
-          <p class="size mb-3">Tamanhos: <?php echo $linha['tamanho']; ?></p>
+          <h3 class="card-title"><?= htmlspecialchars($linha['nome']) ?></h3>
+          <p class="card-text"><?= htmlspecialchars($linha['descricao']) ?></p>
+          <div class="preco mb-2">R$ <?= htmlspecialchars($linha['preco']) ?></div>
+          <p class="size mb-3">Tamanhos: <?= htmlspecialchars($linha['tamanho']) ?></p>
 
           <div class="d-flex justify-content-between">
-            <a href="./produtos.php?id=<?php echo $linha['id']; ?>" class="btn buy-btn flex-grow-1 me-1">
-              <p>Comprar <i class="bi bi-cart-plus"></i></p> 
+            <a href="./produtos.php?id=<?= $linha['id'] ?>" class="btn buy-btn flex-grow-1 me-1">
+              <p>Comprar <i class="bi bi-cart-plus"></i></p>
             </a>
             <button class="btn fav-btn me-1" title="Favorito">
               <p><i class="bi bi-heart"></i></p>
             </button>
-            <button class="btn cart-btn" title="Carrinho">
-             <p><i class="bi bi-bag-plus"></i></p> 
+            <button class="btn cart-btn"
+              data-id="<?= $linha['id'] ?>">
+              <p><i class="bi bi-bag-plus"></i></p>
             </button>
           </div>
         </figcaption>
       </figure>
     <?php endforeach; ?>
-
   </main>
 </section>
 
-<script type="module">
-  import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js'
+<script>
+document.querySelectorAll('.cart-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.id;
 
-  Typebot.initBubble({
-    typebot: "novuz-z7-fqmkeok",
-    theme: {
-      button: {
-        backgroundColor: "#ff5924"
-      },
-      chatWindow: {
-        backgroundColor: "#1D1D1D"
-      },
-    },
+    fetch("add-carrinho.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `id=${id}`
+      })
+      .then(r => r.json())
+      .then(res => {
+        if(res.success){
+          alert("Produto adicionado ao carrinho!");
+        } else {
+          alert(res.msg);
+        }
+      });
   });
+});
 </script>
 
 <?php include('./templates/footer.php'); ?>
-
-</body>
-
-</html>

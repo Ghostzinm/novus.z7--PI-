@@ -45,6 +45,6 @@ if ($formSenha != $formConfSenha) {
             ":senha" => $formSenha
         ]);
         echo"<h1>cadastrado com sucesso</h1>";
-        header('location:index.php');
+        header('location:cadastro.php');
     };
 };
