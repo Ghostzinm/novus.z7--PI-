@@ -18,7 +18,7 @@
       <input type="file" id="img2" accept="image/*" name="img2">
  
       <label for="img3">Imagem 3:</label>
-      <input type="file" id="img3" accept="image/*" name="img3">
+      <input type ="file" id="img3" accept="image/*" name="img3">
  
       <label for="img4">Imagem 4:</label>
       <input type="file" id="img4" accept="image/*" name="img4">
