@@ -2,6 +2,7 @@
 session_start();
 $logado = isset($_SESSION['usuario']);
 
+
 ?>
 
 <!DOCTYPE html>
