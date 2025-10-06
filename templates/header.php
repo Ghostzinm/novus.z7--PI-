@@ -36,7 +36,7 @@ $logado = isset($_SESSION['usuario']);
         <ul>
           <li><a href="./index.php">Home</a></li>
           <li><a href="#">Catálogo</a></li>
-          <li><a href="./sobre.html">Sobre</a></li>
+          <li><a href="./sobre.php">Sobre</a></li>
           <li><a href="#">Contato</a></li>
           <?php 
           if ($logado && (int)$_SESSION['usuario']['adm'] === 1):
