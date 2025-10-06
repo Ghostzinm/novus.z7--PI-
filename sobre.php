@@ -2,24 +2,17 @@
 
 <link rel="stylesheet" href="./css/sobre.css">
 
-  <main>
-    <section class="sobre-container">
-      <h2> SOBRE A NOVUS.Z7 ☯</h2>
-      <p>
-        A <strong>Novus.z7</strong> é mais que uma marca.<br /><br />
+<main>
+  <section class="sobre-container">
+    <h2> SOBRE A NOVUS.Z7 ☯</h2>
+    <p class="sobre-texto">
+      Camisa street de verdade, com estampas únicas e oversized pra quem vive o corre com estilo.<br /><br />
+      Aqui o foco é trazer peças difíceis de achar, com atitude e preço acessível.<br /><br />
+      Nada de seguir padrão — a <strong>Novus.z7</strong> é pra quem veste originalidade.<br /><br />
+      Vendas via <strong>Instagram</strong> e <strong>WhatsApp</strong> | Direto da rua pra você.
+    </p>
 
-        Aqui, o estilo é sujo, o visual é pesado.<br />
-        Cada peça carrega a essência do grafite, do skate, da quebrada e da mente inquieta.<br /><br />
+  </section>
+</main>
 
-        Feito pra quem entende o corre, o peso, e a verdade por trás de cada estampa.<br /><br />
-
-        <strong>Isso aqui é pra quem vive o que veste.</strong><br />
-        Sem modinha, sem rótulo, sem filtro.<br /><br />
-
-        Se você sente, já é parte disso.<br />
-        <strong>Novus.z7 — veste a rua. Representa você.</strong>
-      </p>
-    </section>
-  </main>
-
-  <?php include('./templates/footer.php'); ?>
+<?php include('./templates/footer.php'); ?>

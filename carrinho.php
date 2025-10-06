@@ -1,18 +1,13 @@
 <?php
+session_start();
 
-require('config.php');
+if (!isset($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = [];
+}
 
-$id = (int) $_GET['idProduto'];
-
-$scriptConsulta = "SELECT * FROM tb_produtos WHERE id = :id";
-$stmt = $conn->prepare($scriptConsulta);
-$stmt->bindParam(':id', $id, PDO::PARAM_INT);
-$stmt->execute();
-$produto = $stmt->fetch(PDO::FETCH_ASSOC);
-
+$itensCarrinho = $_SESSION['carrinho'];
+$total = 0;
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,30 +16,34 @@ $produto = $stmt->fetch(PDO::FETCH_ASSOC);
   <title>Carrinho - Loja</title>
   <link rel="stylesheet" href="./css/carrinho.css">
 </head>
-
 <body>
   <div class="cart-container">
     <h1>Carrinho de Compras</h1>
-      <h3>quantidade</h3>
+    <a href="carrinho-delete.php?acao=limpar" class="btn limpar-btn">🗑 Esvaziar carrinho</a>
 
-    <div class="cart-item">
-      <img src="img/roupas/<?= $produto['img'] ?>" alt="Tênis Nike">
-      <div class="item-details">
-        <h2><?= $produto['nome'] ?> </h2>
-        <p>Tamanho:<?= $produto['tamanho'] ?></p>
-        <p><?= $produto['preco'] ?> </p>
-          
+    <?php if (count($itensCarrinho) > 0): ?>
+      <?php foreach ($itensCarrinho as $item): ?>
+        <div class="cart-item">
+          <img src="img/roupas/<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['nome']) ?>">
+          <div class="item-details">
+            <h2><?= htmlspecialchars($item['nome']) ?></h2>
+            <p>Tamanho: <?= htmlspecialchars($item['tamanho']) ?></p>
+            <p>Preço: R$ <?= number_format($item['preco'], 2, ',', '.') ?></p>
+            <p>Qtd: <?= $item['quantidade'] ?></p>
+          </div>
+          <a href="carrinho-delete.php?acao=remover&id=<?= $item['id'] ?>" class="remove-btn">Remover</a>
+        </div>
+        <?php $total += $item['preco'] * $item['quantidade']; ?>
+      <?php endforeach; ?>
+
+      <div class="cart-total">
+        <p>Total: <strong>R$ <?= number_format($total, 2, ',', '.') ?></strong></p>
+        <a class="checkout-btn" href="./form-carrinho.php" target="_blank">Finalizar Compra</a>
       </div>
-     
-    </div>
- <button class="remove-btn">Remover</button>
-    <div class="cart-total">
-      <p>Total: <strong><?= $produto['preco'] ?> </strong></p>
-            <a class="checkout-btn" href="./index.php" target="_blank">Finalizar Compra</a>
 
-    </div>
-
-
+    <?php else: ?>
+      <p>Seu carrinho está vazio!</p>
+    <?php endif; ?>
   </div>
 </body>
 </html>

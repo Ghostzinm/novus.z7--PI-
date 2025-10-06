@@ -18,7 +18,9 @@ if ($usuario && $formSenha === $usuario['senha']) {
     $_SESSION['usuario'] = [
         'id' => $usuario['id'],
         'nome' => $usuario['nome'],
-        'email' => $usuario['email']
+        'email' => $usuario['email'],
+        'telefone' => $usuario['telefone'],
+        'adm' => $usuario['adm']
     ];
     header('location:index.php');
     exit;

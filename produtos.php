@@ -1,5 +1,42 @@
 <?php
 
+
+
+if (isset($_POST['id'])) {
+  $id = $_POST['id'];
+  $nome = $_POST['nome'];
+  $preco = $_POST['preco'];
+  $tamanho = $_POST['tamanho'] ?? 'Único';
+
+  if (isset($_SESSION['carrinho'][$id])) {
+    $_SESSION['carrinho'][$id]['quantidade'] += 1;
+  } else {
+    $_SESSION['carrinho'][$id] = [
+      'nome' => $nome,
+      'preco' => $preco,
+      'tamanho' => $tamanho,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      'quantidade' => 1
+    ];
+  }
+}
+
 include('./templates/header.php');
 include('config.php');
 
@@ -17,9 +54,9 @@ $produto = $resultadoConsulta->fetch();
 <link rel="stylesheet" href="./css/produtos.css">
 
 
-  
 
-  <main class="container-produto">
+
+<main class="container-produto">
   <div class="galeria">
     <div class="miniaturas">
       <img src="img/roupas/<?= $produto['img'] ?>" alt="Foto 1" onclick="trocarImagem(this)">
@@ -36,17 +73,47 @@ $produto = $resultadoConsulta->fetch();
     <h2><?= $produto['nome'] ?></h2>
     <p class="preco"><?= $produto['preco'] ?></p>
     <p class="descricao">
-    <?= $produto['descricao'] ?>
+      <?= $produto['descricao'] ?>
     </p>
-    <a href="./carrinho.php?idProduto=<?= $id ?>" class="btn-comprar">Comprar Agora</a>
+    <button class="btn-comprar cart-btn"
+      data-id="<?= $produto['id'] ?>"
+      data-nome="<?= $produto['nome'] ?>"
+      data-img="<?= $produto['img'] ?>"
+      data-tamanho="<?= $produto['tamanho'] ?>"
+      data-preco="<?= $produto['preco'] ?>">
+      <p>Comprar Agora <i class="bi bi-bag-plus"></i></p>
+    </button>
+
   </div>
 </main>
 
-  <script>
-    function trocarImagem(elemento) {
-      document.getElementById("imagem-principal").src = elemento.src;
-    }
-  </script>
+<script>
+  document.querySelectorAll('.cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const nome = btn.dataset.nome;
+      const preco = btn.dataset.preco;
+
+      fetch("form-carrinho.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}&nome=${nome}&preco=${preco}`
+        })
+        .then(r => r.text())
+        .then(res => {
+          alert("Produto adicionado ao carrinho!");
+        });
+    });
+  });
+</script>
+
+<script>
+  function trocarImagem(elemento) {
+    document.getElementById("imagem-principal").src = elemento.src;
+  }
+</script>
 
 
 
