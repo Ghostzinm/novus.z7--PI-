@@ -12,6 +12,11 @@ $stmt = $conn->prepare($sql);
 $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
 $stmt->execute();
 $endereco = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$logado) {
+    header('Location: cadastro.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

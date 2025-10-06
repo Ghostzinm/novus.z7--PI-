@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!$logado) {
+  header('Location: cadastro.php');
+  exit;
+}
 
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
@@ -7,6 +11,8 @@ if (!isset($_SESSION['carrinho'])) {
 
 $itensCarrinho = $_SESSION['carrinho'];
 $total = 0;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
