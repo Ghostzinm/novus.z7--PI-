@@ -1,8 +1,13 @@
 <?php
 $logado = isset($_SESSION['usuario']);
 
+
 include('./templates/header.php');
 include('consulta-prod.php');
+
+$adm = isset($_SESSION['usuario']) && (int)$_SESSION['usuario']['adm'] === 1;
+
+
 ?>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -31,6 +36,10 @@ include('consulta-prod.php');
   <main class="conteudo container" id="container-produtos">
     <?php foreach ($resultado as $linha): ?>
       <figure class="product card bg-dark text-light p-2">
+        <?php if ($adm) { ?>
+          <a href="./form-apagaroscardla.php?id=<?= $linha['id'] ?>"><i class="bi bi-x-circle"></i></a>
+        <?php } ?>
+
         <img src="./img/roupas/<?= htmlspecialchars($linha['img']) ?>" class="card-img-top" alt="<?= htmlspecialchars($linha['nome']) ?>">
         <figcaption class="card-body">
           <h3 class="card-title"><?= htmlspecialchars($linha['nome']) ?></h3>
@@ -57,25 +66,27 @@ include('consulta-prod.php');
 </section>
 
 <script>
-document.querySelectorAll('.cart-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const id = btn.dataset.id;
+  document.querySelectorAll('.cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
 
-    fetch("add-carrinho.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `id=${id}`
-      })
-      .then(r => r.json())
-      .then(res => {
-        if(res.success){
-          alert("Produto adicionado ao carrinho!");
-        } else {
-          alert(res.msg);
-        }
-      });
+      fetch("add-carrinho.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}`
+        })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            alert("Produto adicionado ao carrinho!");
+          } else {
+            alert(res.msg);
+          }
+        });
+    });
   });
-});
 </script>
 
 <?php include('./templates/footer.php'); ?>
