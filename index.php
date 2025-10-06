@@ -1,8 +1,19 @@
 <?php
 $logado = isset($_SESSION['usuario']);
 
+
 include('./templates/header.php');
 include('consulta-prod.php');
+
+$adm = isset($_SESSION['usuario']) && (int)$_SESSION['usuario']['adm'] === 1;
+
+$sql = "SELECT * FROM tb_produtos WHERE ativo = 1";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$ativo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 ?>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -29,53 +40,61 @@ include('consulta-prod.php');
 
 <section class="container-produtos">
   <main class="conteudo container" id="container-produtos">
-    <?php foreach ($resultado as $linha): ?>
-      <figure class="product card bg-dark text-light p-2">
-        <img src="./img/roupas/<?= htmlspecialchars($linha['img']) ?>" class="card-img-top" alt="<?= htmlspecialchars($linha['nome']) ?>">
-        <figcaption class="card-body">
-          <h3 class="card-title"><?= htmlspecialchars($linha['nome']) ?></h3>
-          <p class="card-text"><?= htmlspecialchars($linha['descricao']) ?></p>
-          <div class="preco mb-2">R$ <?= htmlspecialchars($linha['preco']) ?></div>
-          <p class="size mb-3">Tamanhos: <?= htmlspecialchars($linha['tamanho']) ?></p>
+    <?php if (!empty($ativo)) {
+      foreach ($ativo as $linha): ?>
+        <figure class="product card bg-dark text-light p-2">
+          <?php if ($adm) { ?>
+            <a href="./form-apagaroscardla.php?id=<?= $linha['id'] ?>"><i class="bi bi-x-circle"></i></a>
+          <?php } ?>
 
-          <div class="d-flex justify-content-between">
-            <a href="./produtos.php?id=<?= $linha['id'] ?>" class="btn buy-btn flex-grow-1 me-1">
-              <p>Comprar <i class="bi bi-cart-plus"></i></p>
-            </a>
-            <button class="btn fav-btn me-1" title="Favorito">
-              <p><i class="bi bi-heart"></i></p>
-            </button>
-            <button class="btn cart-btn"
-              data-id="<?= $linha['id'] ?>">
-              <p><i class="bi bi-bag-plus"></i></p>
-            </button>
-          </div>
-        </figcaption>
-      </figure>
-    <?php endforeach; ?>
+          <img src="./img/roupas/<?= htmlspecialchars($linha['img']) ?>" class="card-img-top" alt="<?= htmlspecialchars($linha['nome']) ?>">
+          <figcaption class="card-body">
+            <h3 class="card-title"><?= htmlspecialchars($linha['nome']) ?></h3>
+            <p class="card-text"><?= htmlspecialchars($linha['descricao']) ?></p>
+            <div class="preco mb-2">R$ <?= htmlspecialchars($linha['preco']) ?></div>
+            <p class="size mb-3">Tamanhos: <?= htmlspecialchars($linha['tamanho']) ?></p>
+
+            <div class="d-flex justify-content-between">
+              <a href="./produtos.php?id=<?= $linha['id'] ?>" class="btn buy-btn flex-grow-1 me-1">
+                <p>Comprar <i class="bi bi-cart-plus"></i></p>
+              </a>
+              <button class="btn fav-btn me-1" title="Favorito">
+                <p><i class="bi bi-heart"></i></p>
+              </button>
+              <button class="btn cart-btn"
+                data-id="<?= $linha['id'] ?>">
+                <p><i class="bi bi-bag-plus"></i></p>
+              </button>
+            </div>
+          </figcaption>
+        </figure>
+    <?php endforeach;
+    }; ?>
   </main>
 </section>
 
 <script>
-document.querySelectorAll('.cart-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const id = btn.dataset.id;
+  document.querySelectorAll('.cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
 
-    fetch("add-carrinho.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `id=${id}`
-      })
-      .then(r => r.json())
-      .then(res => {
-        if(res.success){
-          alert("Produto adicionado ao carrinho!");
-        } else {
-          alert(res.msg);
-        }
-      });
+      fetch("add-carrinho.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}`
+        })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            alert("Produto adicionado ao carrinho!");
+          } else {
+            alert(res.msg);
+          }
+        });
+    });
   });
-});
 </script>
 
 <?php include('./templates/footer.php'); ?>

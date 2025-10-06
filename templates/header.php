@@ -2,6 +2,7 @@
 session_start();
 $logado = isset($_SESSION['usuario']);
 
+
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +24,7 @@ $logado = isset($_SESSION['usuario']);
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -34,13 +36,18 @@ $logado = isset($_SESSION['usuario']);
         <ul>
           <li><a href="./index.php">Home</a></li>
           <li><a href="#">Catálogo</a></li>
-          <li><a href="./sobre.html">Sobre</a></li>
+          <li><a href="./sobre.php">Sobre</a></li>
           <li><a href="#">Contato</a></li>
+          <?php 
+          if ($logado && (int)$_SESSION['usuario']['adm'] === 1):
+            echo '<li><a href="./adm.php">Admin</a></li>';
+          endif;
+          ?>
         </ul>
       </nav>
 
       <div class="header-right">
-        <a href="#" class="btn-icon" title="Carrinho">
+        <a href="./carrinho.php" class="btn-icon" title="Carrinho">
           <i class="bi bi-cart-fill"></i>
           <span class="cart-count">2</span>
         </a>
@@ -61,19 +68,17 @@ $logado = isset($_SESSION['usuario']);
 
     <!-- MENU MOBILE -->
     <div class="mobile-nav" id="mobileMenu">
+      <?php if ($logado): ?>
+        <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo ($_SESSION['usuario']['nome']); ?></a>
+        <?php else: ?>
+          <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
+      <?php endif; ?>
       <a href="./index.php">Home</a>
       <a href="#">Catálogo</a>
       <a href="./sobre.html">Sobre</a>
       <a href="#">Contato</a>
-      <a href="#"><i class="bi bi-cart-fill"></i> Carrinho</a>
-
-      <?php if ($logado): ?>
-        <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
-      <?php else: ?>
-        <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo ($_SESSION['usuario']['nome']); ?></a>
-        <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
-      <?php endif; ?>
-    </div>
+      <a href="./Carrinho.php"><i class="bi bi-cart-fill"></i> Carrinho</a>
     </div>
   </header>
 
@@ -84,4 +89,5 @@ $logado = isset($_SESSION['usuario']);
     }
   </script>
 </body>
+
 </html>
