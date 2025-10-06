@@ -38,6 +38,11 @@ $logado = isset($_SESSION['usuario']);
           <li><a href="#">Catálogo</a></li>
           <li><a href="./sobre.html">Sobre</a></li>
           <li><a href="#">Contato</a></li>
+          <?php 
+          if ($logado && (int)$_SESSION['usuario']['adm'] === 1):
+            echo '<li><a href="./adm.php">Admin</a></li>';
+          endif;
+          ?>
         </ul>
       </nav>
 
