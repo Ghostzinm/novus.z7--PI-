@@ -1,12 +1,8 @@
 <?php
 session_start();
-if (!$logado) {
-  header('Location: cadastro.php');
-  exit;
-}
 
 if (!isset($_SESSION['carrinho'])) {
-    $_SESSION['carrinho'] = [];
+  $_SESSION['carrinho'] = [];
 }
 
 $itensCarrinho = $_SESSION['carrinho'];
