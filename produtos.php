@@ -61,8 +61,8 @@ $produto = $resultadoConsulta->fetch();
     <div class="miniaturas">
       <img src="img/roupas/<?= $produto['img'] ?>" alt="Foto 1" onclick="trocarImagem(this)">
       <img src="img/roupas/<?= $produto['img2'] ?>" alt="Foto 2" onclick="trocarImagem(this)">
-      <img src="img/roupas/lv.webp" alt="Foto 3" onclick="trocarImagem(this)">
-      <img src="img/roupas/Anjo_trip.png" alt="Foto 4" onclick="trocarImagem(this)">
+      <img src="img/roupas/<?= $produto['img3'] ?>" alt="Foto 3" onclick="trocarImagem(this)">
+      <img src="img/roupas/<?= $produto['img4'] ?>" alt="Foto 4" onclick="trocarImagem(this)">
     </div>
     <div class="imagem-principal">
       <img id="imagem-principal" src="img/roupas/<?= $produto['img'] ?>" alt="Nome da Peça">
