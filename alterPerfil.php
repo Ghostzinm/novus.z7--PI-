@@ -16,7 +16,7 @@
                         <h4 class="mb-0">Alterar Perfil</h4>
                     </div>
                     <div class="card-body">
-                        <form action="alterPerfil.php" method="post" enctype="multipart/form-data">
+                        <form action="form-alterperfil.php" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Novo nome de usuário:</label>
                                 <input type="text" id="nome" name="nome" class="form-control" required>
