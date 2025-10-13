@@ -40,7 +40,7 @@ $total = 0;
 
       <div class="cart-total">
         <p>Total: <strong>R$ <?= number_format($total, 2, ',', '.') ?></strong></p>
-        <a class="checkout-btn" href="./form-carrinho.php" target="_blank">Finalizar Compra</a>
+        <a class="checkout-btn" href="./pagamento.php" target="_blank">Finalizar Compra</a>
       </div>
 
     <?php else: ?>
