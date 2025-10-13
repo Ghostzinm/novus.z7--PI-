@@ -84,7 +84,7 @@ if (!$logado) {
         <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
       <?php else: ?>
         <p>Nenhum endereço cadastrado.</p>
-        <a href="./perfil.php" style="color:#4CAF50; text-decoration:none;">Cadastrar Endereço</a>
+        <a href="./endereco.php" style="color:#4CAF50; text-decoration:none;">Cadastrar Endereço</a>
       <?php endif; ?>
     </div>
 
