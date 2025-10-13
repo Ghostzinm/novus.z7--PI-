@@ -12,12 +12,14 @@ $total = 0;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Carrinho - Loja</title>
   <link rel="stylesheet" href="./css/carrinho.css">
 </head>
+
 <body>
   <div class="cart-container">
     <h1>Carrinho de Compras</h1>
@@ -40,7 +42,7 @@ $total = 0;
 
       <div class="cart-total">
         <p>Total: <strong>R$ <?= number_format($total, 2, ',', '.') ?></strong></p>
-        <a class="checkout-btn" href="./pagamento.php" target="_blank">Finalizar Compra</a>
+        <a class="checkout-btn" href="pagamento.php?valor=<?= number_format($total, 2, '.', '') ?>">Finalizar Compra</a>
       </div>
 
     <?php else: ?>
@@ -48,4 +50,5 @@ $total = 0;
     <?php endif; ?>
   </div>
 </body>
+
 </html>

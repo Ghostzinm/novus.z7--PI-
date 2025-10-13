@@ -1,5 +1,25 @@
+<?php
+session_start();
+include 'config.php';
+
+// Pega valor total vindo do carrinho
+$valor = isset($_GET['valor']) ? floatval($_GET['valor']) : 0;
+
+// Verifica se o usuário está logado
+$id_usuario = $_SESSION['usuario']['id'] ?? null;
+if (!$id_usuario) {
+    die("Você precisa estar logado para acessar a página de pagamento.");
+}
+
+// Busca os endereços cadastrados do usuário
+$sql = "SELECT * FROM tb_enderecos WHERE id_usuario = :id_usuario";
+$stmt = $conn->prepare($sql);
+$stmt->execute([':id_usuario' => $id_usuario]);
+$enderecos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Pagamento</title>
@@ -10,20 +30,13 @@
       --color-bg-card: rgba(20, 20, 20, 0.7);
       --color-primary: #00ff88;
       --color-primary-dark: #00cc6a;
-      --color-secondary: #ff0055;
-      --color-secondary-dark: #cc0044;
       --color-text: #ffffff;
       --color-text-muted: #aaaaaa;
       --color-border: rgba(255, 255, 255, 0.1);
       --shadow-neon: 0 0 15px var(--color-primary);
       --transition-default: 0.6s ease-in-out;
-
       --btn-color: #00ff88;
       --btn-text: #312525;
-      --checkbox-color: #00ff88;
-      --checkbox-shadow: rgba(0, 255, 136, 0.3);
-      --checkbox-border: rgba(0, 255, 136, 0.7);
-      --text-light: #ffffff;
       --bg-dark: #2c2c2c;
     }
 
@@ -71,7 +84,8 @@
     }
 
     input[type="text"],
-    input[type="number"] {
+    input[type="number"],
+    select {
       width: 100%;
       padding: 12px;
       margin-bottom: 20px;
@@ -84,7 +98,8 @@
     }
 
     input[type="text"]:focus,
-    input[type="number"]:focus {
+    input[type="number"]:focus,
+    select:focus {
       outline: none;
       border-color: var(--color-primary);
       box-shadow: 0 0 10px var(--color-primary);
@@ -117,10 +132,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h2>Pagamento Seguro</h2>
+
     <form action="form-carrinho.php" method="post">
+      <!-- Simulação dos dados do cartão -->
       <label for="nome">Nome no Cartão</label>
       <input type="text" name="nome" id="nome" required>
 
@@ -133,13 +151,40 @@
       <label for="cvv">CVV</label>
       <input type="number" name="cvv" id="cvv" maxlength="3" required>
 
-      <label for="valor">Valor (R$)</label>
-      <input type="number" name="valor" id="valor" step="0.01" readonly value="<?php echo $valor; ?>">
+      <!-- Endereço -->
+      <label for="endereco_entrega">Endereço de Entrega</label>
+      <select name="endereco_entrega" id="endereco_entrega" >
+        <option value="">Selecione um endereço</option>
+        <?php foreach ($enderecos as $end): 
+          $enderecoCompleto = "{$end['rua']}, {$end['numero']}";
+          if (!empty($end['complemento'])) {
+              $enderecoCompleto .= " ({$end['complemento']})";
+          }
+          $enderecoCompleto .= " - {$end['bairro']}, {$end['cidade']}/{$end['estado']} - CEP: {$end['cep']}";
+        ?>
+          <option value="<?= htmlspecialchars($enderecoCompleto) ?>">
+            <?= htmlspecialchars($enderecoCompleto) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
 
+      <!-- Método de pagamento -->
+      <label for="metodo_pagamento">Forma de Pagamento</label>
+      <select name="metodo_pagamento" id="metodo_pagamento" required>
+        <option value="">Selecione</option>
+        <option value="Cartão de Crédito">Cartão de Crédito</option>
+        <option value="Pix">Pix</option>
+        <option value="Boleto">Boleto</option>
+      </select>
+
+      <!-- Valor total (opcional) -->
+      <input type="hidden" name="valor" value="<?= $valor ?>">
 
       <input type="submit" value="Pagar Agora">
     </form>
+
     <div class="footer">🔒 Seus dados estão protegidos</div>
   </div>
 </body>
+
 </html>

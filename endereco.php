@@ -1,8 +1,4 @@
 <?php
-if (!$logado) {
-  header('Location: cadastro.php');
-  exit;
-}
 require_once 'config.php';
 require_once 'templates/header.php';
 ?>
