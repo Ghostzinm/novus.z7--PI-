@@ -1,47 +1,30 @@
 <?php
+require('config.php');
+session_start();
 
-
-$id = $_POST["id"];
-$nome = $_POST["nome"];
-$foto = $_FILES["foto"];
-
-
-  if (!$id) {
-    die("Erro: ID não informado.");
-    }
-    else if(!empty($foto["name"])){
-
-    $id = $_POST['id'] ?? null;
-
- 
-    
-
-
-    $extensao = strtolower(pathinfo($foto["name"], PATHINFO_EXTENSION));
-    $novoNome = uniqid().".".$extensao;
-    $caminho = "uploads/".$novoNome;
-
-    move_uploaded_file($foto["tmp_name"], $caminho);
-
-    require('config.php');
-    session_start();
-    $usuarioId = $_SESSION["usuarioId"];
-
-    $sql = "UPDATE tb_cadastro SET nome = :nome, foto = :foto WHERE id = :id";
-    $scrip = $conn->prepare($sql);
-    $scrip->bindValue(":nome", $nome);
-    $scrip->bindValue(":foto", $caminho);
-    $scrip->bindValue(":id", $usuarioId);
-    $scrip->execute();
-
-    header("Location: perfil.php");
-
+// Verifica se o usuário está logado
+if (!isset($_SESSION["usuario"])) {
+    echo "Erro: usuário não autenticado.";
+    exit;
 }
 
+$usuario = $_SESSION["usuario"]["id"];
+$nome = $_POST["nome"] ?? null;
 
+// Verifica se o nome foi enviado
+if (!$nome) {
+    echo "Erro: Nome não informado.";
+    exit;
+}
 
-    
+// Atualiza apenas o nome
+$sql = "UPDATE tb_cadastro SET nome = :nome WHERE id = :id";
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(":nome", $nome);
+$stmt->bindValue(":id", $usuario);
+$stmt->execute();
 
-
-
+// Redireciona para o perfil
+header("Location: perfil.php");
+exit;
 ?>

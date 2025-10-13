@@ -21,10 +21,7 @@
                                 <label for="nome" class="form-label">Novo nome de usuário:</label>
                                 <input type="text" id="nome" name="nome" class="form-control" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="foto" class="form-label">Nova foto de perfil:</label>
-                                <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
-                            </div>
+                            
                             <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
                         </form>
                     </div>
