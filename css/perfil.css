@@ -1,103 +1,118 @@
  body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #121212;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-    }
-    .perfil-container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-    .perfil-header {
-      display: flex;
-      align-items: center;
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      margin-bottom: 20px;
-    }
-    .perfil-header img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-right: 20px;
-      border: 3px solid #4CAF50;
-    }
-    .perfil-header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-    .perfil-header p {
-      margin: 4px 0 0;
-      color: #aaa;
-    }
-    .perfil-section {
-      background: #1c1c1c;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-    .perfil-section h2 {
-      margin-top: 0;
-      color: #4CAF50;
-      font-size: 1.3rem;
-      border-bottom: 1px solid #333;
-      padding-bottom: 8px;
-      margin-bottom: 15px;
-    }
-    .perfil-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .perfil-section li {
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 8px;
-      background: #262626;
-    }
-    .perfil-section li strong {
-      color: #4CAF50;
-    }
-    .logout {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: #e53935;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .logout:hover {
-      background: #c62828;
-    }
-    a.edit-avatar {
-      position: relative;
-      display: inline-block;
-    }
-    .perfil-header a.edit-avatar i {
-      position: absolute;
-      
-      bottom: 0;
-      right: 0;
-      background: #4CAF50;
-      color: white;
-      border-radius: 50%;
-      padding: 6px;
-      font-size: 14px;
-      border: 2px solid #1e1e1e;
-      cursor: pointer;
-    
-    }
-   .count{
-    position: absolute;
+   font-family: "Segoe UI", Arial, sans-serif;
+   background: #121212;
+   color: #eee;
+   margin: 0;
+   padding: 0;
+ }
+
+ .perfil-container {
+   max-width: 900px;
+   margin: 40px auto;
+   padding: 20px;
+ }
+
+ .perfil-header {
+   display: flex;
+   align-items: center;
+   background: #1e1e1e;
+   padding: 20px;
+   border-radius: 12px;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+   margin-bottom: 20px;
+ }
+
+ .perfil-header img {
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   margin-right: 20px;
+   border: 3px solid #4CAF50;
+ }
+
+ .perfil-header h1 {
+   margin: 0;
+   font-size: 1.6rem;
+ }
+
+ .perfil-header p {
+   margin: 4px 0 0;
+   color: #aaa;
+ }
+
+ .perfil-section {
+   background: #1c1c1c;
+   padding: 20px;
+   border-radius: 10px;
+   margin-bottom: 20px;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+ }
+
+ .perfil-section h2 {
+   margin-top: 0;
+   color: #4CAF50;
+   font-size: 1.3rem;
+   border-bottom: 1px solid #333;
+   padding-bottom: 8px;
+   margin-bottom: 15px;
+ }
+
+ .perfil-section ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+ }
+
+ .perfil-section li {
+   margin-bottom: 10px;
+   padding: 10px;
+   border-radius: 8px;
+   background: #262626;
+ }
+
+ .perfil-section li strong {
+   color: #4CAF50;
+ }
+
+ .logout {
+   display: inline-block;
+   margin-top: 10px;
+   padding: 10px 20px;
+   background: #e53935;
+   color: white;
+   border-radius: 8px;
+   text-decoration: none;
+   font-weight: bold;
+   transition: 0.3s;
+ }
+
+ .logout:hover {
+   background: #c62828;
+ }
+
+ a.edit-avatar {
+   position: relative;
+   display: inline-block;
+ }
+
+ .perfil-header a.edit-avatar i {
+   position: absolute;
+
+   bottom: 0;
+   right: 0;
+   background: #4CAF50;
+   color: white;
+   border-radius: 50%;
+   padding: 6px;
+   font-size: 14px;
+   border: 2px solid #1e1e1e;
+   cursor: pointer;
+
+ }
+
+ .count {
+   position: absolute;
    right: 900px;
-   
-    
-   }
+
+
+ }
