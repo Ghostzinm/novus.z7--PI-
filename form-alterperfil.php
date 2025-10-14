@@ -23,6 +23,8 @@ $stmt = $conn->prepare($sql);
 $stmt->bindValue(":nome", $nome);
 $stmt->bindValue(":id", $usuario);
 $stmt->execute();
+$_SESSION["usuario"]["nome"] = $nome;
+
 
 // Redireciona para o perfil
 header("Location: perfil.php");
