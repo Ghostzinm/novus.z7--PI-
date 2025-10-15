@@ -1,5 +1,7 @@
 <?php
 session_start();
+$logado = isset($_SESSION['usuario']);
+
 if (!$logado) {
   header('Location: cadastro.php');
   exit;
