@@ -6,6 +6,7 @@ $formNome = $_POST["nome"];
 $formEmail = $_POST["email"];
 $formSenha = $_POST["senha"];
 $formConfSenha = $_POST["cSenha"];
+$formTelefone = $_POST["telefone"];
 
 
 require('config.php');
@@ -29,12 +30,13 @@ if ($formSenha != $formConfSenha) {
     tb_cadastro (
         nome,
         email,
-        senha
-    )
+        senha,
+        telefone   )
     VALUES (
         :nome,
         :email,
-        :senha
+        :senha,
+        :telefone
     )";
 
 
@@ -42,8 +44,9 @@ if ($formSenha != $formConfSenha) {
         $scriptPreparado->execute([
             ":nome" => $formNome,
             ":email" => $formEmail,
-            ":senha" => $formSenha
-        ]);
+            ":senha" => $formSenha,
+            ":telefone" => $formTelefone
+               ]);
         echo"<h1>cadastrado com sucesso</h1>";
         header('location:cadastro.php');
     };
