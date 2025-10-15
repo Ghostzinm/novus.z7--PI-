@@ -1,7 +1,12 @@
 <?php
 session_start();
 include 'config.php';
+$logado = isset($_SESSION['usuario']);
 
+if (!$logado) {
+  header('Location: cadastro.php');
+  exit;
+}
 // Pega valor total vindo do carrinho
 $valor = isset($_GET['valor']) ? floatval($_GET['valor']) : 0;
 

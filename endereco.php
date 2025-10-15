@@ -1,6 +1,12 @@
 <?php
 require_once 'config.php';
 require_once 'templates/header.php';
+$logado = isset($_SESSION['usuario']);
+
+if (!$logado) {
+  header('Location: cadastro.php');
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
