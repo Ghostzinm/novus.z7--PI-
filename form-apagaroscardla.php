@@ -9,7 +9,10 @@ $scrip = $conn->prepare($sql);
 $scrip->bindValue(":id", $id);
 $scrip->execute();
 
+
+
 header("Location: index.php");
+
 
 
 

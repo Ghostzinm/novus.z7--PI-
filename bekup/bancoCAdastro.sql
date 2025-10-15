@@ -13,6 +13,7 @@ CREATE TABLE tb_produtos (
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(100) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
+    ativo tinyint DEFAULT 1,
     tamanho VARCHAR(50),
     img VARCHAR(255),
     img2 VARCHAR(255),

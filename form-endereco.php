@@ -1,3 +1,4 @@
+
 <?php 
 $logado = isset($_SESSION['usuario']);
 require_once 'templates/header.php';
@@ -24,5 +25,14 @@ $stmt->bindParam(':bairro', $formBairro, PDO::PARAM_STR);
 $stmt->bindParam(':cidade', $formCidade, PDO::PARAM_STR);
 $stmt->bindParam(':estado', $formEstado, PDO::PARAM_STR);
 $stmt->execute();
+
+
+
+
+
+
 header('Location: perfil.php');
 exit;
+
+
+

@@ -1,9 +1,6 @@
 
 <?php 
-if (!$logado) {
-  echo '<script>alert("Acesso negado. Faça login como administrador."); window.location.href = "cadastro.php";</script>';
-  exit;
-}
+
 
 ?>
 

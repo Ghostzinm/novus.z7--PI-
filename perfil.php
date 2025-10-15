@@ -39,8 +39,8 @@ if (!$logado) {
     <!-- Header -->
     <div class="perfil-header">
 
-       <a href="./  "><i class=" count bi bi-pencil-fill"></i></a>
-         <img src="./img/roupas/high.jpg" alt="Avatar">
+       <a href="./alterPerfil.php"><i class=" count bi bi-pencil-fill"></i></a>
+         <img src="./img/roupas/68e65e6bb6fa2.jpg" alt="Avatar">
         
       <div>
         <h1><?= htmlspecialchars($_SESSION['usuario']['nome']) ?></h1>
