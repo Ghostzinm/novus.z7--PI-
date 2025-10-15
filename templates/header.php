@@ -3,6 +3,16 @@ session_start();
 $logado = isset($_SESSION['usuario']);
 
 
+function totalItensCarrinho() {
+  if (!isset($_SESSION['carrinho'])) return 0;
+  $total = 0;
+  foreach ($_SESSION['carrinho'] as $item) {
+      $total += $item['quantidade'];
+  }
+  return $total;
+}
+
+$totalItens = totalItensCarrinho();
 ?>
 
 <!DOCTYPE html>
@@ -47,9 +57,11 @@ $logado = isset($_SESSION['usuario']);
       </nav>
 
       <div class="header-right">
-        <a href="./carrinho.php" class="btn-icon" title="Carrinho">
-          <i class="bi bi-cart-fill"></i>
-          <span class="cart-count">2</span>
+        <a href="./carrinho.php" class="btn-icon btn btn-outline-light position-relative" title="Carrinho"  id="btn-carrinho">
+        <i class="bi bi-bag-fill"></i>
+        <span id="qtd-carrinho" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <?= $totalItens ?>
+        </span>
         </a>
 
         <?php if ($logado): ?>
