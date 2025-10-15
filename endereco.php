@@ -18,7 +18,7 @@ if (!$logado) {
           <div class="card-body p-4">
             <h3 class="text-center mb-4">Cadastro de Endereço</h3>
 
-            <form id="enderecoForm" autocomplete="off" novalidate>
+            <form action="form-endereco.php" id="enderecoForm" autocomplete="off" novalidate>
               <div class="form-floating mb-3">
                 <input required type="text" class="form-control" id="cep" placeholder="Digite seu CEP" maxlength="9">
                 <label for="cep">CEP</label>
