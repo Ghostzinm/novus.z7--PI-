@@ -50,12 +50,13 @@ include('./templates/header.php');
           class="product card bg-dark text-light p-2 position-relative">
           <?php if ($adm) { ?>
             <div class="bnt-adm">
-              <a href="./form-apagaroscardla.php?id=<?= $produto['id'] ?>"
+              <a href="./form-cardEditar">Editar</a>
+              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>"
                 class="position-absolute end-0 m-2 p-0 text-danger" title="Excluir produto">
                 <i class="bi bi-x-circle fs-4"></i>
               </a>
               <?php if ($inativo) { ?>
-                <a href="./form-reativarCard.php?id=<?= $produto['id'] ?>" class="btn-reativar" title="Reativar produto">
+                <a href="./form-cardReativar.php?id=<?= $produto['id'] ?>" class="btn-reativar" title="Reativar produto">
                   <i class="bi bi-arrow-clockwise fs-4 text-success"></i>
                 </a>
               <?php } ?>
