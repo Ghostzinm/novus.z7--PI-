@@ -47,35 +47,39 @@ include('./templates/header.php');
 
     ?>
         <figure
-          class="product card bg-dark text-light p-2 position-relative"
-          style="width: 18rem; <?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(80%);' : '' ?>">
+          class="product card bg-dark text-light p-2 position-relative">
           <?php if ($adm) { ?>
             <div class="bnt-adm">
               <a href="./form-apagaroscardla.php?id=<?= $produto['id'] ?>"
                 class="position-absolute end-0 m-2 p-0 text-danger" title="Excluir produto">
                 <i class="bi bi-x-circle fs-4"></i>
               </a>
-              <?php if($inativo){ ?>
-              <a href="./form-reativarCard.php">aaaaaaA</a>
+              <?php if ($inativo) { ?>
+                <a href="./form-reativarCard.php?id=<?= $produto['id'] ?>" class="btn-reativar" title="Reativar produto">
+                  <i class="bi bi-arrow-clockwise fs-4 text-success"></i>
+                </a>
+              <?php } ?>
             </div>
-          <?php };
-         }; ?>
+          <?php } ?>
+
 
           <img src="./img/roupas/<?= htmlspecialchars($produto['img']) ?>"
             class="card-img-top" alt="<?= htmlspecialchars($produto['nome']) ?>"
-            style="<?= $inativo && $adm ? 'filter: grayscale(100%);' : '' ?>">
-          <figcaption class="card-body">
+            style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
+          <figcaption class="card-body"
+            style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
+
             <h3 class="card-title text-uppercase"><?= htmlspecialchars($produto['nome']) ?></h3>
             <p class="card-text"><?= htmlspecialchars($produto['descricao']) ?></p>
             <div class="preco text-danger fw-bold mb-2">R$ <?= htmlspecialchars(number_format($produto['preco'], 2, ',', '.')) ?></div>
             <p class="size mb-3">Tamanhos: <?= htmlspecialchars($produto['tamanho']) ?></p>
 
-            <?php if ($inativo && $adm) : ?>
-              <div class="badge bg-danger text-uppercase fw-bold" style="position: absolute; top: 5px; left: 5px;">
+            <?php if ($inativo && $adm) { ?>
+              <p class="Removido badge bg-danger text-uppercase fw-bold">
                 Removido
-              </div>
+              </p>
 
-            <?php else: ?>
+            <?php } else{ ?>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
                   Comprar <i class="bi bi-cart-plus"></i>
@@ -87,53 +91,19 @@ include('./templates/header.php');
                   <i class="bi bi-bag-plus"></i>
                 </button>
               </div>
-            <?php endif; ?>
+            <?php }; ?>
 
           </figcaption>
         </figure>
       <?php endforeach; ?>
 
-    <?php else : ?>
+    <?php  else:  ?>
       <p class="text-center text-light mt-5">Nenhum produto disponível no momento.</p>
     <?php endif; ?>
 
   </main>
 </section>
 
-<style>
-  body {
-    background-color: #000 !important;
-    color: #fff;
-    overflow-x: hidden;
-  }
-
-  .container-produtos {
-    background-color: #000;
-  }
-
-  .product {
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
-  }
-
-  .product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
-  }
-
-  .card-img-top {
-    border-radius: 70px;
-    height: 230px;
-    object-fit: cover;
-  }
-
-  h1 {
-    font-weight: 700;
-    text-shadow: 0 0 10px #0ff, 0 0 25px #0ff;
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
