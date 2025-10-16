@@ -13,6 +13,8 @@ function totalItensCarrinho() {
 }
 
 $totalItens = totalItensCarrinho();
+
+$adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario']['adm'] === 1;
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +51,9 @@ $totalItens = totalItensCarrinho();
           <li><a href="./sobre.php">Sobre</a></li>
           <li><a href="#">Contato</a></li>
           <?php 
-          if ($logado && (int)$_SESSION['usuario']['adm'] === 1):
+          if ($adm){
             echo '<li><a href="./adm.php">Admin</a></li>';
-          endif;
+          }
           ?>
         </ul>
       </nav>
