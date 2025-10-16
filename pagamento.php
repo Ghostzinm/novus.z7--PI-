@@ -1,20 +1,22 @@
 <?php
 session_start();
 include 'config.php';
-$logado = isset($_SESSION['usuario']);
 
+$logado = isset($_SESSION['usuario']);
 if (!$logado) {
   header('Location: cadastro.php');
   exit;
 }
-// Pega valor total vindo do carrinho
-$valor = isset($_GET['valor']) ? floatval($_GET['valor']) : 0;
 
 // Verifica se o usuário está logado
 $id_usuario = $_SESSION['usuario']['id'] ?? null;
 if (!$id_usuario) {
     die("Você precisa estar logado para acessar a página de pagamento.");
 }
+
+// Pega valor total vindo do carrinho (enviado por POST agora)
+$valor = isset($_POST['valor']) ? floatval($_POST['valor']) : 0;
+$pagamento = strtolower(trim($_POST['metodo_pagamento'] ?? ''));
 
 // Busca os endereços cadastrados do usuário
 $sql = "SELECT * FROM tb_enderecos WHERE id_usuario = :id_usuario";
@@ -37,22 +39,30 @@ $enderecos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h2>Pagamento Seguro</h2>
 
     <form action="form-carrinho.php" method="post">
-      <!-- Simulação dos dados do cartão -->
-      <label for="nome">Nome no Cartão</label>
-      <input type="text" name="nome" id="nome" required>
+      <input type="hidden" name="tipo_pagamento" value="finalizar">
 
-      <label for="numero_cartao">Número do Cartão</label>
-      <input type="text" name="numero_cartao" id="numero_cartao" maxlength="16" required>
+      <?php if ($pagamento === 'cartao') { ?>
+        <!-- Dados do cartão -->
+        <label for="nome">Nome no Cartão</label>
+        <input type="text" name="nome" id="nome" required>
 
-      <label for="validade">Validade (MM/AA)</label>
-      <input type="text" name="validade" id="validade" placeholder="MM/AA" required>
+        <label for="numero_cartao">Número do Cartão</label>
+        <input type="text" name="numero_cartao" id="numero_cartao" maxlength="16" required>
 
-      <label for="cvv">CVV</label>
-      <input type="number" name="cvv" id="cvv" maxlength="3" required>
+        <label for="validade">Validade (MM/AA)</label>
+        <input type="text" name="validade" id="validade" placeholder="MM/AA" required>
 
+        <label for="cvv">CVV</label>
+        <input type="number" name="cvv" id="cvv" maxlength="3" required>
+
+      <?php } elseif ($pagamento === 'pix') { ?>
+        <p>Você escolheu pagar via PIX. Use o QR code abaixo para completar o pagamento.</p>
+        <img src="img/pix-qr-code.png" alt="QR Code PIX" style="width:200px;height:200px;">
+
+      <?php } ?>
       <!-- Endereço -->
       <label for="endereco_entrega">Endereço de Entrega</label>
-      <select name="endereco_entrega" id="endereco_entrega" >
+      <select name="endereco_entrega" id="endereco_entrega" required>
         <option value="">Selecione um endereço</option>
         <?php foreach ($enderecos as $end): 
           $enderecoCompleto = "{$end['rua']}, {$end['numero']}";
@@ -67,8 +77,11 @@ $enderecos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
       </select>
 
-      <!-- Valor total (opcional) -->
-      <input type="hidden" name="valor" value="<?= $valor ?>">
+      <!-- Valor total -->
+      <input type="hidden" name="valor" value="<?= htmlspecialchars($valor) ?>">
+
+      <!-- Método de pagamento (para ser reenviado para o próximo passo) -->
+      <input type="hidden" name="metodo_pagamento" value="<?= htmlspecialchars($pagamento) ?>">
 
       <input type="submit" value="Pagar Agora">
     </form>
