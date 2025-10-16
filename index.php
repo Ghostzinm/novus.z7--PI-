@@ -46,18 +46,18 @@ include('./templates/header.php');
         if ($inativo && !$adm) continue;
 
     ?>
-        <figure
-          class="product card bg-dark text-light p-2 position-relative">
+        <figure class="product card bg-dark text-light p-2 position-relative">
           <?php if ($adm) { ?>
-            <div class="bnt-adm">
-              <a href="./form-cardEditar">Editar</a>
-              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>"
-                class="position-absolute end-0 m-2 p-0 text-danger" title="Excluir produto">
+            <div class="bnt-adm position-absolute end-0 top-0 m-2">
+              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>" class="text-danger" title="Excluir produto">
                 <i class="bi bi-x-circle fs-4"></i>
               </a>
+              <a href="./editar_produto.php?id=<?= $produto['id'] ?>" class="text-warning" title="Editar produto">
+                <i class="bi bi-pencil-fill fs-4"></i>
+              </a>
               <?php if ($inativo) { ?>
-                <a href="./form-cardReativar.php?id=<?= $produto['id'] ?>" class="btn-reativar" title="Reativar produto">
-                  <i class="bi bi-arrow-clockwise fs-4 text-success"></i>
+                <a href="./form-cardReativar.php?id=<?= $produto['id'] ?>" class="text-success" title="Reativar produto">
+                  <i class="bi bi-arrow-clockwise fs-4"></i>
                 </a>
               <?php } ?>
             </div>
@@ -80,7 +80,7 @@ include('./templates/header.php');
                 Removido
               </p>
 
-            <?php } else{ ?>
+            <?php } else { ?>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
                   Comprar <i class="bi bi-cart-plus"></i>
@@ -98,7 +98,7 @@ include('./templates/header.php');
         </figure>
       <?php endforeach; ?>
 
-    <?php  else:  ?>
+    <?php else:  ?>
       <p class="text-center text-light mt-5">Nenhum produto disponível no momento.</p>
     <?php endif; ?>
 
