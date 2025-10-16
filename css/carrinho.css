@@ -19,9 +19,24 @@
 }
 
 * {
-  margin: 0;
+  margin-right: 12px;
+  margin-left: 12px;
   padding: 0;
   box-sizing: border-box;
+}
+
+.btn-carrinho{
+  background: var(--color-primary);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition-default);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px;
+  text-decoration: none;
 }
 
 body {

@@ -26,14 +26,16 @@ $total = 0;
 
 <body>
   <header>
-    <a href="./index.php">voltar</a>
+    <a class="btn-carrinho" href="./index.php">voltar</a>
   </header>
 
   <section>
-
+      <h1 sclass="cart-header">Carrinho de Compras</h1>
     <div class="cart-container">
       <div class="cart-header">
-        <h1>Carrinho de Compras</h1>
+        <h2>Seu Carrinho</h2>
+
+        
         <a href="carrinho-delete.php?acao=limpar" class="btn limpar-btn">🗑 Esvaziar</a>
       </div>
 
@@ -85,13 +87,14 @@ $total = 0;
             <option value="Pix">Pix</option>
           </select>
           <input type="hidden" name="valor" value="<?= number_format($totalFinal, 2, '.', '') ?>">
-          <button type="submit" class="checkout-btn">Finalizar Compra ☯</button>
+          <button type="submit" class="checkout-btn">Finalizar Compra </button>
         </form>
 
       <?php else: ?>
         <p class="empty-cart">Seu carrinho está vazio 🕸</p>
-        <a href="./index.php">voltar</a>
+        
       <?php endif; ?>
+      
     </div>
   </section>
 </body>
