@@ -67,15 +67,6 @@ $enderecos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
       </select>
 
-      <!-- Método de pagamento -->
-      <label for="metodo_pagamento">Forma de Pagamento</label>
-      <select name="metodo_pagamento" id="metodo_pagamento" required>
-        <option value="">Selecione</option>
-        <option value="Cartão de Crédito">Cartão de Crédito</option>
-        <option value="Pix">Pix</option>
-        <option value="Boleto">Boleto</option>
-      </select>
-
       <!-- Valor total (opcional) -->
       <input type="hidden" name="valor" value="<?= $valor ?>">
 
