@@ -155,3 +155,56 @@ h1 {
   top: 5px; 
   left: 50%;
 }
+
+/* tost */
+
+#toast-container-novusz7 {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  pointer-events: none;
+}
+
+/* Toast único da marca (evita conflito com .toast do bootstrap) */
+.novusz7-toast {
+  pointer-events: auto; /* ativa o click no botão de fechar*/
+  background: var(--cor-secundaria);
+  border: 1px solid rgba(255,49,49,0.14);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  min-width: 220px;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ícone opcional (pode usar <span> dentro do toast) */
+.novusz7-toast .icon {
+  font-size: 18px;
+  color: #a6ff31;
+}
+
+/* estado visível */
+.novusz7-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* botão fechar (pequeno) */
+.novusz7-toast .close-small {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
