@@ -1,6 +1,6 @@
 <?php
-
-
+include('./templates/header.php');
+include('config.php');
 
 if (isset($_POST['id'])) {
   $id = $_POST['id'];
@@ -16,107 +16,79 @@ if (isset($_POST['id'])) {
       'preco' => $preco,
       'tamanho' => $tamanho,
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
       'quantidade' => 1
     ];
   }
 }
 
-include('./templates/header.php');
-include('config.php');
+// Consulta produto
+$stmtProduto = $conn->prepare("SELECT * FROM tb_produtos WHERE id = :id");
+$stmtProduto->bindParam(':id', $id, PDO::PARAM_INT);
+$stmtProduto->execute();
+$produto = $stmtProduto->fetch();
 
-$id = $_GET['id'];
 
-$scriptConsulta = "SELECT * FROM tb_produtos WHERE id = :id";
-$resultadoConsulta = $conn->prepare($scriptConsulta);
-$resultadoConsulta->bindParam(':id', $id, PDO::PARAM_INT);
-$resultadoConsulta->execute();
-
-$produto = $resultadoConsulta->fetch();
+// Lista de imagens
+$imagensProduto = array_filter([$produto['img'], $produto['img2'], $produto['img3'], $produto['img4']]);
 
 ?>
 
 <link rel="stylesheet" href="./css/produtos.css">
 
+<section class="produto-section">
 
+  <main class="produto-container">
 
-
-<main class="container-produto">
-  <div class="galeria">
-    <div class="miniaturas">
-      <img src="img/roupas/<?= $produto['img'] ?>" alt="Foto 1" onclick="trocarImagem(this)">
-      <img src="img/roupas/<?= $produto['img2'] ?>" alt="Foto 2" onclick="trocarImagem(this)">
-      <img src="img/roupas/<?= $produto['img3'] ?>" alt="Foto 3" onclick="trocarImagem(this)">
-      <img src="img/roupas/<?= $produto['img4'] ?>" alt="Foto 4" onclick="trocarImagem(this)">
+    <!-- Galeria de imagens -->
+    <div class="produto-galeria">
+      <div class="produto-miniaturas">
+        <?php foreach ($imagensProduto as $i => $img): ?>
+          <img src="img/roupas/<?= htmlspecialchars($img) ?>"
+            alt="Imagem <?= $i + 1 ?> do <?= htmlspecialchars($produto['nome']) ?>"
+            onclick="produtoTrocarImagem(this)"
+            class="<?= $i === 0 ? 'produto-selected' : '' ?>">
+        <?php endforeach; ?>
+      </div>
+      <div class="produto-imagem-principal">
+        <img id="produto-imagem-principal"
+          src="img/roupas/<?= htmlspecialchars($produto['img']) ?>"
+          alt="<?= htmlspecialchars($produto['nome']) ?>">
+      </div>
     </div>
-    <div class="imagem-principal">
-      <img id="imagem-principal" src="img/roupas/<?= $produto['img'] ?>" alt="Nome da Peça">
+
+    <!-- Informações do produto -->
+    <div class="produto-info">
+      <h1 class="produto-nome"><?= htmlspecialchars($produto['nome']) ?></h1>
+      <p class="produto-preco">R$ <?= number_format($produto['preco'], 2, ",", ".") ?></p>
+
+      <?php if (!empty($produto['tags'])): ?>
+        <div class="produto-tags">
+          <?php foreach (explode(',', $produto['tags']) as $tag): ?>
+            <span>#<?= htmlspecialchars(trim($tag)) ?></span>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+
+      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
+
+      <button class="produto-btn-comprar cart-btn btn-add-carrinho"
+        data-id="<?= $produto['id'] ?>"
+        data-nome="<?= $produto['nome'] ?>"
+        data-img="<?= $produto['img'] ?>"
+        data-tamanho="<?= $produto['tamanho'] ?>"
+        data-preco="<?= $produto['preco'] ?>">
+        <p>Comprar Agora <i class="bi bi-bag-plus"></i></p>
+      </button>
     </div>
-  </div>
 
-  <div class="info-produto">
-    <h2><?= $produto['nome'] ?></h2>
-    <p class="preco"><?= $produto['preco'] ?></p>
-    <p class="descricao">
-      <?= $produto['descricao'] ?>
-    </p>
-    <button class="btn-comprar cart-btn"
-      data-id="<?= $produto['id'] ?>"
-      data-nome="<?= $produto['nome'] ?>"
-      data-img="<?= $produto['img'] ?>"
-      data-tamanho="<?= $produto['tamanho'] ?>"
-      data-preco="<?= $produto['preco'] ?>">
-      <p>Comprar Agora <i class="bi bi-bag-plus"></i></p>
-    </button>
-
-  </div>
-</main>
-
-<script>
-  document.querySelectorAll('.cart-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const nome = btn.dataset.nome;
-      const preco = btn.dataset.preco;
-
-      fetch("form-carrinho.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: `id=${id}&nome=${nome}&preco=${preco}`
-        })
-        .then(r => r.text())
-        .then(res => {
-          alert("Produto adicionado ao carrinho!");
-        });
-    });
-  });
-</script>
-
-<script>
-  function trocarImagem(elemento) {
-    document.getElementById("imagem-principal").src = elemento.src;
-  }
-</script>
+  </main>
 
 
+</section>
 
-<?php
-include('./templates/footer.php');
-?>
+<div id="toast-container-novusz7"></div>
+
+
+<script src="./js/add-card.js"></script>
+
+<?php include('./templates/footer.php'); ?>
