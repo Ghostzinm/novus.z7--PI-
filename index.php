@@ -4,10 +4,38 @@ require 'config.php';
 $logado = isset($_SESSION['usuario']);
 $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario']['adm'] === 1;
 
+// Busca todos os produtos
 $sql = "SELECT * FROM tb_produtos";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Classe Favoritos real
+if (!class_exists('Favoritos')) {
+    class Favoritos {
+        public static function isFavorito($conn, $produtoId, $usuarioId) {
+            $stmt = $conn->prepare("SELECT id FROM tb_favoritos WHERE id_usuario = ? AND id_produto = ?");
+            $stmt->execute([$usuarioId, $produtoId]);
+            return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
+        }
+    }
+}
+
+// Marca produtos já favoritados pelo usuário logado
+$usuarioId = $_SESSION['usuario']['id'] ?? null;
+
+foreach ($produtos as $key => $produto) {
+    $produtos[$key]['favorito'] = false; // inicializa como falso
+    if ($usuarioId) {
+        try {
+            // Atualiza a chave 'favorito' sem referência
+            $produtos[$key]['favorito'] = Favoritos::isFavorito($conn, $produto['id'], $usuarioId);
+        } catch (Throwable $e) {
+            $produtos[$key]['favorito'] = false;
+        }
+    }
+}
+
 
 include('./templates/header.php');
 ?>
@@ -44,7 +72,6 @@ include('./templates/header.php');
       foreach ($produtos as $produto) :
         $inativo = ((int)$produto['ativo'] === 0);
         if ($inativo && !$adm) continue;
-
     ?>
         <figure class="product card bg-dark text-light p-2 position-relative">
           <?php if ($adm) { ?>
@@ -63,7 +90,6 @@ include('./templates/header.php');
             </div>
           <?php } ?>
 
-
           <img src="./img/roupas/<?= htmlspecialchars($produto['img']) ?>"
             class="card-img-top" alt="<?= htmlspecialchars($produto['nome']) ?>"
             style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
@@ -76,17 +102,14 @@ include('./templates/header.php');
             <p class="size mb-3">Tamanhos: <?= htmlspecialchars($produto['tamanho']) ?></p>
 
             <?php if ($inativo && $adm) { ?>
-              <p class="Removido badge bg-danger text-uppercase fw-bold">
-                Removido
-              </p>
-
+              <p class="Removido badge bg-danger text-uppercase fw-bold">Removido</p>
             <?php } else { ?>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
                   Comprar <i class="bi bi-cart-plus"></i>
                 </a>
-                <button class="btn text-light me-1" title="Favorito">
-                  <i class="bi bi-heart"></i>
+                <button class="btn text-light me-1" title="Favorito" onclick="favoritarProduto(<?= $produto['id'] ?>)" id="fav-<?= $produto['id'] ?>">
+                  <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
                 </button>
                 <button class="btn text-light btn-add-carrinho" title="Adicionar ao carrinho" data-id="<?= $produto['id'] ?>">
                   <i class="bi bi-bag-plus"></i>
@@ -109,7 +132,6 @@ include('./templates/header.php');
 <div id="toast-container-novusz7"></div>
 
 <script src="./js/add-card.js"></script>
-
-
+<script src="./js/add-fav.js"></script>
 
 <?php include('./templates/footer.php'); ?>
