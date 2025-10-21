@@ -16,7 +16,8 @@ $scriptConsulta = "SELECT * FROM tb_cadastro WHERE email = '$formEmail' ";;
 $email = $conn->query($scriptConsulta)->fetchAll();
 
 if ($formSenha != $formConfSenha) {
-    echo '<h1> ta errado </h1>';
+    echo '<h1> as senhas nao confere </h1>';
+    echo '<a href="cadastro.php">voltar</a>';
     
 } else {
     if (!empty($email)) {
