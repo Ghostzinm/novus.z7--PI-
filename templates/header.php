@@ -14,6 +14,7 @@ function totalItensCarrinho() {
 
 $totalItens = totalItensCarrinho();
 
+
 $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario']['adm'] === 1;
 ?>
 

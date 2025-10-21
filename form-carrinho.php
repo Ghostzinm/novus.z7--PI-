@@ -19,7 +19,8 @@ $metodo_pagamento = $_POST['metodo_pagamento'] ?? 'Não informado';
 $total = 0;
 foreach ($_SESSION['carrinho'] as $item) {
     $total += $item['preco'] * $item['quantidade'];
-}
+} 
+
 
 try {
     $conn->beginTransaction();
