@@ -60,6 +60,7 @@ if (isset($_GET['id']) && !empty('id')) {
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
+          <input name="telefone" type="text" id="telefone-cadastro" placeholder="Telefone" required >
           <input <?= $senha ?> name="senha" type="password" id="senha-cadastro" placeholder="Senha" required >
           <input <?= $cSenha ?> name="cSenha" type="password" id="confirmar-senha" placeholder="Confirme sua senha" required >
           <button type="submit">Cadastrar</button>
@@ -112,6 +113,15 @@ if (isset($_GET['id']) && !empty('id')) {
     </div>
 
   </section>
+
+  <script> 
+    const tel = document.getElementById('telefone-cadastro');
+
+    tel.addEventListener('input', function (e) {
+      let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+  </script>
 
   <script src="./js/cadastro.js"></script>
 
