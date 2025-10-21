@@ -5,6 +5,7 @@ $nome = '';
 $email = '';
 $senha = '';
 $cSenha = '';
+$tel = '';
 
 if (isset($_GET['id']) && !empty('id')) {
 
@@ -23,6 +24,7 @@ if (isset($_GET['id']) && !empty('id')) {
     $telefone = $dadosSelect["telefone"];
     $usuario = $dadosSelect["usuario"];
     $senha = $dadosSelect["senha"];
+    $tel = $dadosSelect["telefone"];
 
 };
 
@@ -60,7 +62,7 @@ if (isset($_GET['id']) && !empty('id')) {
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
-          <input  name="telefone" type="text" id="telefone-cadastro" placeholder="Telefone" required >
+          <input <?=$tel ?> name="telefone" type="text" id="telefone-cadastro" placeholder="Telefone" required >
           <input <?= $senha ?> name="senha" type="password" id="senha-cadastro" placeholder="Senha" required >
           <input <?= $cSenha ?> name="cSenha" type="password" id="confirmar-senha" placeholder="Confirme sua senha" required >
           <button type="submit">Cadastrar</button>

@@ -4,6 +4,7 @@ echo "<h1>cadastro php </h1>";
 
 $formNome = $_POST["nome"];
 $formEmail = $_POST["email"];
+$formTel = $_POST["telefone"];
 $formSenha = $_POST["senha"];
 $formConfSenha = $_POST["cSenha"];
 
@@ -29,12 +30,14 @@ if ($formSenha != $formConfSenha) {
     tb_cadastro (
         nome,
         email,
-        senha
+        senha,
+        telefone
     )
     VALUES (
         :nome,
         :email,
-        :senha
+        :senha,
+        :telefone
     )";
 
 
@@ -42,7 +45,8 @@ if ($formSenha != $formConfSenha) {
         $scriptPreparado->execute([
             ":nome" => $formNome,
             ":email" => $formEmail,
-            ":senha" => $formSenha
+            ":senha" => $formSenha,
+            ":telefone" => $formTel
         ]);
         echo"<h1>cadastrado com sucesso</h1>";
         header('location:cadastro.php');
