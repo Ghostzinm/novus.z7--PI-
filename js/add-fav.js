@@ -1,4 +1,10 @@
-// Função para favoritar/desfavoritar
+document.querySelectorAll('.btn-fav').forEach(button => {
+    button.addEventListener('click', () => {
+        const produtoId = button.getAttribute('data-id');
+        favoritarProduto(produtoId);
+    });
+});
+
 function favoritarProduto(produtoId) {
     fetch('favoritar.php', {
         method: 'POST',
@@ -20,11 +26,3 @@ function favoritarProduto(produtoId) {
     })
     .catch(err => console.error('Erro ao favoritar:', err));
 }
-
-// Adiciona evento de clique a todos os botões de favoritos
-document.querySelectorAll('.btn-fav').forEach(button => {
-    button.addEventListener('click', () => {
-        const produtoId = button.getAttribute('data-id');
-        favoritarProduto(produtoId); // Chama a função aqui dentro
-    });
-});

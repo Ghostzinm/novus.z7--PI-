@@ -1,5 +1,6 @@
 <?php
 require 'config.php';
+include('./templates/header.php');
 
 $logado = isset($_SESSION['usuario']);
 $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario']['adm'] === 1;
@@ -10,34 +11,38 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Inicializa a sessão de favoritos se não existir
+if (!isset($_SESSION['favoritos'])) {
+  $_SESSION['favoritos'] = [];
+}
+
 // Classe Favoritos real
 if (!class_exists('Favoritos')) {
-    class Favoritos {
-        public static function isFavorito($conn, $produtoId, $usuarioId) {
-            $stmt = $conn->prepare("SELECT id FROM tb_favoritos WHERE id_usuario = ? AND id_produto = ?");
-            $stmt->execute([$usuarioId, $produtoId]);
-            return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
-        }
+  class Favoritos
+  {
+    public static function isFavorito($conn, $produtoId, $usuarioId)
+    {
+      $stmt = $conn->prepare("SELECT id FROM tb_favoritos WHERE id_usuario = ? AND id_produto = ?");
+      $stmt->execute([$usuarioId, $produtoId]);
+      return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
     }
+  }
 }
 
 // Marca produtos já favoritados pelo usuário logado
 $usuarioId = $_SESSION['usuario']['id'] ?? null;
 
 foreach ($produtos as $key => $produto) {
-    $produtos[$key]['favorito'] = false; // inicializa como falso
-    if ($usuarioId) {
-        try {
-            // Atualiza a chave 'favorito' sem referência
-            $produtos[$key]['favorito'] = Favoritos::isFavorito($conn, $produto['id'], $usuarioId);
-        } catch (Throwable $e) {
-            $produtos[$key]['favorito'] = false;
-        }
-    }
+  // Usa sessão primeiro para feedback rápido
+  if (!empty($_SESSION['favoritos'][$produto['id']])) {
+    $produtos[$key]['favorito'] = true;
+  } else {
+    // Consulta banco caso não esteja na sessão
+    $produtos[$key]['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
+    $_SESSION['favoritos'][$produto['id']] = $produtos[$key]['favorito'];
+  }
 }
 
-
-include('./templates/header.php');
 ?>
 
 <!-- Carrossel -->
@@ -108,9 +113,10 @@ include('./templates/header.php');
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
                   Comprar <i class="bi bi-cart-plus"></i>
                 </a>
-                <button class="btn text-light me-1" title="Favorito" onclick="favoritarProduto(<?= $produto['id'] ?>)" id="fav-<?= $produto['id'] ?>">
+                <button class="btn text-light btn-fav me-1" title="Favorito" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
                   <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
                 </button>
+
                 <button class="btn text-light btn-add-carrinho" title="Adicionar ao carrinho" data-id="<?= $produto['id'] ?>">
                   <i class="bi bi-bag-plus"></i>
                 </button>
