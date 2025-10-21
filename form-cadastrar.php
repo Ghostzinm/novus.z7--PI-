@@ -7,6 +7,7 @@ $formEmail = $_POST["email"];
 $formTel = $_POST["telefone"];
 $formSenha = $_POST["senha"];
 $formConfSenha = $_POST["cSenha"];
+$formTelefone = $_POST["telefone"];
 
 
 require('config.php');
@@ -16,7 +17,8 @@ $scriptConsulta = "SELECT * FROM tb_cadastro WHERE email = '$formEmail' ";;
 $email = $conn->query($scriptConsulta)->fetchAll();
 
 if ($formSenha != $formConfSenha) {
-    echo '<h1> ta errado </h1>';
+    echo '<h1> as senhas nao confere </h1>';
+    echo '<a href="cadastro.php">voltar</a>';
     
 } else {
     if (!empty($email)) {
@@ -31,8 +33,7 @@ if ($formSenha != $formConfSenha) {
         nome,
         email,
         senha,
-        telefone
-    )
+        telefone   )
     VALUES (
         :nome,
         :email,
@@ -46,8 +47,8 @@ if ($formSenha != $formConfSenha) {
             ":nome" => $formNome,
             ":email" => $formEmail,
             ":senha" => $formSenha,
-            ":telefone" => $formTel
-        ]);
+            ":telefone" => $formTelefone
+               ]);
         echo"<h1>cadastrado com sucesso</h1>";
         header('location:cadastro.php');
     };

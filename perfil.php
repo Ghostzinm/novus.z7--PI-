@@ -12,6 +12,12 @@ $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
 $stmt->execute();
 $endereco = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$sqlUser = "SELECT * FROM tb_cadastro WHERE id = :id_usuario";
+$stmtUser = $conn->prepare($sqlUser);
+$stmtUser->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+$stmtUser->execute();
+$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
 if (!$logado) {
   header('Location: cadastro.php');
   exit;
@@ -94,7 +100,7 @@ $produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <h2>👤 Meus Dados</h2>
       <p><strong>Nome:</strong> <?= htmlspecialchars($_SESSION['usuario']['nome']) ?></p>
       <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['usuario']['email']) ?></p>
-      <p><strong>Telefone:</strong> (11) 99999-9999</p>
+      <p><strong>Telefone:</strong><?= htmlspecialchars($user['telefone']) ?></p>
     </div>
 
     <!-- Endereço -->
