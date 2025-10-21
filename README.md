@@ -1,3 +1,23 @@
+
+## Tema gerador
+- Desenvolvimento de um software utilizando a arquitetura cliente e servidor.
+
+## tema do projeto O quê é?
+- um site de venda de roupas 
+
+## objetivo e para que?
+
+- vender camisas de alta qualidade com um preço acessivel
+
+## detalhamento como?
+
+- **acões necessarias para o desenvolvimento:** pegamos de referencias sitemas de vendas de roupas, tenis e até mesmo eletronicos.
+usamos referencias como a estilização e organização desses sites e principalmente seus forms de cadastro 
+
+     usamos uma branch  para podermos mexer os dois no mesmo  projeto ao mesmo tempo 
+
+     para relizar nossos obijetivos precisamos de diciplina e concentração 
+
 # novus.z7 (PI)
 versão PI da NOVUs.z7
 ## Estrutura de Pastas e Arquivos
@@ -76,3 +96,6 @@ O objetivo deste projeto é fornecer uma base sólida para aplicações Python, 
 - Certifique-se de manter as dependências atualizadas.
 - Recomenda-se seguir o padrão de código definido para garantir legibilidade e organização.
 - Contribuições são bem-vindas, desde que sigam as diretrizes do projeto.
+
+
+

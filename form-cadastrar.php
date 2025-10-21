@@ -7,6 +7,7 @@ $formEmail = $_POST["email"];
 $formTel = $_POST["telefone"];
 $formSenha = $_POST["senha"];
 $formConfSenha = $_POST["cSenha"];
+$formTelefone = $_POST["telefone"];
 
 
 require('config.php');
@@ -32,8 +33,7 @@ if ($formSenha != $formConfSenha) {
         nome,
         email,
         senha,
-        telefone
-    )
+        telefone   )
     VALUES (
         :nome,
         :email,
@@ -47,8 +47,8 @@ if ($formSenha != $formConfSenha) {
             ":nome" => $formNome,
             ":email" => $formEmail,
             ":senha" => $formSenha,
-            ":telefone" => $formTel
-        ]);
+            ":telefone" => $formTelefone
+               ]);
         echo"<h1>cadastrado com sucesso</h1>";
         header('location:cadastro.php');
     };
