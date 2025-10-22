@@ -103,6 +103,9 @@ $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario'
       menu.classList.toggle('show');
     }
   </script>
+
+
+
 </body>
 
 </html>

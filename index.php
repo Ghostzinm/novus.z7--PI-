@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 include('./templates/header.php');
+require_once './classes/Favoritos.php';
 
 $logado = isset($_SESSION['usuario']);
 $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario']['adm'] === 1;
@@ -11,38 +12,11 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Inicializa a sessão de favoritos se não existir
-if (!isset($_SESSION['favoritos'])) {
-  $_SESSION['favoritos'] = [];
-}
-
-// Classe Favoritos real
-if (!class_exists('Favoritos')) {
-  class Favoritos
-  {
-    public static function isFavorito($conn, $produtoId, $usuarioId)
-    {
-      $stmt = $conn->prepare("SELECT id FROM tb_favoritos WHERE id_usuario = ? AND id_produto = ?");
-      $stmt->execute([$usuarioId, $produtoId]);
-      return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
-    }
-  }
-}
-
-// Marca produtos já favoritados pelo usuário logado
 $usuarioId = $_SESSION['usuario']['id'] ?? null;
 
 foreach ($produtos as $key => $produto) {
-  // Usa sessão primeiro para feedback rápido
-  if (!empty($_SESSION['favoritos'][$produto['id']])) {
-    $produtos[$key]['favorito'] = true;
-  } else {
-    // Consulta banco caso não esteja na sessão
     $produtos[$key]['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
-    $_SESSION['favoritos'][$produto['id']] = $produtos[$key]['favorito'];
-  }
 }
-
 ?>
 
 <!-- Carrossel -->
@@ -98,12 +72,15 @@ foreach ($produtos as $key => $produto) {
           <img src="./img/roupas/<?= htmlspecialchars($produto['img']) ?>"
             class="card-img-top" alt="<?= htmlspecialchars($produto['nome']) ?>"
             style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
+
           <figcaption class="card-body"
             style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
 
             <h3 class="card-title text-uppercase"><?= htmlspecialchars($produto['nome']) ?></h3>
             <p class="card-text"><?= htmlspecialchars($produto['descricao']) ?></p>
-            <div class="preco text-danger fw-bold mb-2">R$ <?= htmlspecialchars(number_format($produto['preco'], 2, ',', '.')) ?></div>
+            <div class="preco text-danger fw-bold mb-2">
+              R$ <?= htmlspecialchars(number_format($produto['preco'], 2, ',', '.')) ?>
+            </div>
             <p class="size mb-3">Tamanhos: <?= htmlspecialchars($produto['tamanho']) ?></p>
 
             <?php if ($inativo && $adm) { ?>
@@ -113,28 +90,24 @@ foreach ($produtos as $key => $produto) {
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
                   Comprar <i class="bi bi-cart-plus"></i>
                 </a>
-                <button class="btn text-light btn-fav me-1" title="Favorito" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
+                <button class="btn text-light btn-fav me-1" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
                   <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
                 </button>
-
-                <button class="btn text-light btn-add-carrinho" title="Adicionar ao carrinho" data-id="<?= $produto['id'] ?>">
+                <button class="btn text-light btn-add-carrinho" data-id="<?= $produto['id'] ?>">
                   <i class="bi bi-bag-plus"></i>
                 </button>
               </div>
-            <?php }; ?>
-
+            <?php } ?>
           </figcaption>
         </figure>
       <?php endforeach; ?>
-
-    <?php else:  ?>
+    <?php else: ?>
       <p class="text-center text-light mt-5">Nenhum produto disponível no momento.</p>
     <?php endif; ?>
 
   </main>
 </section>
 
-<!-- Toast container -->
 <div id="toast-container-novusz7"></div>
 
 <script src="./js/add-card.js"></script>
