@@ -25,10 +25,11 @@
         <div class="footer-col">
             <h3>Ajuda</h3>
             <ul>
-                <li><a href="#">Suporte</a></li>
-                <li><a href="#">Trocas & Devoluções</a></li>
-                <li><a href="#">Frete & Entregas</a></li>
-                <li><a href="#">Privacidade</a></li>
+                <li><a href="sobre.php#suporte">Suporte</a></li>
+                <li><a href="sobre.php#suporte">Trocas & Devoluções</a></li>
+                <li><a href="sobre.php#trocas">Frete & Entregas</a></li>
+                <li><a href="sobre.php#privacidade">Privacidade</a></li>
+
             </ul>
         </div>
 

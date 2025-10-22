@@ -30,6 +30,7 @@ $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario'
   <link rel="icon" href="./img/logo.png" type="image/png" />
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/perfil.css" />
+  <link rel="stylesheet" href="./css/sobre.css" />
   <link rel="stylesheet" href="./css/footer.css" />
   <link rel="stylesheet" href="./css/header.css" />
 
