@@ -78,22 +78,30 @@ $produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <!-- Favoritos -->
-    <div class="perfil-section">
-      <h2>❤️ Meus Favoritos</h2>
-      <?php if (!empty($produtosFavoritos)): ?>
-        <ul>
-          <?php foreach ($produtosFavoritos as $produto): ?>
-            <li>
-              <?= htmlspecialchars($produto['nome']) ?> -
-              R$ <?= number_format($produto['preco'], 2, ',', '.') ?> -
-              <strong>❤️ Favoritado</strong>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      <?php else: ?>
-        <p>Você ainda não favoritou nenhum produto.</p>
-      <?php endif; ?>
-    </div>
+  <div class="perfil-section">
+  <h2>❤️ Meus Favoritos</h2> 
+  <a href="./exibir-favorito.php"><i class=" bungas bi bi-list"></i></a>
+
+  <?php if (!empty($produtosFavoritos)): ?>
+    <ul>
+      <?php 
+        // Limita o loop ao tamanho do array ou 3, o que for menor
+        $total = min(count($produtosFavoritos), 3);
+        for ($i = 0; $i < $total; $i++): 
+          $produto = $produtosFavoritos[$i];
+      ?>
+        <li>
+          <?= htmlspecialchars($produto['nome']) ?> -
+          R$ <?= number_format($produto['preco'], 2, ',', '.') ?> -
+          <strong>❤️ Favoritado</strong>
+        </li>
+      <?php endfor; ?>
+    </ul>
+  <?php else: ?>
+    <p>Você ainda não favoritou nenhum produto.</p>
+  <?php endif; ?>
+</div>
+
 
     <!-- Dados -->
     <div class="perfil-section">
