@@ -35,6 +35,11 @@ if (!$produto) {
   die('Produto não encontrado.');
 }
 
+$usuarioId = $_SESSION['usuario']['id'] ?? null;
+
+foreach ($produtos as $key => $produto) {
+    $produtos[$key]['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
+}
 include('./templates/header.php');
 ?>
 
@@ -48,17 +53,17 @@ include('./templates/header.php');
       <div class="produto-miniaturas">
         <?php for ($i = 1; $i <= 4; $i++): ?>
           <?php if (!empty($produto["img$i"])): ?>
-            <img src="img/roupas/<?= $produto["img$i"] ?>" 
-                 alt="Imagem <?= $i ?>" 
-                 onclick="trocarImagem(this)">
+            <img src="img/roupas/<?= $produto["img$i"] ?>"
+              alt="Imagem <?= $i ?>"
+              onclick="trocarImagem(this)">
           <?php endif; ?>
         <?php endfor; ?>
       </div>
 
       <div class="produto-imagem-principal">
-        <img id="imagem-principal" 
-             src="img/roupas/<?= $produto['img'] ?>" 
-             alt="<?= htmlspecialchars($produto['nome']) ?>">
+        <img id="imagem-principal"
+          src="img/roupas/<?= $produto['img'] ?>"
+          alt="<?= htmlspecialchars($produto['nome']) ?>">
       </div>
     </div>
 
@@ -79,19 +84,26 @@ include('./templates/header.php');
 
       <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
-      <button class="produto-btn-comprar cart-btn"
+      <a href="./add-carrinho.php" class="produto-btn-comprar cart-btn"
         data-id="<?= $produto['id'] ?>"
         data-nome="<?= htmlspecialchars($produto['nome']) ?>"
         data-preco="<?= $produto['preco'] ?>"
         data-tamanho="<?= $produto['tamanho'] ?>"
         data-img="<?= $produto['img'] ?>">
         Comprar Agora 🛒
+      </a>
+      <button class="btn text-light btn-fav me-1" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
+        <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
+      </button>
+      <button class="btn text-light btn-add-carrinho" data-id="<?= $produto['id'] ?>">
+        <i class="bi bi-bag-plus"></i>
       </button>
     </div>
   </div>
 </section>
 
 <script src="./js/add-card.js"></script>
+<script src="./js/add-fav.js"> </script>
 <script>
   function trocarImagem(elemento) {
     const principal = document.getElementById('imagem-principal');
