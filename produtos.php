@@ -1,5 +1,7 @@
 <?php
+
 require 'config.php';
+
 
 
 // Adiciona ao carrinho
@@ -89,10 +91,11 @@ include('./templates/header.php');
 
 <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
-<button class="produto-btn-comprar"
+<button class="produto-btn-comprar cart-btn"
   data-id="<?= $produto['id'] ?>"
   data-nome="<?= htmlspecialchars($produto['nome']) ?>"
   data-preco="<?= $produto['preco'] ?>"
+  data-tamanho="<?= $produto['tamanho'] ?>"
   data-img="<?= $produto['img'] ?>">
   Comprar Agora 🛒
 </button>

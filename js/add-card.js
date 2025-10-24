@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const botoesAdd = document.querySelectorAll('.produto-btn-comprar');
+  const botoesAdd = document.querySelectorAll('.btn-add-carrinho');
   const qtdCarrinhoEl = document.getElementById('qtd-carrinho');
   const toastContainer = document.getElementById('toast-container-novusz7');
 
