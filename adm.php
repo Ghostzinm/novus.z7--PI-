@@ -2,12 +2,16 @@
 <?php 
 session_start();
 $logado = isset($_SESSION['usuario']);
+$adm = $logado && (int)$_SESSION['usuario']['adm'] === 1;
 
 
-if ($logado && (int)$_SESSION['usuario']['adm'] != 1) {
-  echo '<script>alert("Acesso negado. Faça login como administrador."); window.location.href = "cadastro.php";</script>';
-  exit;
-}
+if (!$logado && !$adm) {
+    echo '<script>
+            alert("Acesso negado. Faça login como administrador.");
+            window.location.href = "cadastro.php";
+          </script>';
+    exit;
+} else {
 
 ?>
 
@@ -65,5 +69,7 @@ if ($logado && (int)$_SESSION['usuario']['adm'] != 1) {
   </div>
 </body>
 </html>
- 
+
+<?php
+} ?>
  
