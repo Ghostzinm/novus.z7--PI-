@@ -1,5 +1,4 @@
-
-<?php 
+<?php
 
 $nome = '';
 $email = '';
@@ -9,22 +8,15 @@ $telefone = '';
 
 if (isset($_GET['id']) && !empty('id')) {
 
-    $id = $_GET['id'];
-    $dsn = 'mysql:dbname=db_forms;host=127.0.0.1';
-    $usuario = 'root';
-    $senha = '';
+  include('./config.php');
+  $scriptSelect = "SELECT * FROM tb_cadastro WHERE id = $id";
 
-    $conn = new PDO($dsn, $usuario, $senha);
+  $dadosSelect = $conn->query($scriptSelect)->fetch();
 
-    $scriptSelect = "SELECT * FROM tb_cadastro WHERE id = $id";
-
-    $dadosSelect = $conn->query($scriptSelect)->fetch();
-
-    $nome = $dadosSelect["nome"];
-    $telefone = $dadosSelect["telefone"];
-    $usuario = $dadosSelect["usuario"];
-    $senha = $dadosSelect["senha"];
-
+  $nome = $dadosSelect["nome"];
+  $telefone = $dadosSelect["telefone"];
+  $usuario = $dadosSelect["usuario"];
+  $senha = $dadosSelect["senha"];
 };
 
 
@@ -33,24 +25,24 @@ $erros = [];
 
 ?>
 <script>
-    let campoComErro = '';
-    <?php
-    if (!empty($erros)) {
-        if (in_array("O nome é obrigatório.", $erros) || in_array("O nome deve ter pelo menos 2 letras.", $erros) || in_array("O nome deve conter apenas letras e espaços.", $erros)) {
-            echo "campoComErro = 'nome-cadastro';";
-        } elseif (in_array("O email é obrigatório.", $erros) || in_array("O email informado é inválido.", $erros)) {
-            echo "campoComErro = 'email-cadastro';";
-        } elseif (in_array("A senha é obrigatória.", $erros) || in_array("A senha deve ter pelo menos 8 caracteres.", $erros) || in_array("A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.", $erros)) {
-            echo "campoComErro = 'senha-cadastro';";
-        } elseif (in_array("As senhas não coincidem.", $erros)) {
-            echo "campoComErro = 'confirmar-senha';";
-        } elseif (in_array("O telefone é obrigatório.", $erros) || in_array("O telefone deve conter apenas números (entre 8 e 15 dígitos).", $erros)) {
-            echo "campoComErro = 'telefone-cadastro';";
-        }
+  let campoComErro = '';
+  <?php
+  if (!empty($erros)) {
+    if (in_array("O nome é obrigatório.", $erros) || in_array("O nome deve ter pelo menos 2 letras.", $erros) || in_array("O nome deve conter apenas letras e espaços.", $erros)) {
+      echo "campoComErro = 'nome-cadastro';";
+    } elseif (in_array("O email é obrigatório.", $erros) || in_array("O email informado é inválido.", $erros)) {
+      echo "campoComErro = 'email-cadastro';";
+    } elseif (in_array("A senha é obrigatória.", $erros) || in_array("A senha deve ter pelo menos 8 caracteres.", $erros) || in_array("A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.", $erros)) {
+      echo "campoComErro = 'senha-cadastro';";
+    } elseif (in_array("As senhas não coincidem.", $erros)) {
+      echo "campoComErro = 'confirmar-senha';";
+    } elseif (in_array("O telefone é obrigatório.", $erros) || in_array("O telefone deve conter apenas números (entre 8 e 15 dígitos).", $erros)) {
+      echo "campoComErro = 'telefone-cadastro';";
     }
-    ?>
-    if (campoComErro) 
-document.getElementById("<?php echo $campoComErro; ?>").focus();
+  }
+  ?>
+  if (campoComErro)
+    document.getElementById("<?php echo $campoComErro; ?>").focus();
 </script>
 
 <!DOCTYPE html>
@@ -84,11 +76,24 @@ document.getElementById("<?php echo $campoComErro; ?>").focus();
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
-          <input <?= $telefone ?> name="telefone" type="tel" id="stelefone-cadastro" placeholder="telefone" required >
-          <input <?= $senha ?> name="senha" type="password" id="senha-cadastro" placeholder="Senha" required >
-          <input <?= $cSenha ?> name="cSenha" type="password" id="confirmar-senha" placeholder="Confirme sua senha" required >
-          
-          <button type="submit">Cadastrar</button>
+          <input <?= $telefone ?> name="telefone" type="tel" id="stelefone-cadastro" placeholder="telefone" required>
+          <!-- input com botao para ver a -->
+          <div class="input-with-toggle">
+            <input name="senha" id="senha-cadastro" type="password" placeholder="Senha" required>
+            <button type="button" class="toggle-password" aria-label="Mostrar senha" data-target="senha-cadastro">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+
+          <div class="input-with-toggle">
+            <input name="cSenha" id="confirmar-senha" type="password" placeholder="Confirme sua senha" required>
+            <button type="button" class="toggle-password" aria-label="Mostrar senha" data-target="confirmar-senha">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+
+
+          <button class="btn-sub" type="submit">Cadastrar</button>
         </form>
       </main>
 
@@ -103,7 +108,12 @@ document.getElementById("<?php echo $campoComErro; ?>").focus();
           </div>
           <span>ou use seu email</span>
           <input type="email" name="email" id="email-login" placeholder="Email" required>
-          <input type="password" name="senha" id="senha-login" placeholder="Senha" required>
+          <div class="input-with-toggle">
+            <input name="senha" id="senha-entrar" type="password" placeholder="Senha" required>
+            <button type="button" class="toggle-password" aria-label="Mostrar senha" data-target="senha-entrar">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
           <div class="remember-me">
             <label class="checkbox-wrapper">
               <input type="checkbox" id="lembrar" />
@@ -116,7 +126,7 @@ document.getElementById("<?php echo $campoComErro; ?>").focus();
             </label>
           </div>
           <a href="#">Esqueceu sua senha?</a>
-          <button type="submit">Entrar</button>
+          <button class="btn-sub" type="submit">Entrar</button>
         </form>
       </main>
 
@@ -126,12 +136,12 @@ document.getElementById("<?php echo $campoComErro; ?>").focus();
           <div class="toggle-panel toggle-left">
             <h1>Bem-vindo de volta!</h1>
             <p>Entre com seus dados para continuar</p>
-            <button class="hidden" id="login">Entrar</button>
+            <button class="hidden btn-sub" id="login">Entrar</button>
           </div>
           <div class="toggle-panel toggle-right">
             <h1>Olá, visitante!</h1>
             <p>Cadastre-se para acessar todos os recursos</p>
-            <button class="hidden" id="register">Cadastrar</button>
+            <button class="hidden btn-sub" id="register">Cadastrar</button>
           </div>
         </div>
       </div>
@@ -139,15 +149,16 @@ document.getElementById("<?php echo $campoComErro; ?>").focus();
 
   </section>
 
-  <script> 
+  <script>
     const tel = document.getElementById('telefone-cadastro');
 
-    tel.addEventListener('input', function (e) {
+    tel.addEventListener('input', function(e) {
       let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
       e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
     });
   </script>
 
   <script src="./js/cadastro.js"></script>
+  <script src="./js/verSenha.js"></script>
 
   <?php include('./templates/footer.php'); ?>
