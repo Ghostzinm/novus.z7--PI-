@@ -48,17 +48,17 @@ include('./templates/header.php');
       <div class="produto-miniaturas">
         <?php for ($i = 1; $i <= 4; $i++): ?>
           <?php if (!empty($produto["img$i"])): ?>
-            <img src="img/roupas/<?= $produto["img$i"] ?>" 
-                 alt="Imagem <?= $i ?>" 
-                 onclick="trocarImagem(this)">
+            <img src="img/roupas/<?= $produto["img$i"] ?>"
+              alt="Imagem <?= $i ?>"
+              onclick="trocarImagem(this)">
           <?php endif; ?>
         <?php endfor; ?>
       </div>
 
       <div class="produto-imagem-principal">
-        <img id="imagem-principal" 
-             src="img/roupas/<?= $produto['img'] ?>" 
-             alt="<?= htmlspecialchars($produto['nome']) ?>">
+        <img id="imagem-principal"
+          src="img/roupas/<?= $produto['img'] ?>"
+          alt="<?= htmlspecialchars($produto['nome']) ?>">
       </div>
     </div>
 
@@ -70,7 +70,6 @@ include('./templates/header.php');
 
       <div class="produto-opcoes">
         <select id="tamanho" name="tamanho">
-          <option value="P">P</option>
           <option value="M">M</option>
           <option value="G">G</option>
           <option value="GG">GG</option>
@@ -79,7 +78,7 @@ include('./templates/header.php');
 
       <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
-      <button class="produto-btn-comprar cart-btn"
+      <button class="produto-btn-comprar cart-btn" id="btn-add-carrinho"
         data-id="<?= $produto['id'] ?>"
         data-nome="<?= htmlspecialchars($produto['nome']) ?>"
         data-preco="<?= $produto['preco'] ?>"

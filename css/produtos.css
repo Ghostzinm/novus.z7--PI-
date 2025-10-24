@@ -167,16 +167,9 @@
   border-radius: 10px;
   text-decoration: none;
   box-shadow: 0 6px 12px rgba(0,143,140,0.6);
-  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
   cursor: pointer;
-  user-select: none;
 }
 
-.produto-btn-comprar:hover, .produto-btn-mini-cart:hover {
-  background-color: var(--produto-secundaria);
-  transform: scale(1.02);
-  box-shadow: 0 8px 18px rgba(1,89,88,0.8);
-}
 
 /* Responsividade */
 @media (max-width: 900px) {
