@@ -41,7 +41,6 @@ $usuarioId = $_SESSION['usuario']['id'] ?? null;
 $produto['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
 
 include('./templates/header.php');
-
 ?>
 
 <link rel="stylesheet" href="./css/produtos.css">
@@ -55,16 +54,16 @@ include('./templates/header.php');
         <?php for ($i = 1; $i <= 4; $i++): ?>
           <?php if (!empty($produto["img$i"])): ?>
             <img src="img/roupas/<?= $produto["img$i"] ?>"
-              alt="Imagem <?= $i ?>"
-              onclick="trocarImagem(this)">
+                 alt="Imagem <?= $i ?>"
+                 onclick="trocarImagem(this)">
           <?php endif; ?>
         <?php endfor; ?>
       </div>
 
       <div class="produto-imagem-principal">
         <img id="imagem-principal"
-          src="img/roupas/<?= $produto['img'] ?>"
-          alt="<?= htmlspecialchars($produto['nome']) ?>">
+             src="img/roupas/<?= $produto['img'] ?>"
+             alt="<?= htmlspecialchars($produto['nome']) ?>">
       </div>
     </div>
 
@@ -84,28 +83,34 @@ include('./templates/header.php');
 
       <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
-      <a href="./add-carrinho.php" class="produto-btn-comprar cart-btn"
-        data-id="<?= $produto['id'] ?>"
-        data-nome="<?= htmlspecialchars($produto['nome']) ?>"
-        data-preco="<?= $produto['preco'] ?>"
-        data-tamanho="<?= $produto['tamanho'] ?>"
-        data-img="<?= $produto['img'] ?>">
+      <a href="./add-carrinho.php" 
+         class="btn produto-btn-comprar cart-btn"
+         data-id="<?= $produto['id'] ?>"
+         data-nome="<?= htmlspecialchars($produto['nome']) ?>"
+         data-preco="<?= $produto['preco'] ?>"
+         data-tamanho="<?= $produto['tamanho'] ?>"
+         data-img="<?= $produto['img'] ?>">
         Comprar Agora 🛒
       </a>
-      <button class="btn text-light btn-fav me-1" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
-        <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
-      </button>
-      <button class="btn text-light btn-add-carrinho" id="add-card" data-id="<?= $produto['id'] ?>">
-        <i class="bi bi-bag-plus"></i>
-      </button>
+
+      <div class="produto-buttons">
+        <button class="btn btn-fav text-light" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
+          <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
+        </button>
+
+        <button class="btn btn-add-carrinho text-light" data-id="<?= $produto['id'] ?>">
+          <i class="bi bi-bag-plus"></i>
+        </button>
+      </div>
     </div>
+
   </div>
 </section>
 
 <div id="toast-container-novusz7"></div>
 
 <script src="./js/add-card.js"></script>
-<script src="./js/add-fav.js"> </script>
+<script src="./js/add-fav.js"></script>
 <script>
   function trocarImagem(elemento) {
     const principal = document.getElementById('imagem-principal');
