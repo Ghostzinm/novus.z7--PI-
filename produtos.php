@@ -37,10 +37,11 @@ if (!$produto) {
 
 $usuarioId = $_SESSION['usuario']['id'] ?? null;
 
-foreach ($produtos as $key => $produto) {
-    $produtos[$key]['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
-}
+// Marca se o produto é favorito ou não
+$produto['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
+
 include('./templates/header.php');
+
 ?>
 
 <link rel="stylesheet" href="./css/produtos.css">
