@@ -80,3 +80,10 @@ CREATE TABLE tb_carrinho (
     FOREIGN KEY (id_usuario) REFERENCES tb_cadastro(id),
     FOREIGN KEY (id_produto) REFERENCES tb_produtos(id)
 );
+CREATE TABLE tb_estoque (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT,
+    quantidade_disponivel INT NOT NULL,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_produto) REFERENCES tb_produtos(id)
+);

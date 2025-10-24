@@ -2,25 +2,21 @@
 session_start();
 require 'config.php';
 
-// garante sessão
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
 }
 
-// verifica se recebeu o POST
 if (isset($_POST['id'])) {
-    $id = (int) $_POST['id'];
+    $id = (int)$_POST['id'];
     $tamanho = $_POST['tamanho'] ?? 'Único';
-    $qtd = (int) ($_POST['quantidade'] ?? 1);
+    $qtd = max(1, (int)($_POST['quantidade'] ?? 1));
 
-    // busca produto no banco
     $stmt = $conn->prepare("SELECT id, nome, preco, img FROM tb_produtos WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $produto = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($produto) {
-        // chave única para id + tamanho
         $chave = $produto['id'] . '_' . $tamanho;
 
         if (isset($_SESSION['carrinho'][$chave])) {
@@ -36,7 +32,6 @@ if (isset($_POST['id'])) {
             ];
         }
 
-        // calcula quantidade total de produtos
         $totalItens = 0;
         foreach ($_SESSION['carrinho'] as $item) {
             $totalItens += $item['quantidade'];
@@ -53,4 +48,3 @@ if (isset($_POST['id'])) {
 } else {
     echo json_encode(["success" => false, "msg" => "Nenhum produto enviado."]);
 }
-?>

@@ -15,9 +15,14 @@ if (isset($_GET['acao']) && $_GET['acao'] === 'limpar') {
 // remover item
 if (isset($_GET['acao']) && $_GET['acao'] === 'remover' && isset($_GET['id'])) {
     $id = (int) $_GET['id'];
-    if (isset($_SESSION['carrinho'][$id])) {
-        unset($_SESSION['carrinho'][$id]);
+
+    foreach ($_SESSION['carrinho'] as $key => $item) {
+        if ($item['id'] == $id) {
+            unset($_SESSION['carrinho'][$key]);
+            break;
+        }
     }
+
     header("Location: carrinho.php");
     exit;
 }

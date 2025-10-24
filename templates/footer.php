@@ -14,10 +14,8 @@
         <div class="footer-col">
             <h3>Navegação</h3>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Catálogo</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="./index.php">Home</a></li>
+                <li><a href="./sobre.php">Sobre</a></li>
             </ul>
         </div>
 

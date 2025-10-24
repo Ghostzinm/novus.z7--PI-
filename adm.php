@@ -35,9 +35,18 @@ if ($logado && (int)$_SESSION['usuario']['adm'] != 1) {
  
       <label for="img4">Imagem 4:</label>
       <input type="file" id="img4" accept="image/*" name="img4">
- 
+
       <label for="img5">Imagem 5:</label>
       <input type="file" id="img5" accept="image/*" name="img5">
+ 
+      <textarea name="desc" placeholder="Descrição da camisa" required></textarea>
+
+<label for="estoque">Quantidade em estoque:</label>
+<input type="number" id="estoque" name="estoque" placeholder="Ex: 15" min="0" required>
+
+
+    
+
  
       <input name="nomeCamisa" type="text" placeholder="Nome da camisa" required>
       <select name="tipo" required>

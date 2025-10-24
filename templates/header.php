@@ -49,9 +49,7 @@ $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario'
       <nav class="nav">
         <ul>
           <li><a href="./index.php">Home</a></li>
-          <li><a href="#">Catálogo</a></li>
           <li><a href="./sobre.php">Sobre</a></li>
-          <li><a href="#">Contato</a></li>
           <?php 
           if ($adm){
             echo '<li><a href="./adm.php">Admin</a></li>';
@@ -87,8 +85,8 @@ $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario'
       <?php if ($logado): ?>
         <a href="./form-logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
         <a href="./perfil.php"><i class="bi bi-person-circle"></i> Olá, <?php echo ($_SESSION['usuario']['nome']); ?></a>
-        <?php else: ?>
-          <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
+      <?php else: ?>
+        <a href="./cadastro.php"><i class="bi bi-person-fill"></i> Login</a>
       <?php endif; ?>
       <a href="./index.php">Home</a>
       <a href="#">Catálogo</a>
@@ -104,8 +102,6 @@ $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario'
       menu.classList.toggle('show');
     }
   </script>
-
-
 
 </body>
 

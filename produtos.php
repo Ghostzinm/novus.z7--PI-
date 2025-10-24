@@ -1,5 +1,8 @@
 <?php
+
 require 'config.php';
+
+
 
 // Adiciona ao carrinho
 if (isset($_POST['id'])) {
@@ -35,6 +38,11 @@ if (!$produto) {
   die('Produto não encontrado.');
 }
 
+$usuarioId = $_SESSION['usuario']['id'] ?? null;
+
+// Marca se o produto é favorito ou não
+$produto['favorito'] = $usuarioId ? Favoritos::isFavorito($conn, $produto['id'], $usuarioId) : false;
+
 include('./templates/header.php');
 ?>
 
@@ -66,7 +74,7 @@ include('./templates/header.php');
     <div class="produto-info">
       <h1 class="produto-nome"><?= htmlspecialchars($produto['nome']) ?></h1>
       <p class="produto-preco">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-      <p class="produto-frete">🚚 Frete Grátis para todo o Brasil</p>
+      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
       <div class="produto-opcoes">
         <select id="tamanho" name="tamanho">
@@ -74,23 +82,39 @@ include('./templates/header.php');
           <option value="G">G</option>
           <option value="GG">GG</option>
         </select>
+        <div class="produto-quantidade">
+          <label for="quantidade">Quantidade:</label>
+          <input type="number" id="quantidade" name="quantidade" value="1" min="1" max="20">
+        </div>
       </div>
 
-      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
-      <button class="produto-btn-comprar cart-btn" id="btn-add-carrinho"
-        data-id="<?= $produto['id'] ?>"
-        data-nome="<?= htmlspecialchars($produto['nome']) ?>"
-        data-preco="<?= $produto['preco'] ?>"
-        data-tamanho="<?= $produto['tamanho'] ?>"
-        data-img="<?= $produto['img'] ?>">
-        Comprar Agora 🛒
-      </button>
+      <div class="produto-buttons">
+        <button type="button"
+          class="btn produto-btn-comprar btn-add-carrinho"
+          data-id="<?= $produto['id'] ?>"
+          data-tamanho="<?= $produto['tamanho'] ?>"
+          data-quantidade="1">
+          Comprar Agora 🛒
+        </button>
+
+        <button class="btn btn-fav text-light" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
+          <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
+        </button>
+
+        <button class="btn btn-add-carrinho text-light" data-id="<?= $produto['id'] ?>">
+          <i class="bi bi-bag-plus"></i>
+        </button>
+      </div>
     </div>
+
   </div>
 </section>
 
+<div id="toast-container-novusz7"></div>
+
 <script src="./js/add-card.js"></script>
+<script src="./js/add-fav.js"></script>
 <script>
   function trocarImagem(elemento) {
     const principal = document.getElementById('imagem-principal');
