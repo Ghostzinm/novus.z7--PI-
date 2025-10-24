@@ -44,7 +44,7 @@ if ($logado && (int)$_SESSION['usuario']['adm'] != 1) {
 <label for="estoque">Quantidade em estoque:</label>
 <input type="number" id="estoque" name="estoque" placeholder="Ex: 15" min="0" required>
 
-<button type="submit">Adicionar Camisa</button>
+
     
 
  
