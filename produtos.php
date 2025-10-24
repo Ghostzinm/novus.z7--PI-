@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 
+
 // Adiciona ao carrinho
 if (isset($_POST['id'])) {
   $id = $_POST['id'];
@@ -34,6 +35,9 @@ $produto = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$produto) {
   die('Produto não encontrado.');
 }
+
+
+
 
 include('./templates/header.php');
 ?>
@@ -69,24 +73,30 @@ include('./templates/header.php');
       <p class="produto-frete">🚚 Frete Grátis para todo o Brasil</p>
 
       <div class="produto-opcoes">
-        <select id="tamanho" name="tamanho">
-          <option value="P">P</option>
-          <option value="M">M</option>
-          <option value="G">G</option>
-          <option value="GG">GG</option>
-        </select>
-      </div>
+  <label for="tamanho">Tamanho:</label>
+  <select id="tamanho" name="tamanho">
+    <option value="P">P</option>
+    <option value="M">M</option>
+    <option value="G">G</option>
+    <option value="GG">GG</option>
+  </select>
+</div>
 
-      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
+<div class="produto-quantidade">
+  <label for="quantidade">Quantidade:</label>
+  <input type="number" id="quantidade" name="quantidade" value="1" min="1" max="20">
+</div>
 
-      <button class="produto-btn-comprar cart-btn"
-        data-id="<?= $produto['id'] ?>"
-        data-nome="<?= htmlspecialchars($produto['nome']) ?>"
-        data-preco="<?= $produto['preco'] ?>"
-        data-tamanho="<?= $produto['tamanho'] ?>"
-        data-img="<?= $produto['img'] ?>">
-        Comprar Agora 🛒
-      </button>
+<p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
+
+<button class="produto-btn-comprar"
+  data-id="<?= $produto['id'] ?>"
+  data-nome="<?= htmlspecialchars($produto['nome']) ?>"
+  data-preco="<?= $produto['preco'] ?>"
+  data-img="<?= $produto['img'] ?>">
+  Comprar Agora 🛒
+</button>
+
     </div>
   </div>
 </section>
