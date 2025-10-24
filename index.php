@@ -52,9 +52,17 @@ foreach ($produtos as $key => $produto) {
     <?php if (!empty($produtos)) :
       foreach ($produtos as $produto) :
         $inativo = ((int)$produto['ativo'] === 0);
+        $semEstoque = ((int)($produto['quantidade_disponivel'] ?? 0) === 0);
+
+        // Se produto inativo e não é ADM, não mostra
         if ($inativo && !$adm) continue;
+
+        // Determina se o card deve ficar desbotado
+        $desbotado = $inativo || $semEstoque;
     ?>
-        <figure class="product card bg-dark text-light p-2 position-relative">
+        <figure class="product card bg-dark text-light p-2 position-relative"
+                style="<?= $desbotado ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
+
           <?php if ($adm) { ?>
             <div class="bnt-adm position-absolute end-0 top-0 m-2">
               <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>" class="text-danger" title="Excluir produto">
@@ -72,12 +80,9 @@ foreach ($produtos as $key => $produto) {
           <?php } ?>
 
           <img src="./img/roupas/<?= htmlspecialchars($produto['img']) ?>"
-            class="card-img-top" alt="<?= htmlspecialchars($produto['nome']) ?>"
-            style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
+               class="card-img-top" alt="<?= htmlspecialchars($produto['nome']) ?>">
 
-          <figcaption class="card-body"
-            style="<?= $inativo && $adm ? 'opacity: 0.5; filter: grayscale(50%);' : '' ?>">
-
+          <figcaption class="card-body">
             <h3 class="card-title text-uppercase"><?= htmlspecialchars($produto['nome']) ?></h3>
             <p class="card-text"><?= htmlspecialchars($produto['descricao']) ?></p>
             <div class="preco text-danger fw-bold mb-2">
@@ -85,7 +90,6 @@ foreach ($produtos as $key => $produto) {
             </div>
             <p class="size mb-3">Tamanhos: <?= htmlspecialchars($produto['tamanho']) ?></p>
 
-            <!-- Mostra estoque apenas para o ADM -->
             <?php if ($adm) { ?>
               <p class="text-info mb-2">
                 Quantidade em estoque: 
@@ -93,8 +97,12 @@ foreach ($produtos as $key => $produto) {
               </p>
             <?php } ?>
 
-            <?php if ($inativo && $adm) { ?>
-              <p class="Removido badge bg-danger text-uppercase fw-bold">Removido</p>
+            <!-- Badge REMOVIDO e botão comprar -->
+            <?php if ($desbotado) { ?>
+              <p class="Removido badge bg-danger text-uppercase fw-bold">sem estoque</p>
+              <button class="btn btn-outline-light flex-grow-1 me-1" disabled>
+                Comprar <i class="bi bi-cart-plus"></i>
+              </button>
             <?php } else { ?>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
