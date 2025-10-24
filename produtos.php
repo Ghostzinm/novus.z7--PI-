@@ -54,16 +54,16 @@ include('./templates/header.php');
         <?php for ($i = 1; $i <= 4; $i++): ?>
           <?php if (!empty($produto["img$i"])): ?>
             <img src="img/roupas/<?= $produto["img$i"] ?>"
-                 alt="Imagem <?= $i ?>"
-                 onclick="trocarImagem(this)">
+              alt="Imagem <?= $i ?>"
+              onclick="trocarImagem(this)">
           <?php endif; ?>
         <?php endfor; ?>
       </div>
 
       <div class="produto-imagem-principal">
         <img id="imagem-principal"
-             src="img/roupas/<?= $produto['img'] ?>"
-             alt="<?= htmlspecialchars($produto['nome']) ?>">
+          src="img/roupas/<?= $produto['img'] ?>"
+          alt="<?= htmlspecialchars($produto['nome']) ?>">
       </div>
     </div>
 
@@ -71,7 +71,7 @@ include('./templates/header.php');
     <div class="produto-info">
       <h1 class="produto-nome"><?= htmlspecialchars($produto['nome']) ?></h1>
       <p class="produto-preco">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-      <p class="produto-frete">🚚 Frete Grátis para todo o Brasil</p>
+      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
 
       <div class="produto-opcoes">
         <select id="tamanho" name="tamanho">
@@ -79,21 +79,24 @@ include('./templates/header.php');
           <option value="G">G</option>
           <option value="GG">GG</option>
         </select>
+        <div class="produto-quantidade">
+          <label for="quantidade">Quantidade:</label>
+          <input type="number" id="quantidade" name="quantidade" value="1" min="1" max="20">
+        </div>
       </div>
 
-      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
-
-      <a href="./add-carrinho.php" 
-         class="btn produto-btn-comprar cart-btn"
-         data-id="<?= $produto['id'] ?>"
-         data-nome="<?= htmlspecialchars($produto['nome']) ?>"
-         data-preco="<?= $produto['preco'] ?>"
-         data-tamanho="<?= $produto['tamanho'] ?>"
-         data-img="<?= $produto['img'] ?>">
-        Comprar Agora 🛒
-      </a>
 
       <div class="produto-buttons">
+        <a href="./add-carrinho.php"
+          class="btn produto-btn-comprar cart-btn"
+          data-id="<?= $produto['id'] ?>"
+          data-nome="<?= htmlspecialchars($produto['nome']) ?>"
+          data-preco="<?= $produto['preco'] ?>"
+          data-tamanho="<?= $produto['tamanho'] ?>"
+          data-img="<?= $produto['img'] ?>">
+          Comprar Agora 🛒
+        </a>
+
         <button class="btn btn-fav text-light" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
           <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
         </button>
