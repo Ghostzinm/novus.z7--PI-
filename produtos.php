@@ -87,15 +87,13 @@ include('./templates/header.php');
 
 
       <div class="produto-buttons">
-        <a href="./add-carrinho.php"
-          class="btn produto-btn-comprar cart-btn"
+        <button type="button"
+          class="btn produto-btn-comprar btn-add-carrinho"
           data-id="<?= $produto['id'] ?>"
-          data-nome="<?= htmlspecialchars($produto['nome']) ?>"
-          data-preco="<?= $produto['preco'] ?>"
           data-tamanho="<?= $produto['tamanho'] ?>"
-          data-img="<?= $produto['img'] ?>">
+          data-quantidade="1">
           Comprar Agora 🛒
-        </a>
+        </button>
 
         <button class="btn btn-fav text-light" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
           <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
