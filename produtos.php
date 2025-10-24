@@ -76,7 +76,6 @@ include('./templates/header.php');
 
       <div class="produto-opcoes">
         <select id="tamanho" name="tamanho">
-          <option value="P">P</option>
           <option value="M">M</option>
           <option value="G">G</option>
           <option value="GG">GG</option>
@@ -96,12 +95,14 @@ include('./templates/header.php');
       <button class="btn text-light btn-fav me-1" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
         <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>
       </button>
-      <button class="btn text-light btn-add-carrinho" data-id="<?= $produto['id'] ?>">
+      <button class="btn text-light btn-add-carrinho" id="add-card" data-id="<?= $produto['id'] ?>">
         <i class="bi bi-bag-plus"></i>
       </button>
     </div>
   </div>
 </section>
+
+<div id="toast-container-novusz7"></div>
 
 <script src="./js/add-card.js"></script>
 <script src="./js/add-fav.js"> </script>
