@@ -49,9 +49,7 @@ $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario'
       <nav class="nav">
         <ul>
           <li><a href="./index.php">Home</a></li>
-          <li><a href="#">Catálogo</a></li>
           <li><a href="./sobre.php">Sobre</a></li>
-          <li><a href="#">Contato</a></li>
           <?php 
           if ($adm){
             echo '<li><a href="./adm.php">Admin</a></li>';
