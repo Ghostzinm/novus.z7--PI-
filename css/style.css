@@ -5,7 +5,7 @@
 
 :root {
   --primary-color: #D8FFDB;
-  --cor-secundaria:  #023535;
+  --cor-secundaria: #023535;
   --cor-terciaria: #C7FFED;
   --cor-comple: #00B3B0;
   --cor-hover: #FF4F6D;
@@ -13,23 +13,30 @@
 
 body {
   margin: 0;
-  background-color: var(--primary-color);
+  background-color: #000 !important; /* Sobrescreve a cor original */
   font-family: Arial, sans-serif;
-  color: var(--cor-terciaria);
+  color: #fff; /* Texto branco para fundo escuro */
+  overflow-x: hidden;
 }
 
-/* carrosel */
+/* Cabeçalhos */
+h1 {
+  font-weight: 700;
+  text-shadow: 0 0 10px #0ff, 0 0 25px #0ff;
+}
+
+/* Carrossel */
 .c-img {
   height: 500px;
   object-fit: cover;
 }
 
+/* Container de produtos */
 .container-produtos {
-  background-color: var(--cor-terciaria);
+  background-color: #000; 
 }
 
-
-/* PRODUTOS */
+/* Grid de produtos */
 .container {
   width: 90%;
   margin: auto;
@@ -39,44 +46,55 @@ body {
   padding: 40px 0;
 }
 
+/* Produto individual */
 .product {
   background-color: var(--cor-secundaria);
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15); /* Efeito neon azul */
+  width: 18rem
 }
 
+/* Hover no produto */
 .product:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 25px rgba(255, 79, 109, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25); /* Glow mais intenso */
 }
 
-.product img {
+/* Imagem do produto */
+.product img,
+.card-img-top {
   width: 100%;
-  height: 220px;
+  height: 230px;
   object-fit: cover;
   border-radius: 10px;
 }
 
-.product h3, p {
+/* Título e texto */
+.product h3,
+.product p {
   color: var(--cor-terciaria);
   margin: 12px 0 5px;
   font-size: 18px;
 }
 
+/* Preço */
 .preco {
   font-size: 20px;
   font-weight: bold;
   color: var(--cor-hover);
 }
 
+/* Tamanho */
 .size {
   font-size: 13px;
   margin: 8px 0;
   color: #aaa;
 }
 
+/* Botão de compra */
 .buy-btn {
   display: inline-block;
   background-color: var(--cor-comple);
@@ -91,3 +109,102 @@ body {
 .buy-btn:hover {
   background-color: var(--cor-hover);
 }
+
+
+/* botão ADM */
+.bnt-adm {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  background: rgb(0, 0, 0);
+  padding: 4px 8px;
+  border-radius: 8px;
+  z-index: 10;
+  align-items: center;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.bnt-adm a {
+  color: #ff4f6d;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bnt-adm a:nth-child(2) {
+  color: #4caf50;
+}
+
+.bnt-adm a:hover {
+  color: var(--cor-hover);
+}
+
+.removido {
+  text-decoration: line-through;
+  color: red;
+  font-weight: bold;
+  position: absolute; 
+  top: 5px; 
+  left: 50%;
+}
+
+/* tost */
+
+#toast-container-novusz7 {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  pointer-events: none;
+}
+
+/* Toast único da marca (evita conflito com .toast do bootstrap) */
+.novusz7-toast {
+  pointer-events: auto; /* ativa o click no botão de fechar*/
+  background: var(--cor-secundaria);
+  border: 1px solid rgba(255,49,49,0.14);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  min-width: 220px;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ícone opcional (pode usar <span> dentro do toast) */
+.novusz7-toast .icon {
+  font-size: 18px;
+  color: #a6ff31;
+}
+
+/* estado visível */
+.novusz7-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* botão fechar (pequeno) */
+.novusz7-toast .close-small {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+

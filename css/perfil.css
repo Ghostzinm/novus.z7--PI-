@@ -116,3 +116,14 @@
 
 
  }
+ .bungas {
+    display: flex;
+    justify-content: right;
+    font-size: 30px;
+
+  
+ }
+ .perfil-section a {
+   color: #295329;
+   text-decoration: none;
+ }

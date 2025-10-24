@@ -1,5 +1,4 @@
 <?php
-
 $logado = isset($_SESSION['usuario']);
 require_once 'config.php';
 require_once 'templates/header.php';
@@ -13,14 +12,33 @@ $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
 $stmt->execute();
 $endereco = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$sqlUser = "SELECT * FROM tb_cadastro WHERE id = :id_usuario";
+$stmtUser = $conn->prepare($sqlUser);
+$stmtUser->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+$stmtUser->execute();
+$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
 if (!$logado) {
-    header('Location: cadastro.php');
-    exit;
+  header('Location: cadastro.php');
+  exit;
 }
+
+
+
+$stmt = $conn->prepare("
+    SELECT p.* 
+    FROM tb_produtos p
+    JOIN tb_favoritos f ON p.id = f.id_produto
+    WHERE f.id_usuario = ?
+");
+$stmt->execute([$_SESSION['usuario']['id']]);
+$produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Meu Perfil</title>
@@ -34,15 +52,16 @@ if (!$logado) {
     }
   </style>
 </head>
+
 <body>
   <div class="perfil-container ">
 
     <!-- Header -->
     <div class="perfil-header">
 
-       <a href="./alterPerfil.php"><i class=" count bi bi-pencil-fill"></i></a>
-         <img src="./img/roupas/68e65e6bb6fa2.jpg" alt="Avatar">
-        
+      <a href="./alterPerfil.php"><i class=" count bi bi-pencil-fill"></i></a>
+      <img src="./img/roupas/68e65e6bb6fa2.jpg" alt="Avatar">
+
       <div>
         <h1><?= htmlspecialchars($_SESSION['usuario']['nome']) ?></h1>
         <p><?= htmlspecialchars($_SESSION['usuario']['email']) ?></p>
@@ -59,20 +78,37 @@ if (!$logado) {
     </div>
 
     <!-- Favoritos -->
-    <div class="perfil-section">
-      <h2>⭐ Favoritos</h2>
-      <ul>
-        <li>Camisa Street Art - R$ 139,90</li>
-        <li>Camisa Urban Neon - R$ 149,90</li>
-      </ul>
-    </div>
+  <div class="perfil-section">
+  <h2>❤️ Meus Favoritos</h2> 
+  <a href="./exibir-favorito.php"><i class=" bungas bi bi-list"></i></a>
+
+  <?php if (!empty($produtosFavoritos)): ?>
+    <ul>
+      <?php 
+        // Limita o loop ao tamanho do array ou 3, o que for menor
+        $total = min(count($produtosFavoritos), 3);
+        for ($i = 0; $i < $total; $i++): 
+          $produto = $produtosFavoritos[$i];
+      ?>
+        <li>
+          <?= htmlspecialchars($produto['nome']) ?> -
+          R$ <?= number_format($produto['preco'], 2, ',', '.') ?> -
+          <strong>❤️ Favoritado</strong>
+        </li>
+      <?php endfor; ?>
+    </ul>
+  <?php else: ?>
+    <p>Você ainda não favoritou nenhum produto.</p>
+  <?php endif; ?>
+</div>
+
 
     <!-- Dados -->
     <div class="perfil-section">
       <h2>👤 Meus Dados</h2>
       <p><strong>Nome:</strong> <?= htmlspecialchars($_SESSION['usuario']['nome']) ?></p>
       <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['usuario']['email']) ?></p>
-      <p><strong>Telefone:</strong> (11) 99999-9999</p>
+      <p><strong>Telefone:</strong><?= htmlspecialchars($user['telefone']) ?></p>
     </div>
 
     <!-- Endereço -->
@@ -93,6 +129,7 @@ if (!$logado) {
 
   </div>
 </body>
+
 </html>
 
 <?php require_once 'templates/footer.php'; ?>

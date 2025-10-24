@@ -1,19 +1,39 @@
 :root {
-  --preto: #0f0f0f;
-  --cor-comple: #00B3B0;
-  --cor-hover: #FF4F6D;
-  --cor-perfil-start: #6a11cb;
-  --cor-perfil-end: #2575fc;
-  --cor-fundo: #111;
-  --cor-texto-claro: #fff;
+  /* === Cores principais === */
+  --color-bg: #111;
+  --color-bg-card: #0f0f0f;
+  --color-primary: #00b3b0;
+  --color-primary-dark: #008985;
+  --color-secondary: #ff4f6d;
+  --color-secondary-dark: #e04260;
+  --color-text: #fff;
+  --color-text-muted: #aaa;
+  --color-border: #222;
+
+  /* === Efeitos === */
+  --shadow-neon: 0 0 8px rgba(0, 179, 176, 0.5);
+  --transition-default: all 0.3s ease;
+
+  /* === Botões === */
+  --btn-color: var(--color-primary);
+  --btn-text: var(--color-text);
+  --checkbox-color: var(--color-primary);
+  --checkbox-shadow: 0 0 10px rgba(0, 179, 176, 0.5);
+  --checkbox-border: 2px solid var(--color-primary);
+  --text-light: var(--color-text);
+  --bg-dark: var(--color-bg);
+
+  /* === Gradientes e especiais === */
+  --perfil-gradient-start: #6a11cb;
+  --perfil-gradient-end: #2575fc;
 }
 
-/* Header desktop */
+/* === HEADER === */
 .header {
   width: 100%;
-  background: var(--preto);
-  color: var(--cor-texto-claro);
-  border-bottom: 2px solid #111;
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -28,15 +48,17 @@
   justify-content: space-between;
 }
 
+/* === LOGO === */
 .header .logo {
   font-size: 22px;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--cor-texto-claro);
-  text-shadow: 0 0 8px #0ff, 0 0 14px #0ff;
+  color: var(--color-text);
+  text-shadow: 0 0 8px var(--color-primary), 0 0 14px var(--color-primary);
 }
 
+/* === NAVIGATION === */
 .nav ul {
   display: flex;
   gap: 25px;
@@ -46,18 +68,18 @@
 }
 
 .nav ul li a {
-  color: #aaa;
+  color: var(--color-text-muted);
   text-decoration: none;
   font-size: 14px;
-  transition: 0.3s;
+  transition: var(--transition-default);
 }
 
 .nav ul li a:hover {
-  color: var(--cor-texto-claro);
-  text-shadow: 0 0 6px #0ff, 0 0 10px #0ff;
+  color: var(--color-text);
+  text-shadow: 0 0 6px var(--color-primary), 0 0 10px var(--color-primary);
 }
 
-/* Header right (botões) */
+/* === HEADER RIGHT === */
 .header-right {
   display: flex;
   align-items: center;
@@ -65,7 +87,7 @@
   position: relative;
 }
 
-/* Botões padrão */
+/* === BOTÕES === */
 .btn-action,
 .btn-icon {
   display: inline-flex;
@@ -77,97 +99,88 @@
   text-decoration: none;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-default);
   user-select: none;
   border: none;
-  color: var(--cor-texto-claro);
-  background: var(--cor-comple);
-  box-shadow: 0 0 8px rgba(0, 179, 176, 0.5);
+  color: var(--btn-text);
+  background: var(--btn-color);
+  box-shadow: var(--shadow-neon);
 }
 
 .btn-action:hover,
 .btn-icon:hover {
-  background: var(--cor-hover);
-  box-shadow: 0 0 12px var(--cor-hover);
+  background: var(--color-secondary);
+  box-shadow: 0 0 12px var(--color-secondary);
   transform: translateY(-2px);
 }
 
-/* Botão perfil - degrade roxo/azul */
+/* === BOTÕES ESPECIAIS === */
 .btn-action.perfil {
-  background: linear-gradient(135deg, var(--cor-perfil-start), var(--cor-perfil-end));
+  background: linear-gradient(135deg, var(--perfil-gradient-start), var(--perfil-gradient-end));
   box-shadow: 0 0 10px rgba(106, 17, 203, 0.7);
 }
-
 .btn-action.perfil:hover {
   box-shadow: 0 0 15px rgba(38, 117, 252, 0.9);
-  transform: translateY(-2px);
 }
 
-/* Botão logout - vermelho suave */
 .btn-action.logout {
-  background: #ff4f6d;
-  box-shadow: 0 0 10px #ff4f6dcc;
+  margin-top: auto;
+  background: var(--color-secondary);
+  box-shadow: 0 0 10px var(--color-secondary);
 }
-
 .btn-action.logout:hover {
-  background: #e04260;
-  box-shadow: 0 0 15px #e04260cc;
-  transform: translateY(-2px);
+  background: var(--color-secondary-dark);
+  box-shadow: 0 0 15px var(--color-secondary-dark);
 }
 
-/* Botão login */
 .btn-action.login {
-  background: var(--cor-comple);
-  box-shadow: 0 0 8px rgba(0, 179, 176, 0.5);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-neon);
 }
-
 .btn-action.login:hover {
-  background: var(--cor-hover);
-  box-shadow: 0 0 12px var(--cor-hover);
-  transform: translateY(-2px);
+  background: var(--color-secondary);
+  box-shadow: 0 0 12px var(--color-secondary);
 }
 
-/* Ícone carrinho */
+/* === CARRINHO === */
 .btn-icon {
   position: relative;
   font-size: 18px;
-  background: var(--cor-comple);
 }
 
 .cart-count {
   position: absolute;
   top: -6px;
   right: -8px;
-  background: #ff4f6d;
-  color: #fff;
+  background: var(--color-secondary);
+  color: var(--color-text);
   font-size: 10px;
   padding: 2px 6px;
   border-radius: 50%;
   font-weight: 700;
 }
 
-/* Mensagem de boas-vindas */
+/* === MENSAGEM DE BOAS-VINDAS === */
 .welcome-msg {
   font-weight: 600;
   font-size: 14px;
-  color: var(--cor-texto-claro);
+  color: var(--color-text);
 }
 
-/* Botão mobile */
+/* === MENU MOBILE === */
 .menu-btn {
   display: none;
   font-size: 28px;
   cursor: pointer;
-  color: #aaa;
+  color: var(--color-text-muted);
   user-select: none;
 }
 
-/* === MENU MOBILE === */
 .mobile-nav {
   display: none;
   flex-direction: column;
-  background: var(--cor-fundo);
-  border-top: 1px solid #222;
+  background: var(--bg-dark);
+  border-top: 1px solid var(--color-border);
   width: 100%;
   padding: 10px 0;
   gap: 0;
@@ -183,28 +196,27 @@
 
 .mobile-nav a {
   padding: 14px 24px;
-  color: #ccc;
+  color: var(--color-text-muted);
   text-decoration: none;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--color-border);
   font-weight: 600;
   font-size: 16px;
-  transition: 0.3s;
+  transition: var(--transition-default);
 }
 
 .mobile-nav a:hover {
-  background: var(--cor-comple);
+  background: var(--color-primary);
   color: #000;
   text-shadow: none;
   border-bottom: none;
 }
 
-/* RESPONSIVO */
+/* === RESPONSIVO === */
 @media (max-width: 768px) {
   .nav,
   .header-right {
     display: none !important;
   }
-
   .menu-btn {
     display: block;
   }

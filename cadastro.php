@@ -5,6 +5,7 @@ $nome = '';
 $email = '';
 $senha = '';
 $cSenha = '';
+$telefone = '';
 
 if (isset($_GET['id']) && !empty('id')) {
 
@@ -27,7 +28,30 @@ if (isset($_GET['id']) && !empty('id')) {
 };
 
 
+
+$erros = [];
+
 ?>
+<script>
+    let campoComErro = '';
+    <?php
+    if (!empty($erros)) {
+        if (in_array("O nome é obrigatório.", $erros) || in_array("O nome deve ter pelo menos 2 letras.", $erros) || in_array("O nome deve conter apenas letras e espaços.", $erros)) {
+            echo "campoComErro = 'nome-cadastro';";
+        } elseif (in_array("O email é obrigatório.", $erros) || in_array("O email informado é inválido.", $erros)) {
+            echo "campoComErro = 'email-cadastro';";
+        } elseif (in_array("A senha é obrigatória.", $erros) || in_array("A senha deve ter pelo menos 8 caracteres.", $erros) || in_array("A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.", $erros)) {
+            echo "campoComErro = 'senha-cadastro';";
+        } elseif (in_array("As senhas não coincidem.", $erros)) {
+            echo "campoComErro = 'confirmar-senha';";
+        } elseif (in_array("O telefone é obrigatório.", $erros) || in_array("O telefone deve conter apenas números (entre 8 e 15 dígitos).", $erros)) {
+            echo "campoComErro = 'telefone-cadastro';";
+        }
+    }
+    ?>
+    if (campoComErro) 
+document.getElementById("<?php echo $campoComErro; ?>").focus();
+</script>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -60,8 +84,10 @@ if (isset($_GET['id']) && !empty('id')) {
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
+          <input <?= $telefone ?> name="telefone" type="tel" id="stelefone-cadastro" placeholder="telefone" required >
           <input <?= $senha ?> name="senha" type="password" id="senha-cadastro" placeholder="Senha" required >
           <input <?= $cSenha ?> name="cSenha" type="password" id="confirmar-senha" placeholder="Confirme sua senha" required >
+          
           <button type="submit">Cadastrar</button>
         </form>
       </main>
@@ -112,6 +138,15 @@ if (isset($_GET['id']) && !empty('id')) {
     </div>
 
   </section>
+
+  <script> 
+    const tel = document.getElementById('telefone-cadastro');
+
+    tel.addEventListener('input', function (e) {
+      let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+  </script>
 
   <script src="./js/cadastro.js"></script>
 

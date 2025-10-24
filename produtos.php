@@ -1,7 +1,7 @@
 <?php
+require 'config.php';
 
-
-
+// Adiciona ao carrinho
 if (isset($_POST['id'])) {
   $id = $_POST['id'];
   $nome = $_POST['nome'];
@@ -15,108 +15,90 @@ if (isset($_POST['id'])) {
       'nome' => $nome,
       'preco' => $preco,
       'tamanho' => $tamanho,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
       'quantidade' => 1
     ];
   }
 }
 
+// Consulta o produto
+$id = $_GET['id'] ?? null;
+if (!$id) {
+  die('Produto não encontrado.');
+}
+
+$stmt = $conn->prepare("SELECT * FROM tb_produtos WHERE id = :id");
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
+$produto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$produto) {
+  die('Produto não encontrado.');
+}
+
 include('./templates/header.php');
-include('config.php');
-
-$id = $_GET['id'];
-
-$scriptConsulta = "SELECT * FROM tb_produtos WHERE id = :id";
-$resultadoConsulta = $conn->prepare($scriptConsulta);
-$resultadoConsulta->bindParam(':id', $id, PDO::PARAM_INT);
-$resultadoConsulta->execute();
-
-$produto = $resultadoConsulta->fetch();
-
 ?>
 
 <link rel="stylesheet" href="./css/produtos.css">
 
+<section class="produto-section">
+  <div class="produto-container">
 
+    <!-- GALERIA -->
+    <div class="produto-galeria">
+      <div class="produto-miniaturas">
+        <?php for ($i = 1; $i <= 4; $i++): ?>
+          <?php if (!empty($produto["img$i"])): ?>
+            <img src="img/roupas/<?= $produto["img$i"] ?>" 
+                 alt="Imagem <?= $i ?>" 
+                 onclick="trocarImagem(this)">
+          <?php endif; ?>
+        <?php endfor; ?>
+      </div>
 
-
-<main class="container-produto">
-  <div class="galeria">
-    <div class="miniaturas">
-      <img src="img/roupas/<?= $produto['img'] ?>" alt="Foto 1" onclick="trocarImagem(this)">
-      <img src="img/roupas/<?= $produto['img2'] ?>" alt="Foto 2" onclick="trocarImagem(this)">
-      <img src="img/roupas/<?= $produto['img3'] ?>" alt="Foto 3" onclick="trocarImagem(this)">
-      <img src="img/roupas/<?= $produto['img4'] ?>" alt="Foto 4" onclick="trocarImagem(this)">
+      <div class="produto-imagem-principal">
+        <img id="imagem-principal" 
+             src="img/roupas/<?= $produto['img'] ?>" 
+             alt="<?= htmlspecialchars($produto['nome']) ?>">
+      </div>
     </div>
-    <div class="imagem-principal">
-      <img id="imagem-principal" src="img/roupas/<?= $produto['img'] ?>" alt="Nome da Peça">
+
+    <!-- INFORMAÇÕES -->
+    <div class="produto-info">
+      <h1 class="produto-nome"><?= htmlspecialchars($produto['nome']) ?></h1>
+      <p class="produto-preco">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
+      <p class="produto-frete">🚚 Frete Grátis para todo o Brasil</p>
+
+      <div class="produto-opcoes">
+        <select id="tamanho" name="tamanho">
+          <option value="P">P</option>
+          <option value="M">M</option>
+          <option value="G">G</option>
+          <option value="GG">GG</option>
+        </select>
+      </div>
+
+      <p class="produto-descricao"><?= nl2br(htmlspecialchars($produto['descricao'])) ?></p>
+
+      <button class="produto-btn-comprar cart-btn"
+        data-id="<?= $produto['id'] ?>"
+        data-nome="<?= htmlspecialchars($produto['nome']) ?>"
+        data-preco="<?= $produto['preco'] ?>"
+        data-tamanho="<?= $produto['tamanho'] ?>"
+        data-img="<?= $produto['img'] ?>">
+        Comprar Agora 🛒
+      </button>
     </div>
   </div>
+</section>
 
-  <div class="info-produto">
-    <h2><?= $produto['nome'] ?></h2>
-    <p class="preco"><?= $produto['preco'] ?></p>
-    <p class="descricao">
-      <?= $produto['descricao'] ?>
-    </p>
-    <button class="btn-comprar cart-btn"
-      data-id="<?= $produto['id'] ?>"
-      data-nome="<?= $produto['nome'] ?>"
-      data-img="<?= $produto['img'] ?>"
-      data-tamanho="<?= $produto['tamanho'] ?>"
-      data-preco="<?= $produto['preco'] ?>">
-      <p>Comprar Agora <i class="bi bi-bag-plus"></i></p>
-    </button>
-
-  </div>
-</main>
-
-<script>
-  document.querySelectorAll('.cart-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const nome = btn.dataset.nome;
-      const preco = btn.dataset.preco;
-
-      fetch("form-carrinho.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: `id=${id}&nome=${nome}&preco=${preco}`
-        })
-        .then(r => r.text())
-        .then(res => {
-          alert("Produto adicionado ao carrinho!");
-        });
-    });
-  });
-</script>
-
+<script src="./js/add-card.js"></script>
 <script>
   function trocarImagem(elemento) {
-    document.getElementById("imagem-principal").src = elemento.src;
+    const principal = document.getElementById('imagem-principal');
+    document.querySelectorAll('.produto-miniaturas img').forEach(img => img.classList.remove('produto-selected'));
+    elemento.classList.add('produto-selected');
+    principal.src = elemento.src;
   }
 </script>
 
-
-
-<?php
-include('./templates/footer.php');
-?>
+<?php include('./templates/footer.php'); ?>
