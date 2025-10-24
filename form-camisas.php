@@ -80,8 +80,8 @@ function exibirMensagem($mensagem, $sucesso = true, $nome_camisa = null) {
             <?php if ($sucesso && $nome_camisa): ?>
                 <div class="camisa-nome">Nome da camisa: <?php echo htmlspecialchars($nome_camisa); ?></div>
             <?php endif; ?>
-            <a href="./adm.php"><?php echo $sucesso ? "Cadastrar camisa" : "Voltar"; ?></a>
-             <a href="./index.php"><?php echo $sucesso ? "pagina principal" : "ir_paginapricipal"; ?></a>
+            <a href="./adm.php"><?php echo $sucesso ? "Cadastrar outra camisa" : "Voltar"; ?></a>
+            <a href="./index.php"><?php echo $sucesso ? "Página principal" : "Ir para página principal"; ?></a>
         </div>
     </body>
     </html>
@@ -94,6 +94,7 @@ if (!empty($_FILES["img1"]["name"])) {
     $tamanho = $conexao->real_escape_string($_POST['tamanho']);
     $preco = $conexao->real_escape_string($_POST['preco']);
     $desc = $conexao->real_escape_string($_POST['desc']);
+    $estoque = isset($_POST['estoque']) ? (int)$_POST['estoque'] : 0;
 
     // Função para salvar imagem
     function salvarImagem($file, $pasta) {
@@ -113,14 +114,21 @@ if (!empty($_FILES["img1"]["name"])) {
     $img2 = salvarImagem($_FILES["img2"], $pasta_destino);
     $img3 = salvarImagem($_FILES["img3"], $pasta_destino);
     $img4 = salvarImagem($_FILES["img4"], $pasta_destino);
-    $img5 = salvarImagem($_FILES["img5"], $pasta_destino);
+    $img5 = $_FILES["img5"]["name"] ?? null;
 
+    // Insere o produto
     $sql = "INSERT INTO tb_produtos (nome, tipo, preco, tamanho, img, img2, img3, img4, img5, descricao)
             VALUES ('$nome_camisa', '$tipo', '$preco', '$tamanho',
             '$img1', '$img2', '$img3', '$img4', '$img5', '$desc')";
 
     if ($conexao->query($sql) === TRUE) {
-        exibirMensagem("Camisa cadastrada com sucesso.", true, $nome_camisa);
+        $idProduto = $conexao->insert_id;
+
+        // Insere o estoque
+        $sqlEstoque = "INSERT INTO tb_estoque (id_produto, quantidade_disponivel) VALUES ('$idProduto', '$estoque')";
+        $conexao->query($sqlEstoque);
+
+        exibirMensagem("Camisa cadastrada com sucesso e estoque registrado.", true, $nome_camisa);
     } else {
         exibirMensagem("Erro ao salvar no banco: " . $conexao->error, false);
     }

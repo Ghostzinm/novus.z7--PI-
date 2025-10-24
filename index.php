@@ -6,8 +6,10 @@ require_once './classes/Favoritos.php';
 $logado = isset($_SESSION['usuario']);
 $adm = $logado && isset($_SESSION['usuario']['adm']) && (int)$_SESSION['usuario']['adm'] === 1;
 
-// Busca todos os produtos
-$sql = "SELECT * FROM tb_produtos";
+// Busca todos os produtos + quantidade em estoque
+$sql = "SELECT p.*, e.quantidade_disponivel 
+        FROM tb_produtos p
+        LEFT JOIN tb_estoque e ON p.id = e.id_produto";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -82,6 +84,14 @@ foreach ($produtos as $key => $produto) {
               R$ <?= htmlspecialchars(number_format($produto['preco'], 2, ',', '.')) ?>
             </div>
             <p class="size mb-3">Tamanhos: <?= htmlspecialchars($produto['tamanho']) ?></p>
+
+            <!-- Mostra estoque apenas para o ADM -->
+            <?php if ($adm) { ?>
+              <p class="text-info mb-2">
+                Quantidade em estoque: 
+                <strong><?= htmlspecialchars($produto['quantidade_disponivel'] ?? 0) ?></strong>
+              </p>
+            <?php } ?>
 
             <?php if ($inativo && $adm) { ?>
               <p class="Removido badge bg-danger text-uppercase fw-bold">Removido</p>
