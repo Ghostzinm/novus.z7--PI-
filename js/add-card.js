@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `id=${encodeURIComponent(id)}&tamanho=${encodeURIComponent(tamanho)}&quantidade=${encodeURIComponent(quantidade)}`
+        body: `id=${encodeURIComponent(id)}&tamanho=${encodeURIComponent(tamanho)}&quantidade=${encodeURIComponent(quantidade)}`
       })
       .then(res => res.json())
       .then(data => {
@@ -58,3 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+

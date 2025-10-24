@@ -1,5 +1,8 @@
 <?php
+
 require 'config.php';
+
+
 
 // Adiciona ao carrinho
 if (isset($_POST['id'])) {
