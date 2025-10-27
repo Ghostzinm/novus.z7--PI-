@@ -125,7 +125,11 @@ $erros = [];
               <span class="label">Lembrar de mim</span>
             </label>
           </div>
-          <a href="#">Esqueceu sua senha?</a>
+          <!-- Botão -->
+          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#forgotModal">
+            Esqueci minha senha
+          </button>
+
           <button class="btn-sub" type="submit">Entrar</button>
         </form>
       </main>
@@ -160,5 +164,6 @@ $erros = [];
 
   <script src="./js/cadastro.js"></script>
   <script src="./js/verSenha.js"></script>
+  <script src="./js/recuperarSenha.js" ></script>
 
   <?php include('./templates/footer.php'); ?>
