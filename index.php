@@ -88,7 +88,7 @@ foreach ($produtos as $key => $produto) {
             <div class="preco text-danger fw-bold mb-2">
               R$ <?= htmlspecialchars(number_format($produto['preco'], 2, ',', '.')) ?>
             </div>
-            <p class="size mb-3">Tamanhos: <?= htmlspecialchars($produto['tamanho']) ?></p>
+
 
             <?php if ($adm) { ?>
               <p class="text-info mb-2">
