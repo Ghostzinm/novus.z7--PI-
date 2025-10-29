@@ -14,6 +14,20 @@ if (!$id_usuario) {
     die("Você precisa estar logado para acessar a página de pagamento.");
 }
 
+$sql = "SELECT * FROM tb_enderecos WHERE id = :id";
+$stmt = $conn->prepare($sql);
+$stmt->execute([':id' => $id_usuario]);
+$enderecoUsuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$enderecoUsuario) {
+  echo '<script>
+          alert("Por favor, cadastre um endereço antes de prosseguir para o pagamento.");
+          window.location.href = "endereco.php";
+        </script>';
+  exit;  // Certifique-se de que o script não continue após o redirecionamento
+}
+
+
 // Pega valor total vindo do carrinho (enviado por POST agora)
 $valor = isset($_POST['valor']) ? floatval($_POST['valor']) : 0;
 $pagamento = strtolower(trim($_POST['metodo_pagamento'] ?? ''));
