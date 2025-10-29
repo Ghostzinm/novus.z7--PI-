@@ -37,7 +37,7 @@ $produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Produtos Favoritos -->
 <section class="container-produtos py-5">
   <a class="btn-exibirfav" href="./index.php">voltar</a>
-  <h1 class="text-center text-light mb-4">Meus Favoritos ❤️</h1>
+  <h1 class="text-center text-light mb-4">Meus ffavoritos❤️</h1>
   <main class="d-flex flex-wrap justify-content-center gap-4">
 
     <?php if (!empty($produtosFavoritos)) :

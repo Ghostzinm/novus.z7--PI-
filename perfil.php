@@ -88,7 +88,7 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Pedidos -->
    <div class="perfil-section">
   <h2>📦 Meus Pedidos</h2>
-  <a href="./exibir-favorito.php"><i class="bungas bi bi-list"></i></a>
+  <a href="./pedidos.php"><i class="bungas bi bi-list"></i></a>
 
   <?php if (empty($pedidos)): ?>
       <p>Você ainda não fez nenhum pedido.</p>
