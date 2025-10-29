@@ -34,6 +34,23 @@ $stmt = $conn->prepare("
 $stmt->execute([$_SESSION['usuario']['id']]);
 $produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+if (!isset($_SESSION['usuario']['id'])) {
+    header('Location: login.php');
+    exit;
+}
+$id_usuario = $_SESSION['usuario']['id'];
+
+$sql = "SELECT p.id, pr.nome, p.quantidade, p.preco_total, p.status, p.data_pedido
+        FROM tb_pedidos p
+        JOIN tb_produtos pr ON pr.id = p.id_produto
+        WHERE p.id_usuario = ?
+        ORDER BY p.data_pedido DESC";
+$stmt = $conn->prepare($sql);
+$stmt->execute([$id_usuario]);
+$pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -69,13 +86,33 @@ $produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <!-- Pedidos -->
-    <div class="perfil-section">
-      <h2>📦 Meus Pedidos</h2>
+   <div class="perfil-section">
+  <h2>📦 Meus Pedidos</h2>
+  <a href="./exibir-favorito.php"><i class="bungas bi bi-list"></i></a>
+
+  <?php if (empty($pedidos)): ?>
+      <p>Você ainda não fez nenhum pedido.</p>
+  <?php else: ?>
       <ul>
-        <li>Camisa Ghost Z7 - R$ 159,90 - <strong>✔ Entregue</strong></li>
-        <li>Camisa Oversized Black - R$ 189,90 - <strong>🚚 A caminho</strong></li>
+          <?php foreach ($pedidos as $pedido): ?>
+        <li>
+    <?= htmlspecialchars($pedido['nome']) ?> - 
+    R$ <?= number_format($pedido['preco_total'], 2, ',', '.') ?> - 
+    <strong>
+        <?php if ($pedido['status'] === 'Entregue'): ?>
+            ✔ Entregue
+        <?php elseif ($pedido['status'] === 'A caminho'): ?>
+            🚚 A caminho
+        <?php else: ?>
+            ⏳ <?= htmlspecialchars($pedido['status']) ?>
+        <?php endif; ?>
+    </strong>
+</li>
+
+          <?php endforeach; ?>
       </ul>
-    </div>
+  <?php endif; ?>
+</div>
 
     <!-- Favoritos -->
   <div class="perfil-section">

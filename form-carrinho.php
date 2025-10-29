@@ -11,57 +11,50 @@ if (!isset($_SESSION['carrinho']) || count($_SESSION['carrinho']) === 0) {
     die("Carrinho vazio.");
 }
 
-// Supondo que endereço e método venham via POST
-$endereco_entrega = $_POST['endereco_entrega'] ?? 'Não informado';
-$metodo_pagamento = $_POST['metodo_pagamento'] ?? 'Não informado';
-
-// Calcula total
-$total = 0;
-foreach ($_SESSION['carrinho'] as $item) {
-    $total += $item['preco'] * $item['quantidade'];
-} 
-
-
 try {
     $conn->beginTransaction();
 
-    // Inserir pedido
-    $sqlPedido = "INSERT INTO tb_pedidos (id_usuario, preco_total, status, data_pedido, endereco_entrega, metodo_pagamento) 
-                  VALUES (:id_usuario, :preco_total, 'Pendente', NOW(), :endereco_entrega, :metodo_pagamento)";
-    $stmtPedido = $conn->prepare($sqlPedido);
-    $stmtPedido->execute([
-        ':id_usuario' => $id_usuario,
-        ':preco_total' => $total,
-        ':endereco_entrega' => $endereco_entrega,
-        ':metodo_pagamento' => $metodo_pagamento,
-    ]);
-
-    $pedido_id = $conn->lastInsertId();
-
-    // Inserir itens do pedido
-    $sqlItens = "INSERT INTO tb_pedido_itens (pedido_id, id_produto, nome, tamanho, preco, quantidade) 
-                 VALUES (:pedido_id, :id_produto, :nome, :tamanho, :preco, :quantidade)";
-    $stmtItens = $conn->prepare($sqlItens);
-
     foreach ($_SESSION['carrinho'] as $item) {
-        $stmtItens->execute([
-            ':pedido_id' => $pedido_id,
+        $preco_total = $item['preco'] * $item['quantidade'];
+
+        // Cria um pedido por produto
+        $sql = "INSERT INTO tb_pedidos (id_usuario, id_produto, quantidade, preco_total, status, data_pedido)
+                VALUES (:id_usuario, :id_produto, :quantidade, :preco_total, 'Pendente', NOW())";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ':id_usuario' => $id_usuario,
             ':id_produto' => $item['id'],
-            ':nome' => $item['nome'],
-            ':tamanho' => $item['tamanho'],
-            ':preco' => $item['preco'],
             ':quantidade' => $item['quantidade'],
+            ':preco_total' => $preco_total
+        ]);
+
+        // Atualiza estoque
+        $updateEstoque = "UPDATE tb_estoque SET quantidade_disponivel = quantidade_disponivel - :qtd WHERE id_produto = :id";
+        $stmt2 = $conn->prepare($updateEstoque);
+        $stmt2->execute([
+            ':qtd' => $item['quantidade'],
+            ':id' => $item['id']
         ]);
     }
 
     $conn->commit();
 
+    // Limpa carrinho
     unset($_SESSION['carrinho']);
 
-    echo "Pedido realizado com sucesso! Número do pedido: $pedido_id";
+    echo "✅ Pedido realizado com sucesso!";
 
 } catch (Exception $e) {
     $conn->rollBack();
     echo "Erro ao salvar pedido: " . $e->getMessage();
 }
 ?>
+<?php
+header('Location: perfil.php');
+exit;
+
+
+?>
+
+
+

@@ -87,3 +87,14 @@ CREATE TABLE tb_estoque (
     data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_produto) REFERENCES tb_produtos(id)
 );
+CREATE TABLE tb_pedido_itens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT NOT NULL,
+    id_produto INT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    tamanho VARCHAR(50),
+    preco DECIMAL(10,2) NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES tb_pedidos(id),
+    FOREIGN KEY (id_produto) REFERENCES tb_produtos(id)
+);
