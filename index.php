@@ -65,7 +65,7 @@ foreach ($produtos as $key => $produto) {
 
           <?php if ($adm) { ?>
             <div class="bnt-adm position-absolute end-0 top-0 m-2">
-              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>" class="text-danger" title="Excluir produto">
+              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>" class="text-danger" title="Desativar produto">
                 <i class="bi bi-x-circle fs-4"></i>
               </a>
               <a href="./editar_produto.php?id=<?= $produto['id'] ?>" class="text-warning" title="Editar produto">
