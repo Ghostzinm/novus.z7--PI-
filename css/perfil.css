@@ -35,6 +35,10 @@ body {
   min-height: 100vh;
 }
 
+.perfil-container p, a, li {
+  color: var(--color-text);
+}
+
 /* === Container principal === */
 .perfil-container {
   max-width: 900px;

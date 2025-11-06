@@ -54,7 +54,7 @@ include('./templates/header.php');
     <!-- GALERIA -->
     <div class="produto-galeria">
       <div class="produto-miniaturas">
-        <?php for ($i = 1; $i <= 4; $i++): ?>
+        <?php for ($i = 1; $i <= 5; $i++): ?>
           <?php if (!empty($produto["img$i"])): ?>
             <img src="img/roupas/<?= $produto["img$i"] ?>"
               alt="Imagem <?= $i ?>"
