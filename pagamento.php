@@ -14,9 +14,9 @@ if (!$id_usuario) {
     die("Você precisa estar logado para acessar a página de pagamento.");
 }
 
-$sql = "SELECT * FROM tb_enderecos WHERE id = :id";
+$sql = "SELECT * FROM tb_enderecos WHERE id_usuario = :id_usuario";
 $stmt = $conn->prepare($sql);
-$stmt->execute([':id' => $id_usuario]);
+$stmt->execute([':id_usuario' => $id_usuario]);
 $enderecoUsuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$enderecoUsuario) {
