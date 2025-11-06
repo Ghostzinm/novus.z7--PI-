@@ -106,7 +106,7 @@ foreach ($produtos as $key => $produto) {
             <?php } else { ?>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
-                  Comprar <i class="bi bi-cart-plus"></i>
+                Mais informações <i class="bi bi-cart-plus"></i>
                 </a>
                 <button class="btn text-light btn-fav me-1" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
                   <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>

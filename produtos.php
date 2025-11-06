@@ -62,7 +62,7 @@ include('./templates/header.php');
     <?php endif; ?>
 
     <!-- Exibe as imagens extras -->
-    <?php for ($i = 1; $i <= 6; $i++): ?>
+    <?php for ($i = 1; $i <= 4; $i++): ?>
       <?php if (!empty($produto["img$i"])): ?>
         <img src="img/roupas/<?= htmlspecialchars($produto["img$i"]) ?>"
              alt="Imagem <?= $i ?>"

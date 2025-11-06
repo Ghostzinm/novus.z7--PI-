@@ -164,6 +164,7 @@ $erros = [];
 
   <script src="./js/cadastro.js"></script>
   <script src="./js/verSenha.js"></script>
+  <script sec="./js/validacao.js"></script>
   <script src="./js/recuperarSenha.js" ></script>
 
   <?php include('./templates/footer.php'); ?>

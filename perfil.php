@@ -141,7 +141,7 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Endereço -->
     <div class="perfil-section">
-      <a href="./exibir-favorito.php"><i class="bungas bi bi-plus"></i></a>
+      <a href="./endereco.php"><i class="bungas bi bi-plus"></i></a>
       <h2>🏠 Endereço</h2>
 
       <?php if ($endereco): ?>
