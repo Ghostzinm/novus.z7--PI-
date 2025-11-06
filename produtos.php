@@ -51,24 +51,42 @@ include('./templates/header.php');
 <section class="produto-section">
   <div class="produto-container">
 
-    <!-- GALERIA -->
-    <div class="produto-galeria">
-      <div class="produto-miniaturas">
-        <?php for ($i = 1; $i <= 5; $i++): ?>
-          <?php if (!empty($produto["img$i"])): ?>
-            <img src="img/roupas/<?= $produto["img$i"] ?>"
-              alt="Imagem <?= $i ?>"
-              onclick="trocarImagem(this)">
-          <?php endif; ?>
-        <?php endfor; ?>
-      </div>
+  <div class="produto-galeria">
+  <div class="produto-miniaturas">
+    <!-- Adiciona a imagem principal como miniatura também -->
+    <?php if (!empty($produto['img'])): ?>
+      <img src="img/roupas/<?= htmlspecialchars($produto['img']) ?>"
+           alt="Imagem principal"
+           class="produto-selected"
+           onclick="trocarImagem(this)">
+    <?php endif; ?>
 
-      <div class="produto-imagem-principal">
-        <img id="imagem-principal"
-          src="img/roupas/<?= $produto['img'] ?>"
-          alt="<?= htmlspecialchars($produto['nome']) ?>">
-      </div>
-    </div>
+    <!-- Exibe as imagens extras -->
+    <?php for ($i = 1; $i <= 6; $i++): ?>
+      <?php if (!empty($produto["img$i"])): ?>
+        <img src="img/roupas/<?= htmlspecialchars($produto["img$i"]) ?>"
+             alt="Imagem <?= $i ?>"
+             onclick="trocarImagem(this)">
+      <?php endif; ?>
+    <?php endfor; ?>
+  </div>
+
+  <div class="produto-imagem-principal">
+    <img id="imagem-principal"
+         src="img/roupas/<?= !empty($produto['img']) ? htmlspecialchars($produto['img']) : htmlspecialchars($produto['img1']) ?>"
+         alt="<?= htmlspecialchars($produto['nome']) ?>">
+  </div>
+</div>
+
+
+
+<style>
+  .produto-selected {
+    border: 2px solid #000;
+    opacity: 0.8;
+  }
+</style>
+
 
     <!-- INFORMAÇÕES -->
     <div class="produto-info">
@@ -123,5 +141,6 @@ include('./templates/header.php');
     principal.src = elemento.src;
   }
 </script>
+
 
 <?php include('./templates/footer.php'); ?>
