@@ -20,7 +20,7 @@ $total = 0;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Carrinho | novus.z7 ☯</title>
+  <title>Carrinho | novus.z7 </title>
   <link rel="stylesheet" href="./css/carrinho.css">
 </head>
 

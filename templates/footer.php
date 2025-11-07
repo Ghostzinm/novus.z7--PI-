@@ -5,7 +5,7 @@
         <div class="footer-col">
             <h2 class="logo">novus.z7</h2>
             <p class="desc">
-                Streetwear independente ☯🎭💭<br>
+                Streetwear independente <br>
                 Estilo urbano, identidade única, atitude nas ruas.
             </p>
         </div>

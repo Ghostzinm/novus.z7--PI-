@@ -4,57 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alterar Perfil</title>
+  <link rel="stylesheet" href="./css/alterPerfil.css">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #0d0d0d;
-      color: #d4d4d4;
+ 
+</head>
+<header class="bt-alterPerfil">
+  <a class="btn-alterPerfil" href="./perfil .php">voltar</a>
+
+</header>
+
+<style>
+
+  body {
+      background-color: #1a1a1aff;
+      color: #ffffffcc;
     }
 
+    .btn-alterPerfil{
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+  
+
+
+}
+ 
     .card {
-      background-color: #111;
-      border: 1px solid #00ff80;
-      border-radius: 12px;
+      background-color: #2c2c2c;
+      border-radius: 10px;
     }
 
     .card-header {
-      background-color: #00ff80;
-      color: #000;
-      font-weight: bold;
-      text-align: center;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
+      background-color: #3d3d3d;
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .form-label {
+      color: #ffffffcc;
     }
 
     .form-control {
-      background-color: #1a1a1a;
-      color: #00ff80;
-      border: 1px solid #00ff80;
+      background-color: #444444;
+      border: none;
+      color: #ffffffcc;
     }
 
-    .form-control:focus {
-      background-color: #0f0f0f;
-      border-color: #00cc66;
-      box-shadow: 0 0 6px #00ff80;
-      color: #00ff80;
+    .form-control::placeholder {
+      color: #bbbbbb;
     }
 
     .btn-primary {
-      background-color: #00ff80;
+      background-color: #5a5a5a;
       border: none;
-      color: #000;
-      font-weight: bold;
-      transition: all 0.3s ease;
     }
 
     .btn-primary:hover {
-      background-color: #00cc66;
-      color: #fff;
-      box-shadow: 0 0 10px #00ff80;
+      background-color: #777777;
     }
-  </style>
-</head>
+
+</style>
 
 <body>
   <div class="container mt-5">

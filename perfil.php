@@ -151,22 +151,37 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Endereço -->
     <div class="perfil-section">
       <h2>🏠 Endereço</h2>
-      <?php if ($endereco): ?>
-        <p><?= htmlspecialchars($endereco['rua']) ?>, <?= htmlspecialchars($endereco['numero']) ?></p>
-        <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
-        <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
-      <?php else: ?>
-        <p>Nenhum endereço cadastrado.</p>
-        <a href="./endereco.php" style="color:#4CAF50; text-decoration:none;">Cadastrar Endereço</a>
-      <?php endif; ?>
+
+     <?php if ($endereco): ?>
+  <div class="enderecos-container">
+    <div class="endereco-card">
+      <p><?= htmlspecialchars($endereco['rua']) ?>, <?= htmlspecialchars($endereco['numero']) ?></p>
+      <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
+      <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
     </div>
 
-    <!-- Logout -->
+    <div class="endereco-card">
+      <p><?= htmlspecialchars($endereco['rua']) ?>, <?= htmlspecialchars($endereco['numero']) ?></p>
+      <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
+      <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
+    </div>
 
-
+    <div class="endereco-card">
+      <p><?= htmlspecialchars($endereco['rua']) ?>, <?= htmlspecialchars($endereco['numero']) ?></p>
+      <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
+      <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
+    </div>
   </div>
-</body>
+<?php else: ?>
+  <p>Nenhum endereço cadastrado.</p>
+  <a href="./endereco.php" style="color:#4CAF50; text-decoration:none;">Cadastrar Endereço</a>
+<?php endif; ?>
+    </div> 
 
+  </div> 
 </html>
 
 <?php require_once 'templates/footer.php'; ?>
+
+
+
