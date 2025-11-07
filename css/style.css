@@ -4,25 +4,40 @@
 }
 
 :root {
-  --primary-color: #D8FFDB;
-  --cor-secundaria: #023535;
-  --cor-terciaria: #C7FFED;
-  --cor-comple: #00B3B0;
-  --cor-hover: #FF4F6D;
+  /* === Cores principais === */
+  --color-bg: #0f0f0f;
+  --color-bg-card: rgb(20, 20, 20);
+  --color-primary: #00ff88;
+  --color-primary-dark: #00cc6a;
+  --color-secondary: #ff0055;
+  --color-secondary-dark: #cc0044;
+  --color-text: #ffffff;
+  --color-text-muted: #aaaaaa;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --shadow-neon: 0 0 15px var(--color-primary);
+  --transition-default: 0.6s ease-in-out;
+
+  --btn-color: #00ff88;
+  --btn-text: #312525;
+  --checkbox-color: #00ff88;
+  --checkbox-shadow: rgba(0, 255, 136, 0.3);
+  --checkbox-border: rgba(0, 255, 136, 0.7);
+  --text-light: #ffffff;
+  --bg-dark: #2c2c2c;
 }
 
 body {
   margin: 0;
-  background-color: #000 !important; /* Sobrescreve a cor original */
+  background-color: var(--color-bg) !important;
   font-family: Arial, sans-serif;
-  color: #fff; /* Texto branco para fundo escuro */
+  color: var(--color-text);
   overflow-x: hidden;
 }
 
 /* Cabeçalhos */
 h1 {
   font-weight: 700;
-  text-shadow: 0 0 10px #0ff, 0 0 25px #0ff;
+  text-shadow: 0 0 10px var(--color-primary), 0 0 25px var(--color-primary);
 }
 
 /* Carrossel */
@@ -33,7 +48,7 @@ h1 {
 
 /* Container de produtos */
 .container-produtos {
-  background-color: #000; 
+  background-color: var(--color-bg);
 }
 
 /* Grid de produtos */
@@ -48,19 +63,19 @@ h1 {
 
 /* Produto individual */
 .product {
-  background-color: var(--cor-secundaria);
+  background-color: var(--color-bg-card);
   border-radius: 15px;
   padding: 20px;
-  transition: all 0.3s ease;
+  transition: var(--transition-default);
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15); /* Efeito neon azul */
-  width: 18rem
+  box-shadow: var(--shadow-neon);
+  width: 18rem;
 }
 
 /* Hover no produto */
 .product:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25); /* Glow mais intenso */
+  box-shadow: 0 0 25px rgba(0, 179, 176, 0.6);
 }
 
 /* Imagem do produto */
@@ -75,50 +90,50 @@ h1 {
 /* Título e texto */
 .product h3,
 .product p {
-  color: var(--cor-terciaria);
+  color: var(--color-text);
   margin: 12px 0 5px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 /* Preço */
 .preco {
   font-size: 20px;
   font-weight: bold;
-  color: var(--cor-hover);
+  color: var(--color-secondary);
 }
 
 /* Tamanho */
 .size {
   font-size: 13px;
   margin: 8px 0;
-  color: #aaa;
+  color: var(--color-text-muted);
 }
 
 /* Botão de compra */
 .buy-btn {
   display: inline-block;
-  background-color: var(--cor-comple);
-  color: #fff;
+  background-color: var(--btn-color);
+  color: var(--btn-text);
   font-weight: bold;
   padding: 10px 18px;
   border-radius: 8px;
   text-decoration: none;
-  transition: 0.3s;
+  transition: var(--transition-default);
 }
 
 .buy-btn:hover {
-  background-color: var(--cor-hover);
+  background-color: var(--color-secondary);
+  box-shadow: 0 0 12px rgba(255, 79, 109, 0.4);
 }
 
-
-/* botão ADM */
+/* Botão ADM */
 .bnt-adm {
   position: absolute;
   top: 10px;
   right: 10px;
   display: flex;
   gap: 10px;
-  background: rgb(0, 0, 0);
+  background: var(--bg-dark);
   padding: 4px 8px;
   border-radius: 8px;
   z-index: 10;
@@ -128,7 +143,7 @@ h1 {
 }
 
 .bnt-adm a {
-  color: #ff4f6d;
+  color: var(--color-secondary);
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -144,20 +159,31 @@ h1 {
 }
 
 .bnt-adm a:hover {
-  color: var(--cor-hover);
+  color: var(--color-secondary-dark);
 }
 
+/* Produto removido */
 .removido {
   text-decoration: line-through;
   color: red;
   font-weight: bold;
-  position: absolute; 
-  top: 5px; 
+  position: absolute;
+  top: 5px;
   left: 50%;
 }
 
-/* tost */
+.card-text {
+  font-size: 14px !important; 
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita o texto a 3 linhas */
+  -webkit-box-orient: vertical; /* Define a orientação do conteúdo */
+  overflow: hidden; /* Esconde o texto que ultrapassa o limite */
+  text-overflow: ellipsis; /* Adiciona as reticências (...) no final */
+  width: 200px; /* Define a largura do texto */
+}
 
+
+/* Toast container */
 #toast-container-novusz7 {
   position: fixed;
   bottom: 30px;
@@ -165,12 +191,12 @@ h1 {
   pointer-events: none;
 }
 
-/* Toast único da marca (evita conflito com .toast do bootstrap) */
+/* Toast da marca */
 .novusz7-toast {
-  pointer-events: auto; /* ativa o click no botão de fechar*/
-  background: var(--cor-secundaria);
-  border: 1px solid rgba(255,49,49,0.14);
-  color: #fff;
+  pointer-events: auto;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 49, 49, 0.14);
+  color: var(--color-text);
   padding: 12px 18px;
   border-radius: 10px;
   margin-top: 10px;
@@ -178,7 +204,7 @@ h1 {
   transform: translateY(18px);
   transition: opacity 0.28s ease, transform 0.28s ease;
   font-family: 'Poppins', sans-serif;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
   min-width: 220px;
   max-width: 360px;
   display: flex;
@@ -186,25 +212,24 @@ h1 {
   gap: 10px;
 }
 
-/* ícone opcional (pode usar <span> dentro do toast) */
+/* Ícone no toast */
 .novusz7-toast .icon {
   font-size: 18px;
-  color: #a6ff31;
+  color: var(--color-primary);
 }
 
-/* estado visível */
+/* Estado visível */
 .novusz7-toast.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* botão fechar (pequeno) */
+/* Botão fechar */
 .novusz7-toast .close-small {
   margin-left: auto;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--color-text);
   font-size: 16px;
   cursor: pointer;
 }
-

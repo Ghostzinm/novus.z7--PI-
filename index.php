@@ -65,7 +65,7 @@ foreach ($produtos as $key => $produto) {
 
           <?php if ($adm) { ?>
             <div class="bnt-adm position-absolute end-0 top-0 m-2">
-              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>" class="text-danger" title="Excluir produto">
+              <a href="./form-cardApagar.php?id=<?= $produto['id'] ?>" class="text-danger" title="Desativar produto">
                 <i class="bi bi-x-circle fs-4"></i>
               </a>
               <a href="./editar_produto.php?id=<?= $produto['id'] ?>" class="text-warning" title="Editar produto">
@@ -106,7 +106,7 @@ foreach ($produtos as $key => $produto) {
             <?php } else { ?>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="./produtos.php?id=<?= $produto['id'] ?>" class="btn btn-outline-light flex-grow-1 me-1">
-                  Comprar <i class="bi bi-cart-plus"></i>
+                Mais informações <i class="bi bi-cart-plus"></i>
                 </a>
                 <button class="btn text-light btn-fav me-1" id="fav-<?= $produto['id'] ?>" data-id="<?= $produto['id'] ?>">
                   <i class="bi <?= $produto['favorito'] ? 'bi-heart-fill text-danger' : 'bi-heart' ?>"></i>

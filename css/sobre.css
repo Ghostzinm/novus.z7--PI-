@@ -1,15 +1,18 @@
 :root {
-  --color-bg: #121212;
-  --color-card-bg: #1c1c1c;
-  --color-primary: #fffcf5;
-  --color-secondary: #00ffae;
-  --color-secondary-dark: #00cc8f;
-  --color-text-muted: #999;
-  --color-border: #333;
+  --color-bg: #0d0d1a;
+  --color-bg-card: #1a1a33;
+  --color-primary: #ff00ff;
+  --color-primary-dark: #cc00cc;
+  --color-secondary: #00ffff;
+  --color-secondary-dark: #00cccc;
+  --color-text: #fff;
+  --color-text-muted: #aaa;
+  --color-border: #222244;
   --shadow-neon: 0 0 12px var(--color-secondary);
   --transition-default: 0.3s ease;
 }
 
+/* === Área principal (sem aplicar no body) === */
 .novusz7-main {
   padding: 4rem 1rem;
   background-color: var(--color-bg);
@@ -17,6 +20,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* === Seção sobre === */
 .novusz7-about-section {
   display: flex;
   flex-wrap: wrap;
@@ -74,6 +78,7 @@
   color: var(--color-text-muted);
 }
 
+/* === Contato / Botões === */
 .novusz7-contact {
   flex: 0 1 300px;
   display: flex;
@@ -81,6 +86,7 @@
   gap: 1rem;
 }
 
+/* === Botões === */
 .novusz7-btn {
   text-decoration: none;
   padding: 0.8rem 1.5rem;
@@ -105,7 +111,7 @@
 }
 
 .novusz7-btn--secondary {
-  background: var(--color-card-bg);
+  background: var(--color-bg-card);
   color: var(--color-primary);
   border: 1px solid var(--color-secondary);
 }
@@ -116,6 +122,7 @@
   box-shadow: var(--shadow-neon);
 }
 
+/* === Cards de tópicos === */
 .novusz7-topics-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -127,12 +134,12 @@
 }
 
 .novusz7-topic-card {
-  background-color: var(--color-card-bg);
+  background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1.5rem;
   transition: var(--transition-default);
-  box-shadow: 0 0 10px rgba(0,255,174,0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 174, 0.2);
 }
 
 .novusz7-topic-card h3 {

@@ -1,27 +1,24 @@
 :root {
-  /* === Cores principais === */
-  --color-bg: #111;
-  --color-bg-card: #0f0f0f;
-  --color-primary: #00b3b0;
-  --color-primary-dark: #008985;
-  --color-secondary: #ff4f6d;
-  --color-secondary-dark: #e04260;
-  --color-text: #fff;
-  --color-text-muted: #aaa;
-  --color-border: #222;
+   /* === Cores principais === */
+   --color-bg: #0f0f0f;
+   --color-bg-card: rgb(20, 20, 20);
+   --color-primary: #00ff88;
+   --color-primary-dark: #00cc6a;
+   --color-secondary: #ff0055;
+   --color-secondary-dark: #cc0044;
+   --color-text: #ffffff;
+   --color-text-muted: #aaaaaa;
+   --color-border: rgba(255, 255, 255, 0.1);
+   --shadow-neon: 0 0 15px var(--color-primary);
+   --transition-default: 0.6s ease-in-out;
 
-  /* === Efeitos === */
-  --shadow-neon: 0 0 8px rgba(0, 179, 176, 0.5);
-  --transition-default: all 0.3s ease;
-
-  /* === Botões === */
-  --btn-color: var(--color-primary);
-  --btn-text: var(--color-text);
-  --checkbox-color: var(--color-primary);
-  --checkbox-shadow: 0 0 10px rgba(0, 179, 176, 0.5);
-  --checkbox-border: 2px solid var(--color-primary);
-  --text-light: var(--color-text);
-  --bg-dark: var(--color-bg);
+   --btn-color: #00ff88;
+   --btn-text: #312525;
+   --checkbox-color: #00ff88;
+   --checkbox-shadow: rgba(0, 255, 136, 0.3);
+   --checkbox-border: rgba(0, 255, 136, 0.7);
+   --text-light: #ffffff;
+   --bg-dark: #2c2c2c;
 
   /* === Gradientes e especiais === */
   --perfil-gradient-start: #6a11cb;

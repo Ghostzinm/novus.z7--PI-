@@ -60,7 +60,7 @@ if (!$logado) {
                 <label for="complemento">Complemento</label>
               </div>
 
-              <button type="submit" class="btn btn-custom w-100 py-2 rounded-3">
+              <button type="submit" class="btn btn-success btn-custom w-100 py-2 rounded-3">
                 Salvar Endereço
               </button>
             </form>

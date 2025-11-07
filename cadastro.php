@@ -66,17 +66,15 @@ $erros = [];
     <div class="container" id="container">
       <!-- Cadastro -->
       <main class="form-container sign-up">
-        <form action="./form-cadastrar.php" method="POST">
+        <form action="./form-cadastrar.php" id="form-cadastro" method="POST">
           <h1>Crie sua conta</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="bi bi-google"></i></a>
-            <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
-            <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
-          <input <?= $telefone ?> name="telefone" type="tel" id="stelefone-cadastro" placeholder="telefone" required>
+          <input <?= $telefone ?> name="telefone" type="tel" id="telefone-cadastro" placeholder="telefone" required>
           <!-- input com botao para ver a -->
           <div class="input-with-toggle">
             <input name="senha" id="senha-cadastro" type="password" placeholder="Senha" required>
@@ -103,8 +101,6 @@ $erros = [];
           <h1>Entrar</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="bi bi-google"></i></a>
-            <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
-            <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email</span>
           <input type="email" name="email" id="email-login" placeholder="Email" required>
@@ -162,6 +158,7 @@ $erros = [];
     });
   </script>
 
+<script src="./js/validacao.js"></script>
   <script src="./js/cadastro.js"></script>
   <script src="./js/verSenha.js"></script>
   <script src="./js/recuperarSenha.js" ></script>

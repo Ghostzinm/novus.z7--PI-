@@ -37,8 +37,8 @@ $produtosFavoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 if (!isset($_SESSION['usuario']['id'])) {
-    header('Location: login.php');
-    exit;
+  header('Location: login.php');
+  exit;
 }
 $id_usuario = $_SESSION['usuario']['id'];
 
@@ -59,15 +59,6 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8">
   <title>Meu Perfil</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #121212;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
 </head>
 
 <body>
@@ -86,58 +77,58 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <!-- Pedidos -->
-   <div class="perfil-section">
-  <h2>📦 Meus Pedidos</h2>
-  <a href="./pedidos.php"><i class="bungas bi bi-list"></i></a>
+    <div class="perfil-section">
+      <h2>📦 Meus Pedidos</h2>
+      <a href="./exibir-favorito.php"><i class="bungas bi bi-list"></i></a>
 
-  <?php if (empty($pedidos)): ?>
-      <p>Você ainda não fez nenhum pedido.</p>
-  <?php else: ?>
-      <ul>
+      <?php if (empty($pedidos)): ?>
+        <p>Você ainda não fez nenhum pedido.</p>
+      <?php else: ?>
+        <ul>
           <?php foreach ($pedidos as $pedido): ?>
-        <li>
-    <?= htmlspecialchars($pedido['nome']) ?> - 
-    R$ <?= number_format($pedido['preco_total'], 2, ',', '.') ?> - 
-    <strong>
-        <?php if ($pedido['status'] === 'Entregue'): ?>
-            ✔ Entregue
-        <?php elseif ($pedido['status'] === 'A caminho'): ?>
-            🚚 A caminho
-        <?php else: ?>
-            ⏳ <?= htmlspecialchars($pedido['status']) ?>
-        <?php endif; ?>
-    </strong>
-</li>
+            <li>
+              <?= htmlspecialchars($pedido['nome']) ?> -
+              R$ <?= number_format($pedido['preco_total'], 2, ',', '.') ?> -
+              <strong>
+                <?php if ($pedido['status'] === 'Entregue'): ?>
+                  ✔ Entregue
+                <?php elseif ($pedido['status'] === 'A caminho'): ?>
+                  🚚 A caminho
+                <?php else: ?>
+                  ⏳ <?= htmlspecialchars($pedido['status']) ?>
+                <?php endif; ?>
+              </strong>
+            </li>
 
           <?php endforeach; ?>
-      </ul>
-  <?php endif; ?>
-</div>
+        </ul>
+      <?php endif; ?>
+    </div>
 
     <!-- Favoritos -->
-  <div class="perfil-section">
-  <h2>❤️ Meus Favoritos</h2> 
-  <a href="./exibir-favorito.php"><i class=" bungas bi bi-list"></i></a>
+    <div class="perfil-section">
+      <h2>❤️ Meus Favoritos</h2>
+      <a href="./exibir-favorito.php"><i class=" bungas bi bi-list"></i></a>
 
-  <?php if (!empty($produtosFavoritos)): ?>
-    <ul>
-      <?php 
-        // Limita o loop ao tamanho do array ou 3, o que for menor
-        $total = min(count($produtosFavoritos), 3);
-        for ($i = 0; $i < $total; $i++): 
-          $produto = $produtosFavoritos[$i];
-      ?>
-        <li>
-          <?= htmlspecialchars($produto['nome']) ?> -
-          R$ <?= number_format($produto['preco'], 2, ',', '.') ?> -
-          <strong>❤️ Favoritado</strong>
-        </li>
-      <?php endfor; ?>
-    </ul>
-  <?php else: ?>
-    <p>Você ainda não favoritou nenhum produto.</p>
-  <?php endif; ?>
-</div>
+      <?php if (!empty($produtosFavoritos)): ?>
+        <ul>
+          <?php
+          // Limita o loop ao tamanho do array ou 3, o que for menor
+          $total = min(count($produtosFavoritos), 3);
+          for ($i = 0; $i < $total; $i++):
+            $produto = $produtosFavoritos[$i];
+          ?>
+            <li>
+              <?= htmlspecialchars($produto['nome']) ?> -
+              R$ <?= number_format($produto['preco'], 2, ',', '.') ?> -
+              <strong>❤️ Favoritado</strong>
+            </li>
+          <?php endfor; ?>
+        </ul>
+      <?php else: ?>
+        <p>Você ainda não favoritou nenhum produto.</p>
+      <?php endif; ?>
+    </div>
 
 
     <!-- Dados -->
@@ -150,14 +141,17 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Endereço -->
     <div class="perfil-section">
+      <a href="./endereco.php"><i class="bungas bi bi-plus"></i></a>
       <h2>🏠 Endereço</h2>
 
-     <?php if ($endereco): ?>
-  <div class="enderecos-container">
-    <div class="endereco-card">
-      <p><?= htmlspecialchars($endereco['rua']) ?>, <?= htmlspecialchars($endereco['numero']) ?></p>
-      <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
-      <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
+      <?php if ($endereco): ?>
+        <p><?= htmlspecialchars($endereco['rua']) ?>, <?= htmlspecialchars($endereco['numero']) ?></p>
+        <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
+        <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
+      <?php else: ?>
+        <p>Nenhum endereço cadastrado.</p>
+        <a href="./endereco.php" style="color:#4CAF50; text-decoration:none;">Cadastrar Endereço</a>
+      <?php endif; ?>
     </div>
 
     <div class="endereco-card">
