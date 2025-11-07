@@ -70,8 +70,6 @@ $erros = [];
           <h1>Crie sua conta</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="bi bi-google"></i></a>
-            <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
-            <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
@@ -103,8 +101,6 @@ $erros = [];
           <h1>Entrar</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="bi bi-google"></i></a>
-            <a href="#" class="icon"><i class="bi bi-facebook"></i></i></a>
-            <a href="#" class="icon"><i class="bi bi-apple"></i></a>
           </div>
           <span>ou use seu email</span>
           <input type="email" name="email" id="email-login" placeholder="Email" required>
