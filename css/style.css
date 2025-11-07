@@ -92,7 +92,7 @@ h1 {
 .product p {
   color: var(--color-text);
   margin: 12px 0 5px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 /* Preço */
@@ -173,6 +173,7 @@ h1 {
 }
 
 .card-text {
+  font-size: 14px !important; 
   display: -webkit-box;
   -webkit-line-clamp: 3; /* Limita o texto a 3 linhas */
   -webkit-box-orient: vertical; /* Define a orientação do conteúdo */
