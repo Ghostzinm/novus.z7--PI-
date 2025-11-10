@@ -10,7 +10,7 @@
  
 </head>
 <header class="bt-alterPerfil">
-  <a class="btn-alterPerfil" href="./perfil .php">voltar</a>
+  <a class="btn-alterPerfil" href="./perfil.php">voltar</a>
 
 </header>
 
