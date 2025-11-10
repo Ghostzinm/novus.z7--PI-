@@ -1,4 +1,4 @@
-
+//refaça o readme.md falando sobre o esse projeto
 ## Tema gerador
 - Desenvolvimento de um software utilizando a arquitetura cliente e servidor.
 
@@ -82,20 +82,5 @@ novus.z7--PI-/
 ## 📄 Licença
 
 Este projeto está sob a licença  MIT. Consulte o arquivo LICENSE para mais detalhes.
-
----
-
-## 🎯 Objetivos do Projeto
-
-O objetivo deste projeto é fornecer uma base sólida para aplicações Python, com estrutura modular, fácil manutenção e escalabilidade. Ele foi desenvolvido pensando em facilitar o desenvolvimento colaborativo e a implementação de novas funcionalidades.
-
----
-
-## 📝 Observações
-
-- Certifique-se de manter as dependências atualizadas.
-- Recomenda-se seguir o padrão de código definido para garantir legibilidade e organização.
-- Contribuições são bem-vindas, desde que sigam as diretrizes do projeto.
-
 
 
