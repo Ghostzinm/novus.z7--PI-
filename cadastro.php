@@ -111,11 +111,7 @@ $erros = [];
           <div class="remember-me">
             <label class="checkbox-wrapper">
               <input type="checkbox" id="lembrar" />
-              <div class="checkmark">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M20 6L9 17L4 12" stroke-width="3"></path>
-                </svg>
-              </div>
+             
               
             </label>
           </div>
