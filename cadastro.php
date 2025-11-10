@@ -68,7 +68,6 @@ $erros = [];
       <main class="form-container sign-up">
         <form action="./form-cadastrar.php" id="form-cadastro" method="POST">
           <h1>Crie sua conta</h1>
-         
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
@@ -97,9 +96,6 @@ $erros = [];
       <main class="form-container sign-in">
         <form action="./form-login.php" method="POST">
           <h1>Entrar</h1>
-          <div class="social-icons">
-          
-          </div>
           <span>ou use seu email</span>
           <input type="email" name="email" id="email-login" placeholder="Email" required>
           <div class="input-with-toggle">
@@ -111,12 +107,8 @@ $erros = [];
           <div class="remember-me">
             <label class="checkbox-wrapper">
               <input type="checkbox" id="lembrar" />
-             
-              
             </label>
           </div>
-        
-        
 
           <button class="btn-sub" type="submit">Entrar</button>
         </form>
