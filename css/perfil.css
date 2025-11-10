@@ -1,14 +1,14 @@
 :root {
   /* === Cores principais === */
   --color-bg: #000;
-  --color-bg-card: #ffffff;
+  --color-bg-card: #0f0f0f;
   --color-primary: #00b3b0;
   --color-primary-dark: #008985;
   --color-secondary: #ff4f6d;
   --color-secondary-dark: #e04260;
   --color-text: #ffffff;
-  --color-text-muted: #ffffff;
-  --color-border: #ffffff;
+  --color-text-muted: #aaaaaa;
+  --color-border: #222222;
 
   /* === Efeitos === */
   --shadow-neon: 0 0 15px rgba(0, 179, 176, 0.5);

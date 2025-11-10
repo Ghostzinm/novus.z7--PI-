@@ -90,29 +90,48 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     .endereco-card {
       flex: 1;
       min-width: 250px;
-      background-color: #f7f7f7;
+      background-color: #3d3d41;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 1);
       text-align: left;
       position: relative;
     }
 
     .endereco-card button {
-      background-color: #007bff;
+      background-color: #8e9194;
       color: #fff;
       border: none;
       padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
       transition: 0.3s;
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
     }
 
     .endereco-card button:hover {
       background-color: #0056b3;
+    }
+
+    /* Botão de excluir */
+    .delete-form {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      margin: 0;
+    }
+
+    .delete {
+      background: none;
+      border: none;
+      color: #ff4d4d;
+      font-size: 22px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .delete:hover {
+      transform: scale(1.2);
+      color: #ff1a1a;
     }
 
     a {
@@ -216,56 +235,69 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <p><strong>Telefone:</strong> <?= htmlspecialchars($user['telefone'] ?? 'Não informado') ?></p>
     </div>
 
-<!-- Endereços -->
-<div class="perfil-section">
-  <h2>🏠 Meus Endereços</h2>
+    <!-- Endereços -->
+    <div class="perfil-section">
+      <h2>🏠 Meus Endereços</h2>
 
-  <a href="#" id="addEnderecoBtn">
-    <i class="bungas bi bi-plus"></i> Adicionar novo endereço
-  </a>
+      <a href="#" id="addEnderecoBtn">
+        <i class="bungas bi bi-plus"></i> 
+      </a>
 
-  <div id="limiteMsg" class="limite-msg" style="display: none;">
-    ⚠️ Limite de 3 endereços cadastrados.
+      <div id="limiteMsg" class="limite-msg" style="display: none;">
+        ⚠️ Limite de 3 endereços cadastrados.
+      </div>
+
+      <?php if (!empty($enderecos)): ?>
+        <div class="enderecos-container">
+          <?php foreach ($enderecos as $endereco): ?>
+            <div class="endereco-card">
+
+              <!-- Botão de exclusão -->
+              <form action="excluir_endereco.php" method="post" class="delete-form">
+                <input type="hidden" name="id" value="<?= $endereco['id'] ?>">
+                <button type="submit" class="delete" title="Excluir endereço">&times;</button>
+              </form>
+
+              <!-- Dados do endereço -->
+              <p><strong><?= htmlspecialchars($endereco['rua']) ?></strong>, <?= htmlspecialchars($endereco['numero']) ?></p>
+              <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
+              <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
+
+              <form action="editar_endereco.php" method="get">
+                <input type="hidden" name="id" value="<?= $endereco['id'] ?>">
+                <button type="submit">Editar</button>
+              </form>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      <?php else: ?>
+        <p>Nenhum endereço cadastrado.</p>
+      <?php endif; ?>
+    </div>
   </div>
 
-  <?php if (!empty($enderecos)): ?>
-    <div class="enderecos-container">
-      <?php foreach ($enderecos as $endereco): ?>
-        <div class="endereco-card">
-          <p><strong><?= htmlspecialchars($endereco['rua']) ?></strong>, <?= htmlspecialchars($endereco['numero']) ?></p>
-          <p><?= htmlspecialchars($endereco['cidade']) ?> - <?= htmlspecialchars($endereco['estado']) ?></p>
-          <p>CEP: <?= htmlspecialchars($endereco['cep']) ?></p>
-          <form action="editar_endereco.php" method="get">
-            <input type="hidden" name="id" value="<?= $endereco['id'] ?>">
-            <button type="submit">Editar</button>
-          </form>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  <?php else: ?>
-    <p>Nenhum endereço cadastrado.</p>
-  <?php endif; ?>
-</div>
+  <script>
+    // Controle de limite
+    document.getElementById('addEnderecoBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const totalEnderecos = <?= count($enderecos) ?>;
+      if (totalEnderecos >= 3) {
+        const msg = document.getElementById('limiteMsg');
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 3000);
+      } else {
+        window.location.href = './endereco.php';
+      }
+    });
 
-<script>
-  document.getElementById('addEnderecoBtn').addEventListener('click', function(e) {
-    e.preventDefault();
-
-    const totalEnderecos = <?= count($enderecos) ?>;
-    if (totalEnderecos >= 3) {
-      const msg = document.getElementById('limiteMsg');
-      msg.style.display = 'block';
-
-      // Some automaticamente depois de 3 segundos
-      setTimeout(() => {
-        msg.style.display = 'none';
-      }, 3000);
-    } else {
-      // Redireciona normalmente para o cadastro de endereço
-      window.location.href = './endereco.php';
-    }
-  });
-</script>
-
-
-
+    // Confirmação antes de excluir
+    document.querySelectorAll('.delete-form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        if (!confirm('Tem certeza que deseja excluir este endereço?')) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
