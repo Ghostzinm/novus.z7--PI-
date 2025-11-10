@@ -68,9 +68,6 @@ $erros = [];
       <main class="form-container sign-up">
         <form action="./form-cadastrar.php" id="form-cadastro" method="POST">
           <h1>Crie sua conta</h1>
-          <div class="social-icons">
-            <a href="#" class="icon"><i class="bi bi-google"></i></a>
-          </div>
           <span>ou use seu email para se cadastrar</span>
           <input <?= $nome ?> name="nome" type="text" id="nome-cadastro" placeholder="Nome" required>
           <input <?= $email ?> name="email" type="email" id="email-cadastro" placeholder="Email" required>
@@ -99,9 +96,6 @@ $erros = [];
       <main class="form-container sign-in">
         <form action="./form-login.php" method="POST">
           <h1>Entrar</h1>
-          <div class="social-icons">
-            <a href="#" class="icon"><i class="bi bi-google"></i></a>
-          </div>
           <span>ou use seu email</span>
           <input type="email" name="email" id="email-login" placeholder="Email" required>
           <div class="input-with-toggle">
@@ -113,18 +107,8 @@ $erros = [];
           <div class="remember-me">
             <label class="checkbox-wrapper">
               <input type="checkbox" id="lembrar" />
-              <div class="checkmark">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M20 6L9 17L4 12" stroke-width="3"></path>
-                </svg>
-              </div>
-              <span class="label">Lembrar de mim</span>
             </label>
           </div>
-          <!-- Botão -->
-          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#forgotModal">
-            Esqueci minha senha
-          </button>
 
           <button class="btn-sub" type="submit">Entrar</button>
         </form>
