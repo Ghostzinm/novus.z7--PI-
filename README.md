@@ -1,86 +1,125 @@
-//refaça o readme.md falando sobre o esse projeto
-## Tema gerador
-- Desenvolvimento de um software utilizando a arquitetura cliente e servidor.
+# 🕸️ Novus.z7 — Plataforma de E-commerce Streetwear
 
-## tema do projeto O quê é?
-- um site de venda de roupas 
+Projeto desenvolvido como um **sistema web de vendas** voltado para uma loja de camisas streetwear, com funcionalidades completas de **cadastro, login, carrinho, pedidos e administração de produtos**.  
+A aplicação foi construída em **PHP**, com integração a banco de dados e suporte a sessões de usuário.
 
-## objetivo e para que?
+---
 
-- vender camisas de alta qualidade com um preço acessivel
+## 📁 Estrutura do Projeto
 
-## detalhamento como?
-
-- **acões necessarias para o desenvolvimento:** pegamos de referencias sitemas de vendas de roupas, tenis e até mesmo eletronicos.
-usamos referencias como a estilização e organização desses sites e principalmente seus forms de cadastro 
-
-     usamos uma branch  para podermos mexer os dois no mesmo  projeto ao mesmo tempo 
-
-     para relizar nossos obijetivos precisamos de diciplina e concentração 
-
-# novus.z7 (PI)
-versão PI da NOVUs.z7
-## Estrutura de Pastas e Arquivos
-
-## 🌟 Estrutura Detalhada do Projeto
-
-A seguir, você encontra uma visão completa e organizada da estrutura do projeto, com explicações claras sobre o papel de cada pasta e arquivo. Isso facilita o entendimento, manutenção e colaboração no desenvolvimento.
-
-```
 novus.z7--PI-/
-├── src/
-│   ├── main.py               # 🚀 Ponto de entrada da aplicação
-│   ├── controllers/          # 🎛️ Controladores das rotas e regras de negócio
-│   │   └── user_controller.py    # 👤 Gerenciamento de usuários
-│   ├── models/               # 🗄️ Modelos de dados e entidades
-│   │   └── user.py               # 👤 Estrutura do usuário
-│   └── views/                # 🖼️ Interface do usuário (templates)
-│       └── index.html            # 🏠 Página inicial
-├── config/
-│   ├── settings.py           # ⚙️ Configurações gerais do projeto
-│   └── database.py           # 🛢️ Configuração do banco de dados
-├── tests/
-│   ├── test_main.py          # ✅ Testes do main.py
-│   └── test_user.py          # ✅ Testes de funcionalidades de usuário
-├── requirements.txt          # 📦 Dependências do projeto
-├── README.md                 # 📖 Documentação principal
-└── .gitignore                # 🚫 Arquivos ignorados pelo Git
-```
+│
+├── sql
+│    ├── bancoCAdastro.sql
+├── classes
+│    ├──favoritos.php
+├── css
+│    ├──adn.css
+│    ├──alterPerfil.css
+│    ├──cadastro.css
+│    ├──carrinho.css
+│    ├──contato.css
+│    ├──exibir-favorito.css
+│    ├──footer.css
+│    ├──pagamento.css
+│    ├──perfil.css
+│    ├──produtos.css
+│    ├──sobre.css
+│    ├──style.css
+│
+├── fonts
+│    ├──Cinzel-VariableFont_wght.ttf
+├── img
+│    ├──carrossel
+│    ├──roupas
+│
+├── templates
+│    ├──footer.php
+│    ├──header.php
+│ 
+├── .env
+├── .env-exemple
+├── .gitattributes
+├── .gitignore
+│
+├── index.php
+├── produtos.php
+├── carrinho.php
+├── pedidos.php
+├── perfil.php
+├── adm.php
+│
+├── config.php
+├── cadastro.php
+├── form-login.php
+├── form-logout.php
+├── form-cadastrar.php
+│
+├── add-carrinho.php
+├── carrinho-delete.php
+├── favoritar.php
+├── exibir-favorito.php
+│
+├── editar_produto.php
+├── form-cardEditar.php
+├── form-cardApagar.php
+├── form-cardReativar.php
+│
+├── endereco.php
+├── editar_endereco.php
+├── salvar_edicao_endereco.php
+├── excluir_endereco.php
+│
+├── sobre.php
+└── README.md
 
-### 📂 Descrição dos principais arquivos e pastas
-
-- **src/main.py**: Inicia a aplicação, carrega módulos e configurações.
-- **src/controllers/**: Gerencia as rotas e lógica de negócio. Exemplo: `user_controller.py` cuida das operações de usuário.
-- **src/models/**: Define as estruturas de dados do sistema, como usuários, produtos, etc.
-- **src/views/**: Contém os templates e páginas que compõem a interface do usuário.
-- **config/settings.py**: Centraliza variáveis de ambiente, chaves secretas e parâmetros de configuração.
-- **config/database.py**: Realiza a configuração e inicialização do banco de dados.
-- **tests/**: Abriga os testes automatizados para garantir qualidade e estabilidade do código.
-- **requirements.txt**: Lista todas as bibliotecas necessárias para rodar o projeto.
-- **README.md**: Documentação completa do projeto, com instruções de uso e informações relevantes.
-- **.gitignore**: Define arquivos e pastas que não devem ser versionados.
 
 ---
 
-## 🚀 Como executar o projeto
+## ⚙️ Principais Arquivos e Funções
 
-1. Instale as dependências:
-    ```bash
-    pip install -r requirements.txt
-    ```
-2. Configure as variáveis de ambiente em `config/settings.py`.
-3. (Opcional) Ajuste o banco de dados em `config/database.py`.
-4. Execute o sistema:
-    ```bash
-    python src/main.py
-    ```
+### 🏠 **index.php**
+Página inicial da loja — exibe os produtos e direciona para as demais páginas (detalhes, carrinho, login etc).
+
+### 🧾 **config.php**
+Arquivo central de **configuração do banco de dados**, responsável por conectar o sistema às tabelas MySQL.
+
+### 👤 **cadastro.php / form-cadastrar.php / form-login.php / form-logout.php**
+Gerenciam **autenticação de usuários** — registro, login e logout de clientes.
+
+### 👕 **produtos.php / editar_produto.php / form-cardEditar.php**
+Área de **gerenciamento de produtos** — exibe, edita e controla o estoque dos itens.
+
+### 🛒 **carrinho.php / add-carrinho.php / carrinho-delete.php**
+Gerenciam o **carrinho de compras**, incluindo adição, listagem e remoção de itens.
+
+### ⭐ **favoritar.php / exibir-favorito.php**
+Permitem **salvar produtos como favoritos** para acesso rápido posterior.
+
+### 🚚 **endereco.php / editar_endereco.php / excluir_endereco.php**
+Gerenciam os **endereços de entrega** do usuário.
+
+### 💳 **pagamento.php / pedidos.php**
+Tratam do processo de **finalização de compra** e listagem dos **pedidos realizados**.
+
+### 👑 **adm.php**
+Painel administrativo com acesso restrito para *produtos, e pedidos**.
+
+### 📜 **sobre.php**
+Página institucional com informações sobre a marca **Novus.z7**.
+
+### 🧩 **.env / .env-exemple**
+Definem variáveis de ambiente (ex: credenciais do banco, chaves secretas).  
+O arquivo `.env-exemple` serve como modelo de referência.
 
 ---
 
+## 💡 Tecnologias Utilizadas
+
+- **PHP 8+**
+- **MySQL** (banco de dados)
+- **HTML5 / CSS3 / JavaScript**
+- **Git / GitHub**
+- **Variáveis de ambiente (.env)**
+
 ---
-
-## 📄 Licença
-
-Este projeto está sob a licença  MIT. Consulte o arquivo LICENSE para mais detalhes.
-
-
